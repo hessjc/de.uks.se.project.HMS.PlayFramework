@@ -1,0 +1,117 @@
+<script type="text/javascript">
+	$.pjax.defaults.scrollTo = false;
+	$(function() {
+		//we only set pjax if the browser supports it
+		if ($.support.pjax) {
+
+			//This code ensures that we won't use Pjax if the user has pressed a modifier key when clicking,
+			//as some OS/browsers may have special behaviour linked to it
+			attachPjaxHandlers();
+			
+			$(document).on('pjax:success', function(event, response, type, responseObj, requestObj) {
+				console.log("pjax:success called");
+				
+				// Since pjax:success only states that the pjax call itself was successfull, any
+				// server-side validation might have thrown an error -> Check for that state
+				var pjaxExtra = responseObj.getResponseHeader("X-PJAX-EXTRA");
+				if("FORM_VALIDATION_ERROR" != pjaxExtra)
+				{
+					var msg = $(requestObj).attr("successMessage");
+					if(msg)
+					{
+						showGlobalMessage(msg);
+					}
+				}
+			});
+			
+			$(document).on('pjax:error', function(event, response, type, responseObj, requestObj) {
+				console.log("pjax:error called");
+				var msg = $(requestObj).attr("errorMessage")
+				if(!msg)
+				{
+					msg = "<strong>Oh verdammt:</strong> Es ist ein Fehler aufgetreten (" +$(response).attr("status") +", " + $(response).attr("statusText") +")";
+				}
+				showGlobalError(msg);
+			});
+
+			
+			$(document).on('pjax:send', function(event) {
+				console.log("pjax:send called");
+				$("#globalSuccess").hide("slow");
+				$("#globalError").hide("slow");
+			});
+			
+			// Ensure to close any global (error) messages before a new pjax request
+			$(document).on('pjax:complete', function(event) {
+				console.log("pjax:complete called");
+				attachPjaxHandlers();
+			});
+		}
+	});
+	
+	function showGlobalError(msg)
+	{
+		$("#globalErrorContent").html(msg);
+		$("#globalError").fadeIn("slow");
+	}
+	
+	function showGlobalMessage(msg)
+	{
+		$("#globalSuccessContent").text(msg);
+		$("#globalSuccess").fadeIn("slow");
+	}
+
+	/**
+	 * This code ensures that we won't use Pjax if the user has pressed a modifier key when clicking,
+	 * as some OS/browsers may have special behaviour linked to it
+	 **/
+	function checkModifiers(event) {
+		return !event.altKey && !event.ctrlKey && !event.metaKey
+				&& !event.shiftKey;
+	}
+
+	function attachPjaxHandlers() {
+		$("form.js-pjax").submit(handlePjaxButton);
+		$("a.js-pjax").click(handlePjaxLink);
+	}
+
+	function handlePjaxButton(event) {
+		
+		if (!event.isDefaultPrevented() && checkModifiers(event)) {
+			event.preventDefault();
+
+			var container = $(this).attr('container')
+			var formData = new FormData($(this)[0]);
+			$.pjax({
+				url : $(this).attr('action'),
+				contentType : false,
+				processData : false,
+				type : 'POST',
+				data : formData,
+				container : '#' + container,
+				timeout : null,
+				push : false,
+				successMessage : $(this).attr("successMessage"),
+				errorMessage : $(this).attr("errorMessage")
+			});
+		} else {
+			console.log("Modifier key pressed, no Pjax call executed");
+		}
+	}
+
+	function handlePjaxLink(event) {
+		if (!event.isDefaultPrevented() && checkModifiers(event)) {
+			event.preventDefault();
+
+			var container = $(this).attr('container')
+			$.pjax({
+				url : $(this).attr('href'),
+				container : '#' + container,
+				timeout : null,
+				push : false
+			});
+		} else {
+			console.log("Modifier key pressed, no Pjax call executed");
+		}
+	}
+</script>

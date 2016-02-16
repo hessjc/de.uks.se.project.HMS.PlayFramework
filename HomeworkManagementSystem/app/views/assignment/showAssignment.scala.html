@@ -1,0 +1,397 @@
+@(assignment: models.Assignment)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import helper._
+@import helper.twitterBootstrap._
+@import security.HDSDynamicResourceHandler.ADMINISTRATOR
+
+@user = @{User.findBySession(session())}
+@completed = @{assignment.isCompleted()}
+@hasMessage = @{user.hasMessageInAssignment(assignment)}
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic("IsParticipantOfLecture") {
+		<div class="col-sm-8 col-lg-9">
+		<div class="panel panel-default">
+		    <div class="panel-heading">
+			    <h3 class="panel-title">@assignment.getLecture().getName() - @assignment.getName()
+			    @dynamic(ADMINISTRATOR) {
+					@button.delete()
+				}
+				
+				@dynamic("IsLectureadminOfLecture") {
+						@if(completed){
+							@button.edit(routes.AssignmentController.editAssignment(assignment.getLecture().getId(), assignment.getId()), true, Messages("assignment.completed"))
+						}else{
+							@button.edit(routes.AssignmentController.editAssignment(assignment.getLecture().getId(), assignment.getId()))
+						}
+					}
+				@dynamic("IsParticipantOfLecture"){
+					<a class="btn btn-info btn-xs pull-right" href="mailto: @assignment.getLecture().getLectureadmins().iterator().next().getEmail()?subject=Frage von @user.getName() (@user.getMatrikelNumber()) zu @assignment.getName() (@assignment.getLecture().getName(), @assignment.getLecture().getSemester().getSemester)"><span class="fa fa-question"> Frage zur Aufgabe</span></a>
+				}
+				</h3>
+			  </div>
+			  <div class="panel-body">
+			  		<div class="row row-padded">
+			  			<div class="col-lg-2 col-sm-4 col-xs-4"><strong class="pull-right">Veranstaltung:</strong></div><div class="col-lg-10 col-sm-8 col-xs-8">@assignment.getLecture().getName(), @assignment.getLecture().getSemester().getSemester()</div>
+			  		</div>
+			  		<div class="row row-padded">
+			  			<div class="col-lg-2 col-sm-4 col-xs-4"><strong class="pull-right">Beschreibung:</strong></div><div class="col-lg-10 col-sm-8 col-xs-8 well">@Html(assignment.getDescription())</div>
+			  		</div>
+			  		<div class="row row-padded">
+			  			<div class="col-lg-2 col-sm-4 col-xs-4"><strong class="pull-right">Abgabeschluss:</strong></div>
+	  					<div class="col-lg-10 col-sm-8 col-xs-8">
+				  			<font color=red>
+								@defining(assignment.getDeadline()) { deadline =>
+									@deadline match {
+												case dl:org.joda.time.DateTime => {
+													@if(dl.isBeforeNow()) {
+														@util.dateformat(dl, Messages("deadline.format")) (@Messages("deadline.expired"))
+													} else {
+														@util.dateformat(dl, Messages("deadline.format")) (@util.period(dl))
+													}
+												}
+												case _ => {@Messages("deadline.none")}
+											   }
+									}
+							</font>
+						</div>
+					</div>
+					<div class="row row-padded">
+						<div class="col-lg-2 col-sm-4 col-xs-4"><strong class="pull-right">Multiplikator:</strong></div><div class="col-lg-10 col-sm-8 col-xs-8"><font color=red>@assignment.getMultiplicator()</font></div>
+					</div>
+					<div class="row row-padded">
+						<div class="col-lg-2 col-sm-4 col-xs-4"><strong class="pull-right">Material:</strong></div><div class="col-lg-10 col-sm-8 col-xs-8">
+				  				@if(assignment.getStuff().isEmpty()) {
+									Kein Material vorhanden.
+									} else {
+										<div class="row">
+											@for(stuff <- assignment.getStuff()) {
+												<div class="col-lg-12"><a href="@routes.AssignmentController.downloadStuff(assignment.getLecture().getId(), assignment.getId(), stuff.getId())">@stuff.getFileName()</a></div>
+											}
+										</div>
+									}
+			  			</div>
+					</div>
+					<div class="row row-padded">
+						<div class="col-lg-2 col-sm-4 col-xs-4"><strong class="pull-right">Kommentar:</strong></div><div class="col-lg-10 col-sm-8 col-xs-8 well">
+				  				@Html(Option(assignment.getComment()).getOrElse("N/A"))
+			  			</div>
+					</div>
+		  		</div>
+		  </div>
+		  
+		  <div class="panel panel-default">
+		    <div class="panel-heading">
+			    <h3 class="panel-title">Teilaufgaben
+			     @dynamic("IsLectureadminOfLecture") {
+							@if(completed){
+							    @button.edit(routes.SubtaskController.openSubtasks(assignment.getLecture.getId(), assignment.getId()),false, Messages("assignment.aresubtaskeditable"))
+								@button.add(routes.SubtaskController.createSubtask(assignment.getLecture().getId(), assignment.getId()),true, Messages("assignment.completed"))
+							} else {
+								@button.add(routes.SubtaskController.createSubtask(assignment.getLecture().getId(), assignment.getId()),false, Messages("assignment.subtask.create"))
+							}
+					}
+				</h3>
+			  </div>
+			  <div class="panel-body">
+			  			@if(!assignment.getSubtasks().isEmpty()) {
+						<table class="table table-hover">
+							<thead>
+								<th class="col-lg-2">Name</th><th class="col-lg-4">Beschreibung</th><th class="col-lg-1">Zusatz</th><th class="col-lg-1">Punkte</th>@dynamic("IsParticipantOfLectureOnly"){<th class="col-lg-1">Prozent</th>}@dynamic("IsLectureadminOfLecture") {<th class="col-lg-1"></th>}
+							</thead>
+							@for(subtask <- assignment.getSubtasks()) {
+								<tr> 
+									<td>@subtask.getName()</td>
+									<td>
+										<a class="accordion-toggle" data-toggle="collapse" href="#subtask_@subtask.getId()"><i class="fa fa-caret-down"></i></a>
+									<div id="subtask_@subtask.getId()" class="collapse in">
+										@Html(Option(subtask.getDescription()).getOrElse("N/A"))
+									</td>
+									
+									<td>@if(subtask.isAdditional()){&#10004 (ja)}else{&#10006 (nein)}</td>
+									@dynamicOr("IsParticipantOfLectureOnly") {
+										@Duty.findDutyByUserANDAssignment(user, assignment) match {
+											case d:Duty if d.isCorrected() => {
+												<td>@Valuation.resultpointsByUserANDDutyIDANDSubtaskID(user.getId(), d.getId(), subtask.getId()) / @subtask.getPoints()</td>
+												<td></td>
+											}
+											case _ => {<td>- / @subtask.getPoints()</td><td>-</td>}
+										}
+									}{
+										<td>@subtask.getPoints()</td>
+									}
+									@dynamic("IsLectureadminOfLecture") {
+									<td>
+										@if(completed) {
+											<form method="POST" action="@routes.SubtaskController.deleteSubtask(subtask.assignment.getLecture().getId(), subtask.assignment.getId())">
+												<input type="hidden" name="id" value="@subtask.id"/>
+												@button.delete(true, Messages("assignment.completed"))
+											</form>
+									    	@button.edit(routes.SubtaskController.editSubtask(subtask.getAssignment().getLecture().getId(), subtask.getAssignment().getId(), subtask.getId()), true, Messages("assignment.completed"))
+									    } else {
+									    	<form method="POST" action="@routes.SubtaskController.deleteSubtask(subtask.getAssignment().getLecture().getId(), subtask.getAssignment().getId())">
+												<input type="hidden" name="id" value="@subtask.getId()"/>
+									    		@button.delete()
+											</form>
+											@button.edit(routes.SubtaskController.editSubtask(subtask.getAssignment().getLecture().getId(), subtask.getAssignment().getId(), subtask.getId()))
+									    }
+									</td>
+									}
+								</tr>
+							}
+							@dynamic("IsParticipantOfLectureOnly") {
+								<tr>
+								<td></td><td></td><td></td>
+								@Duty.findDutyByUserANDAssignment(user, assignment) match {
+									case d:Duty if d.isCorrected() => {
+										<td>
+										<b>@Assessment.resultpointsByDutyID(d.getId()) /
+										@Assessment.pointsByDutyID(d.getId())</b></td>
+										<td><b>@Assessment.percentageByDutyID(d.getId()) %</b></td>
+									}
+									case d:Duty if !d.isCorrected() => {
+										<td><b>- / @Assessment.pointsByDutyID(d.getId())</b></td><td>-</td>
+									}
+									case _ => {
+										<td></td><td>-</td>
+									}
+								}
+								</tr>
+							}
+						</table>
+					} else {
+						Es wurden noch keine Teilaufgaben erstellt.
+					}
+		  		</div>
+		  </div>
+		
+		@if(completed){
+			@dynamic("IsProofreaderOfLecture") {
+			<div class="panel panel-default">
+			    <div class="panel-heading"><h3 class="panel-title">Abgaben</h3></div>
+				<div class="panel-body">
+					<div class="row row-padded">
+						<div class="col-lg-4"><strong>Insgesamt:</strong> @assignment.getDutys().size()</div>
+						<div class="col-lg-4"><strong>Nicht abgeholt:</strong> @Duty.findNotCatchedDutysByAssignmentID(assignment.getId()).size()</div>
+						<div class="col-lg-4"><strong>Korrigiert:</strong> @Duty.findCorrectedDutysByAssignmentID(assignment.getId()).size()</div>
+					</div>
+					<div class="row row-padded">
+					    <div class="col-lg-12">
+					    <div class="panel panel-warning">
+						  <div class="panel-heading"><h3 class="panel-title">Offen</h3></div>
+							  <div class="panel-body">
+							    <table class="table table-condensed table-striped">
+									@for(duty <- assignment.getDutys()) {
+										@if(duty.isCatched() == false) {
+											<tr>
+												<td>@duty.getId()</td>
+												<td>@util.dateformat(duty.getUploadedDateTime(), Messages("duty.uploadedDateTime.format")) Uhr</td>
+												<td>
+													@if(assignment.getDeadline() == null || assignment.getDeadline().isBeforeNow()){
+														<form method="post" action="@routes.DutyController.catchDuty(duty.getAssignment().getLecture().getId(), duty.getAssignment().getId(), duty.getId())">
+															<button type="submit" class="btn btn-success btn-sm">Mir zuweisen!</button>
+														</form>
+													}
+												</td>
+											</tr>
+										}
+									}
+								</table>
+							  </div>
+						  </div>
+					    </div>
+					</div>
+					@dynamic("IsLectureadminOfLecture") {
+				    <div class="row" id="dutyAllocationTable">
+                    @allocation(assignment.getLecture(), assignment)
+                    </div>
+                    }
+			  	</div>
+			 </div>
+			}
+			
+			<div class="panel panel-default">
+				@dynamicOr("IsProofreaderOfLecture") {
+				    <div class="panel-heading"><h3 class="panel-title">Manuelle Abgabe</h3></div>
+					<div class="panel-body">
+						<div class="row">
+							    @defining(forms.AssignmentForms.ManualUploadForm()){ uploadForm =>
+									@util.inlineform(action = routes.DutyController.uploadDutyFromAdmin(assignment.getLecture().getId(), assignment.getId()), 'enctype -> "multipart/form-data") {
+										<div class="col-lg-5">
+											@select(uploadForm("user"), 
+														options = options(Lecture.findAllUsersWithMatrikelnumberAsList(assignment.getLecture().getId())),
+														'_label -> "Student"
+											)(handler = util.twitterBootstrapInlineFieldConstructor, lang())
+										</div>
+										<div class="col-lg-4">
+											<input type="file" name="dutyFromAdmin">
+										</div>
+										<div class="col-lg-3">
+											<button class=" btn btn-success" type="submit">Datei hochladen</button>
+										</div>
+									}
+								}
+						</div>
+				  	</div>
+				}{
+					<div class="panel-heading"><h3 class="panel-title">Abgabe hochladen</h3></div>
+					<div class="panel-body">
+						<div class="row row-padded">
+						@defining(Duty.findDutyByUserANDAssignment(User.findBySession(session()), assignment)){ duty =>
+							@if(duty != null && duty.getUploadedFile()) {
+								<div class="col-lg-9 col-sm-9">
+									<a href="@routes.DutyController.downloadDuty(assignment.getLecture().getId(), duty.getId())">Aktuelle Abgabe</a>
+								</div>
+								<div class="col-lg-3 col-sm-3">
+									@util.dateformat(duty.getUploadedDateTime(), Messages("duty.uploadedDateTime.format"))
+								</div>
+							} else {
+								<div class="col-lg-12 col-sm-12">Noch keine Datei hochgeladen</div>
+							}
+						}
+						</div>
+						<div class="row spacer-top-10">
+							@if(assignment.getDeadline() == null || assignment.getDeadline().isAfterNow()) {
+								@helper.form(action = routes.DutyController.uploadDuty(assignment.getLecture().getId(), assignment.getId()), 'enctype -> "multipart/form-data") {
+									<div class="col-lg-9 col-sm-9">
+										<input type="file" name="duty">
+									</div>
+									<div class="col-lg-3 col-sm-3">
+										<button class=" btn btn-success" type="submit" title='@Messages("duty.upload.wrongformat")'>Datei hochladen</button>
+									</div>
+								}
+							}
+						</div>
+					</div>
+				}	
+			</div>
+		}else {
+			@dynamic("IsLectureadminOfLecture") {
+				@* Assignment is not yet completed *@
+				<a href="#">
+					<button type="button" class="btn btn-success btn-sm pull-right" title="Aufgabe abschließen" data-toggle="modal" data-target="#completeAssignmentDialog">Abschließen</button>
+					<!-- Modal -->
+					<div class="modal fade" id="completeAssignmentDialog" tabindex="-1" role="dialog" aria-labelledby="completeAssignmentDialogLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					        <h4 class="modal-title" id="myModalLabel">Aufgabe abschließen</h4>
+					      </div>
+					      <div class="modal-body">
+					        @Messages("assignment.close")
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-danger" data-dismiss="modal">Abbrechen</button>
+					        <form method="POST" action="@routes.AssignmentController.completeAssignment(assignment.getLecture().getId(), assignment.getId())" style="display:inline;">
+					        	<button type="submit" class="btn btn-success">Abschließen</button>
+					        </form>
+					      </div>
+					    </div><!-- /.modal-content -->
+					  </div><!-- /.modal-dialog -->
+					</div><!-- /.modal -->
+				</a>
+			}
+		}
+		
+		@if(completed){
+			@dynamic("IsParticipantOfLecture") {
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Nachrichten
+							@button.addMessage(routes.MessageController.createAssignmentMessage(assignment.getLecture().getId(), assignment.getId()), false, "Neue Nachricht")
+							<br>
+							<span class="badge badge-my-right">Ich</span>
+							<span class="badge badge-student-right">Student</span>
+							<span class="badge badge-admin-right">Lectureadmin</span>
+						</h3>
+					</div>
+					<div class="tree">
+		    			<ul>
+		    				@if(assignment.getMessages().isEmpty() || !hasMessage) {
+								Keine Nachrichten vorhanden
+							}
+		    				@for(message <- assignment.getMessages()) {
+		    					@if(user.canSee(message)) {
+			        				<li>
+			        					<span style="width:500px">
+									    	@if(message.getSender().getId() == user.getId()) {
+												<spanMy class="badge badge-my-center" style="width:93%">
+													<spanMy class="badge badge-my-left" style="width:50%">
+				            							@message.getHead()
+				            						</spanMy>
+				            						<spanMy class="badge badge-my-center" style="width:21%">
+	    												Ich
+	    											</spanMy>
+	    											<spanMy class="badge badge-my-right" style="width:27%">
+				            							@util.dateformat(message.getDate(), Messages("date.format"))
+				            						</spanMy>
+				            					</spanMy>
+											} else {
+												@if(message.getSender().isLectureadminOf().contains(message.getConversationLecture())) {
+													<spanAdmin class="badge badge-admin-center" style="width:93%">
+														<spanAdmin class="badge badge-admin-left" style="width:52%">
+	    													@message.getHead()
+	    												</spanAdmin>
+	    												<spanAdmin class="badge badge-admin-center" style="width:21%">
+															Lectureadmin
+														</spanAdmin>
+														<spanAdmin class="badge badge-admin-right" style="width:27%">
+															@util.dateformat(message.getDate(), Messages("date.format"))
+														</spanAdmin>
+													</spanAdmin>
+												} else {
+													<spanStudent class="badge badge-student-center" style="width:93%">
+														<spanStudent class="badge badge-student-left" style="width:52%">
+	    													@message.getHead()
+	    												</spanStudent>
+	    												<spanStudent class="badge badge-student-center" style="width:21%">
+															Student
+														</spanStudent>
+														<spanStudent class="badge badge-student-right" style="width:27%">
+															@util.dateformat(message.getDate(), Messages("date.format"))
+														</spanStudent>
+													</spanStudent>
+												}
+											}
+				            				@if(user.canAnswer(message)) {
+				            					@button.addMessage(routes.MessageController.createAssignmentAnswer(assignment.getLecture().getId(), assignment.getId(), message.getId()), false, "Neue Antwort")
+				            				} else {
+				            					@button.addMessage(routes.MessageController.createAssignmentAnswer(assignment.getLecture().getId(), assignment.getId(), message.getId()), true, "Neue Antwort")
+				            				}
+				            				<br>
+				                    		@Html(message.getBody())
+				                    	</span>
+				                    	@messages.showAnswer(message, null, null, assignment, null)
+			        				</li>
+		        				}
+							}
+		    			</ul>
+					</div>
+				</div>
+			}
+		}
+
+		<script>
+			$(function () {
+			    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Einklappen');
+			    $('.tree li.parent_li > span').on('click', function (e) {
+			        var children = $(this).parent('li.parent_li').find(' > ul > li');
+			        if (children.is(":visible")) {
+			            children.hide('fast');
+			            $(this).attr('title', 'Ausklappen').find(' > i').addClass().removeClass();
+			        } else {
+			            children.show('fast');
+			            $(this).attr('title', 'Einklappen').find(' > i').addClass().removeClass();
+			        }
+			        e.stopPropagation();
+			    });
+			});
+		</script>		
+		
+	</div>  
+	}
+}

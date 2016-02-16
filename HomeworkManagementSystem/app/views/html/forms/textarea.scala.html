@@ -1,0 +1,13 @@
+@(id:String, rows:Integer, cols:Integer, value:String)
+<div class="form-group @if(flash.contains(id)) {has-error}">
+  <textarea rows="@rows" cols="@rows" name="@id" class="form-control">@value</textarea>
+  @if(flash.contains(id)) {<font size=2px color=red>@flash.get(id)</font>}
+</div>
+<script src="@routes.Assets.at("javascripts/nicEdit.js")" type="text/javascript"></script>
+<script type="text/javascript">
+  bkLib.onDomLoaded(function() {
+    nicEditors.allTextAreas({
+      iconsPath : '@routes.Assets.at("images/nicEditorIcons.gif")'
+    });
+  });
+</script>

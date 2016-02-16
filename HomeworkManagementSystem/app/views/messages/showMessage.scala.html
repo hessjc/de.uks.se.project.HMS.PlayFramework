@@ -1,0 +1,112 @@
+@(message: models.Message)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import security.HDSDynamicResourceHandler.ADMINISTRATOR
+
+@assignment = @{message.getConversationParent().getAssignment()}
+@lecture = @{message.getConversationParent().getLecture()}
+@duty = @{message.getConversationParent().getDuty()}
+@tmpMessage = @{message.getConversationParent()}
+@user = @{User.findBySession(session())}
+
+@main() {
+	@navigation.homeMenu()
+	<div class="col-sm-8 col-lg-9">
+		<div class="tree">
+		    <ul>
+				<li>
+					<span class="badge badge-semester">
+						@message.getSemester().getSemester()
+					</span>
+					<span class="badge badge-lecture">
+						@message.getConversationLecture().getName()
+					</span>
+					@if(message.getConversationAssignment() != null) {
+						<span class="badge badge-assignment">
+							@message.getConversationAssignment().getName()
+						</span>
+					}
+					@if(message.getConversationDuty() != null) {
+						<span class="badge badge-assignment">
+							@message.getConversationDuty().getAssignment().getName()
+						</span>
+						<span class="badge badge-duty">
+							@if(tmpMessage.getSender().getId() == user.getId()) {
+								Abgabe
+							} else {
+								@tmpMessage.getSender().getMatrikelNumber()
+							}
+						</span>
+					}
+					<br>
+					<span style="width:500px">
+				    	@if(tmpMessage.getSender().getId() == user.getId()) {
+							<spanMy class="badge badge-my-center" style="width:93%">
+								<spanMy class="badge badge-my-left" style="width:50%">
+				            		@tmpMessage.getHead()
+				            	</spanMy>
+				            	<spanMy class="badge badge-my-center" style="width:21%">
+	    							Ich
+	    						</spanMy>
+	    						<spanMy class="badge badge-my-right" style="width:27%">
+				            		@util.dateformat(tmpMessage.getDate(), Messages("date.format"))
+				            	</spanMy>
+				            </spanMy>
+						} else {
+							@if(tmpMessage.getSender().isLectureadminOf().contains(tmpMessage.getConversationLecture())) {
+								<spanAdmin class="badge badge-admin-center" style="width:93%">
+									<spanAdmin class="badge badge-admin-left" style="width:52%">
+	    								@tmpMessage.getHead()
+	    							</spanAdmin>
+	    							<spanAdmin class="badge badge-admin-center" style="width:21%">
+										Lectureadmin
+									</spanAdmin>
+									<spanAdmin class="badge badge-admin-right" style="width:27%">
+										@util.dateformat(tmpMessage.getDate(), Messages("date.format"))
+									</spanAdmin>
+								</spanAdmin>
+							} else {
+								<spanStudent class="badge badge-student-center" style="width:93%">
+									<spanStudent class="badge badge-student-left" style="width:52%">
+	    								@tmpMessage.getHead()
+	    							</spanStudent>
+	    							<spanStudent class="badge badge-student-center" style="width:21%">
+										Student
+									</spanStudent>
+									<spanStudent class="badge badge-student-right" style="width:27%">
+										@util.dateformat(tmpMessage.getDate(), Messages("date.format"))
+									</spanStudent>
+								</spanStudent>
+							}
+						}
+						@{ null match {
+							case null if(assignment != null) => {button.addMessage(routes.MessageController.createAssignmentAnswer(assignment.getLecture().getId(), assignment.getId(), tmpMessage.getId()), false, "Neue Antwort")}
+							case null if(lecture != null) => {button.addMessage(routes.MessageController.createLectureAnswer(lecture.getId(), tmpMessage.getId()), false, "Neue Antwort")}
+							case null if(duty != null) => {button.addMessage(routes.MessageController.createDutyAnswer(duty.getAssignment().getLecture().getId(), duty.getAssignment().getId(), duty.getId(), tmpMessage.getId()), false, "Neue Antwort")}
+						}}
+						<br>
+						@Html(tmpMessage.getBody())
+					</span>
+					@messages.showAnswer(tmpMessage, null, lecture, assignment, duty)
+				</li>
+		    </ul>
+		</div>
+	</div>
+	
+	<script>
+		$(function () {
+		    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Einklappen');
+		    $('.tree li.parent_li > span').on('click', function (e) {
+		        var children = $(this).parent('li.parent_li').find(' > ul > li');
+		        if (children.is(":visible")) {
+		            children.hide('fast');
+		            $(this).attr('title', 'Ausklappen').find(' > i').addClass().removeClass();
+		        } else {
+		            children.show('fast');
+		            $(this).attr('title', 'Einklappen').find(' > i').addClass().removeClass();
+		        }
+		        e.stopPropagation();
+		    });
+		});
+	</script>
+}

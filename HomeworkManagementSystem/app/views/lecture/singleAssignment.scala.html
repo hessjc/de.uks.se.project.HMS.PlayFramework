@@ -1,0 +1,35 @@
+@(user: User, assignment: Assignment)
+@import be.objectify.deadbolt.java.views.html._
+
+@lecture=@{assignment.getLecture()}
+@comment=@{Html(Option(assignment.getComment()).getOrElse("N/A"))}
+@duty=@{Duty.findDutyByUserANDAssignment(User.findBySession(session()), assignment)}
+
+<tr @if(!assignment.isCompleted()){class="warning" title='@Messages("assignment.incomplete")'}>
+	<td><a href="@routes.AssignmentController.showAssignment(lecture.getId(), assignment.getId())">@assignment.getName()</a></td>
+	<td>@assignment.getSubtasks().size()</td>
+	<td><div class="cell-ellipsis cell-md">@comment</div></td>
+	<td>@assignment.getMultiplicator()</td>
+	@if(assignment.isAdditional() == false) {
+		<td>&#10006 (nein)</td>
+	} else {
+		<td>&#10004 (ja)</td>
+	}
+	@dynamic("IsParticipantOfLectureOnly") {
+		@if(duty != null) {
+			<td>&#10004 (ja)</td>
+			@if(duty.isCorrected()) {
+			<td>@Assessment.resultpointsByDutyID(duty.getId()) / @Assignment.pointsByAssignmentID(assignment.getId())</td>
+			<td><b>@Assessment.percentageByDutyID(duty.getId()) %</b></td>
+			} else {
+			<td>- / @Assignment.pointsByAssignmentID(assignment.getId())</td>
+			<td>-</td>
+			}
+		} else {
+			<td>&#10006 (nein)</td>
+			<td>- / @Assignment.pointsByAssignmentID(assignment.getId())</td>
+			<td>-</td>
+		}
+		<td class="text-center"><a href="mailto: @lecture.getLectureadmins().iterator().next().getEmail()?subject=Frage von @user.getName() (@user.getMatrikelNumber()) zu @assignment.getName() (@lecture.getName(), @lecture.getSemester().getSemester)" title="Bei R&uuml;ckfragen zu dieser Aufgabe ist der zust&auml;ndige Ansprechpartner hiermit zu erreichen."><i class="fa fa-question fa-lg"></i></a></td>
+	}
+</tr>

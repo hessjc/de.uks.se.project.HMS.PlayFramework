@@ -1,0 +1,128 @@
+@(assessment: models.Assessment)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import helper._
+@import helper.twitterBootstrap._
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic("Proofreader") {
+	<div class="col-12 col-sm-8 col-lg-9">
+		<div class="row">
+			<legend>Bewertung einer Abgabe</legend>
+			@if(flash.contains("assessmenterror")) {
+			<div class="alert alert-danger">@flash.get("assessmenterror")</div>
+			}
+			<table class="table table-striped">
+				<tr><td>Name der Veranstaltung:</td><td>@assessment.duty.getAssignment().getLecture().getName()</td></tr>
+				<tr><td>Semester:</td><td>@assessment.duty.getAssignment().getLecture().getSemester().getSemester</td></tr>
+				<tr><td>Aufgabenblatt:</td><td>@assessment.duty.getAssignment().getName()</td></tr>
+				<tr><td></td><td></td></tr>
+				<tr><td>Abgabe von Matrikelnummer:</td><td>@assessment.duty.user.getMatrikelNumber()</td></tr>
+				<tr><td>Datei:</td><td><a href="@routes.DutyController.downloadDuty(assessment.duty.getAssignment().getLecture().getId(), assessment.duty.id)">Abgabe</a></td></tr>
+			</table>
+		</div>
+		<div class="row">
+			<div class="col-12 col-sm-12 col-lg-12">
+				<a href="@routes.AccountController.showMyDutys()"><button class="btn btn-primary">Zur&uuml;ck zur &Uuml;bersicht</button></a>
+				<a data-toggle="modal" data-target="#modalClose" href=""><button class="btn btn-success" id="finish_duty" @if(assessment.duty.corrected || !Assessment.allValuationsCorrected(assessment.id)){disabled="disabled"}>Bewertung abschlie&szlig;en</button></a>
+				
+				<div class="modal fade" id="modalClose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Bewertung abschlie&szlig;en</h4>
+							</div>
+							<div class="modal-body">
+								Mit der Best&auml;tigung dieser Nachricht akzeptierst du, dass die Bewertung abgeschlossen wird:<br>
+								Abgeschlossene Bewertungen k&ouml;nnen im Anschluss nicht mehr von dir ge&auml;ndert werden.
+								<h4>Um sp&auml;tere &Auml;nderungen vorzunehmen, musst du den @Messages("roles.lectureadmin") kontaktieren!</h4>
+								Bewertung wirklich abschlie&szlig;en?
+							</div>
+							<div class="modal-footer">
+								<form method="post"  action="@routes.AssessmentController.closeAssessment()">
+									<input type="hidden" name="id" value="@assessment.id" />
+									@button.cancel("btn-sm")
+									@button.save(size="btn-sm")
+								</form>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+			</div>
+		</div>
+		<hr>
+		@for(valuation <- assessment.valuations) {
+			<div id="valuation@valuation.id">
+				@valuations.showvaluation(valuation, forms.ValuationForms.ValuationForm().bind(scala.collection.mutable.Map("resultpoints" -> valuation.resultpoints.toString, "comment" -> valuation.comment)))
+			</div>
+		}
+		
+		@if(!assessment.getDuty().getMessages().isEmpty()) {
+			<div class="tree">
+				<ul>
+					@for(message <- assessment.getDuty().getMessages()) {
+						<li>
+							<span style="width:500px">
+								<spanStudent class="badge badge-student-center" style="width:93%">
+									<spanStudent class="badge badge-student-left" style="width:52%">
+		    							@message.getHead()
+		    						</spanStudent>
+		    						<spanStudent class="badge badge-student-center" style="width:21%">
+										Student
+									</spanStudent>
+									<spanStudent class="badge badge-student-right" style="width:27%">
+										@util.dateformat(message.getDate(), Messages("date.format"))
+									</spanStudent>
+								</spanStudent>
+								@button.addMessage(routes.MessageController.createDutyAnswer(assessment.getDuty().getAssignment().getLecture().getId(), assessment.getDuty().getAssignment().getId(), assessment.getDuty().getId(), message.getId()), false, "Neue Antwort")
+								<br>
+								@Html(message.getBody())
+							</span>
+							@messages.showAnswer(message, null, null, null, assessment.getDuty())
+						</li>									        
+					}
+				</ul>
+			</div>
+		}
+																													
+		<script>
+			$(function () {
+			    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Einklappen');
+			    $('.tree li.parent_li > span').on('click', function (e) {
+			        var children = $(this).parent('li.parent_li').find(' > ul > li');
+			        if (children.is(":visible")) {
+			            children.hide('fast');
+			            $(this).attr('title', 'Ausklappen').find(' > i').addClass().removeClass();
+			        } else {
+			            children.show('fast');
+			            $(this).attr('title', 'Einklappen').find(' > i').addClass().removeClass();
+			        }
+			        e.stopPropagation();
+			    });
+			});
+		</script>
+		
+	</div>
+	}
+}
+@util.pjax()
+<script type="text/javascript">
+	$(function(){
+	    if($.support.pjax) {
+	        $(document).on('pjax:success', function() {
+	        	var finished = true;
+    			$("form.js-pjax").each(function(){
+    				var container =  $(this).attr('container');
+    				if(!$('#corrected_' + container).length){
+    					finished = false;
+    				}
+    			});
+    			if(finished){
+    				$('#finish_duty').removeAttr('disabled');
+    			}
+			});
+	    }
+	});
+</script>

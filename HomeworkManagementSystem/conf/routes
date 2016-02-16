@@ -1,0 +1,129 @@
+# All routes for HDS
+
+GET     /                                                            controllers.Application.index()
+
+GET     /changelog                                                   controllers.Application.changelog()
+GET     /faq                                                         controllers.Application.faq()
+GET     /impressum                                                   controllers.Application.impressum()
+GET     /privacy                                                     controllers.Application.privacy()
+GET     /sitemap                                                     controllers.Application.sitemap()
+
+POST    /login                                                       controllers.UserController.login()
+GET     /logout                                                      controllers.UserController.logout()
+POST    /register                                                    controllers.UserController.register()
+
+GET     /account                                                     controllers.AccountController.showMyAccountInfo()
+GET     /account/$idU<[0-9]+>/student                                controllers.AccountController.editMatriculationNumber(idU:Long)
+POST    /account/$idU<[0-9]+>/student/save                           controllers.AccountController.editMatriculationNumberSave(idU:Long)
+GET     /account/$idU<[0-9]+>/password                               controllers.AccountController.editPassword(idU:Long)
+POST    /account/$idU<[0-9]+>/password/save                          controllers.AccountController.editPasswordSave(idU:Long)
+
+# TODO: Enable these routes as soon as we have integrated change of mail adresses
+#GET     /account/$idU<[0-9]+>/email                                  controllers.AccountController.editEmail(idU:Long)
+#POST    /account/$idU<[0-9]+>/email/save                             controllers.AccountController.editEmailSave(idU:Long)
+
+GET     /account/$idU<[0-9]+>/name                                   controllers.AccountController.editName(idU:Long)
+POST    /account/$idU<[0-9]+>/name/save                              controllers.AccountController.editNameSave(idU:Long)
+GET     /account/mylectures                                          controllers.AccountController.showMyLectures()
+GET     /account/myassessments                                       controllers.AccountController.showMyAssessments()
+GET     /account/mydutys                                             controllers.AccountController.showMyDutys()
+GET     /account/mymessages                                          controllers.AccountController.showMyMessages()
+
+GET     /accounts/exists                                             controllers.UserController.userExists()
+GET     /accounts/verify/:token                                      controllers.UserController.verify(token: String)
+GET     /accounts/unverified                                         controllers.UserController.unverified()
+
+GET     /authenticate/:provider                                      com.feth.play.module.pa.controllers.Authenticate.authenticate(provider: String)
+
+GET     /lecture                                                        controllers.LectureController.showLectures()
+GET     /lecture/$idL<[0-9]+>/show                                      controllers.LectureController.showLecture(idL:Long)
+GET     /lecture/create                                                 controllers.LectureController.createLecture()
+GET     /lecture/$idL<[0-9]+>/edit                                      controllers.LectureController.editLecture(idL:Long)
+POST    /lecture/$idL<[0-9]+>/edit/addLectureadmin                      controllers.LectureController.addLectureadmin(idL:Long)
+POST    /lecture/$idL<[0-9]+>/edit/addProofreader                       controllers.LectureController.addProofreader(idL:Long)
+POST    /lecture/$idL<[0-9]+>/edit/deleteLectureadmin                   controllers.LectureController.deleteLectureadmin(idL:Long)
+POST    /lecture/$idL<[0-9]+>/edit/deleteProofreader                    controllers.LectureController.deleteProofreader(idL:Long)
+POST    /lecture/saveCreate                                             controllers.LectureController.saveLectureCreate()
+POST    /lecture/$idL<[0-9]+>/saveEdit                                  controllers.LectureController.saveLectureEdit(idL:Long)
+POST    /lecture/delete                                                 controllers.LectureController.deleteLecture()
+GET     /lecture/$idL<[0-9]+>/join                                      controllers.LectureController.joinLecture(idL:Long)
+POST    /lecture/$idL<[0-9]+>/sendMailToAll                             controllers.LectureController.sendMailToAll(idL:Long)
+
+POST    /lecture/$idL<[0-9]+>/allocate                                  controllers.DutyController.allocate1(idL:Long, dutys:String, proofreaders:String)
+POST    /lecture/$idL<[0-9]+>/release                                   controllers.DutyController.release1(idL:Long, dutys:String, proofreaders:String)
+POST    /lecture/$idL<[0-9]+>/refresh                                   controllers.DutyController.refreshCatchedDutys1(idL:Long, proofreaders:String)
+
+GET     /lecture/$idL<[0-9]+>/Message/create                            controllers.MessageController.createLectureMessage(idL:Long)
+POST    /lecture/$idL<[0-9]+>/Message/saveCreate                        controllers.MessageController.saveLectureMessageCreate(idL:Long)
+GET     /lecture/$idL<[0-9]+>/Message/$idM<[0-9]+>/Answer/create        controllers.MessageController.createLectureAnswer(idL:Long, idM:Long)
+POST    /lecture/$idL<[0-9]+>/Message/$idM<[0-9]+>/Answer/saveCreate    controllers.MessageController.saveLectureAnswerCreate(idL:Long, idM:Long)
+
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/show                                                        controllers.AssignmentController.showAssignment(idL:Long, idA:Long)
+GET     /lecture/$idL<[0-9]+>/assignment/create                                                                   controllers.AssignmentController.createAssignment(idL:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/complete                                                                 controllers.AssignmentController.completeAssignment(idL:Long, idA:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/saveCreate                                                               controllers.AssignmentController.saveAssignmentCreate(idL:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/saveEdit                                                    controllers.AssignmentController.saveAssignmentEdit(idL:Long, idA:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/saveStuff                                                   controllers.AssignmentController.saveStuff(idL:Long, idA:Long)
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/edit                                                        controllers.AssignmentController.editAssignment(idL:Long, idA:Long)
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/stuff/$idSt<[0-9]+>/download                                controllers.AssignmentController.downloadStuff(idL:Long, idA:Long, idSt:Long)
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/stuff/$idSt<[0-9]+>/delete                                  controllers.AssignmentController.deleteStuff(idL:Long, idA:Long, idSt:Long)
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/Message/create                                              controllers.MessageController.createAssignmentMessage(idL:Long, idA:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/Message/saveCreate                                          controllers.MessageController.saveAssignmentMessageCreate(idL:Long, idA:Long)
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/Message/$idM<[0-9]+>/Answer/create                          controllers.MessageController.createAssignmentAnswer(idL:Long, idA:Long, idM:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/Message/$idM<[0-9]+>/Answer/saveCreate                      controllers.MessageController.saveAssignmentAnswerCreate(idL:Long, idA:Long, idM:Long)
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/duty/$idD<[0-9]+>/Message/create                            controllers.MessageController.createDutyMessage(idL:Long, idA:Long, idD:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/duty/$idD<[0-9]+>/Message/saveCreate                        controllers.MessageController.saveDutyMessageCreate(idL:Long, idA:Long, idD:Long)
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/duty/$idD<[0-9]+>/Message/$idM<[0-9]+>/Answer/create        controllers.MessageController.createDutyAnswer(idL:Long, idA:Long, idD:Long, idM:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/duty/$idD<[0-9]+>/Message/$idM<[0-9]+>/Answer/saveCreate    controllers.MessageController.saveDutyAnswerCreate(idL:Long, idA:Long, idD:Long, idM:Long)
+
+GET     /lecture/$idL<[0-9]+>/showDutyAllocation                                                controllers.DutyController.showDutyAllocation(idL:Long)
+
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/allocate                                  controllers.DutyController.allocate(idL:Long, idA:Long, dutys:String, proofreaders:String)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/release                                   controllers.DutyController.release(idL:Long, idA:Long, dutys:String, proofreaders:String)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/refresh                                   controllers.DutyController.refreshCatchedDutys(idL:Long, idA:Long, proofreaders:String)
+
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/uploadDuty                                controllers.DutyController.uploadDuty(idL:Long, idA:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/uploadDutyFromAdmin                       controllers.DutyController.uploadDutyFromAdmin(idL:Long, idA:Long)
+GET     /lecture/$idL<[0-9]+>/duty/downloadDuty/$idD<[0-9]+>                                    controllers.DutyController.downloadDuty(idL:Long, idD:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/duty/$idD<[0-9]+>/catch                   controllers.DutyController.catchDuty(idL:Long, idA:Long, idD:Long)
+GET     /lecture/$idL<[0-9]+>/catcheddutys                                                      controllers.DutyController.showCatchedDutys(idL:Long)
+POST    /lecture/$idL<[0-9]+>/duty/$idD<[0-9]+>/release                                         controllers.DutyController.releaseDuty(idL:Long, idD:Long)
+
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/subtask/create                 controllers.SubtaskController.createSubtask(idL:Long, idA:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/subtask/saveCreate             controllers.SubtaskController.saveSubtaskCreate(idL:Long, idA:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/subtask/delete                 controllers.SubtaskController.deleteSubtask(idL:Long, idA:Long)
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/subtask/open                   controllers.SubtaskController.openSubtasks(idL:Long, idA:Long)
+POST    /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/subtask/$idS<[0-9]+>/saveEdit  controllers.SubtaskController.saveSubtaskEdit(idL:Long, idA:Long, idS:Long)
+GET     /lecture/$idL<[0-9]+>/assignment/$idA<[0-9]+>/subtask/$idS<[0-9]+>/edit      controllers.SubtaskController.editSubtask(idL:Long, idA:Long, idS:Long)
+
+GET     /lecture/$idL<[0-9]+>/assessments                                            controllers.AssessmentController.showAssessments(idL:Long)
+
+GET     /user/$idU<[0-9]+>/show                                                      controllers.UserController.showUser(idU:Long)
+GET     /user/create                                                                 controllers.UserController.createUser()
+POST    /user/resetPassword                                                          controllers.UserController.resetPassword()
+POST    /user/resetPasswordSave/:token                                               controllers.UserController.resetPasswordSave(token)
+GET     /user/Message/$idM<[0-9]+>/show                                              controllers.UserController.showMessage(idM:Long)
+
+GET     /assessment/$idA<[0-9]+>/evaluate                                            controllers.AssessmentController.evaluateDuty(idA:Long)
+POST    /assessment/close                                                            controllers.AssessmentController.closeAssessment()
+POST    /assessment/$idA<[0-9]+>/valuation/$idV<[0-9]+>/evaluate                     controllers.AssessmentController.saveValuation(idA:Long, idV:Long)
+
+
+GET     /administration/dutys                                                        controllers.AdministrationController.administrateDutys()
+GET     /administration/lectures                                                     controllers.AdministrationController.administrateLectures()
+GET     /administration/roles                                                        controllers.AdministrationController.administrateRoles()
+GET     /administration/semester                                                     controllers.SemesterController.showSemesters()
+POST    /administration/semester/create                                              controllers.SemesterController.createSemester()
+GET     /administration/users                                                        controllers.AdministrationController.administrateUsers()
+
+GET     /plus                           controllers.Application.plus(index: String)
+GET     /minus                          controllers.Application.minus(index: String)
+
+POST     /messages                          controllers.Application.refreshGlobalMessage()
+ 
+# Javascript routing
+GET     /assets/javascripts/routes      controllers.Application.javascriptRoutes()
+
+# Map static resources from the /public folder to the /assets URL path
+
+GET     /assets/*file                                                                controllers.Assets.at(path="/public", file)

@@ -1,0 +1,35 @@
+@(proofreaders: List[User], divID: String, filterProofreaders: String, btnSelectProofreaders: String)
+
+<div class="col-2 col-sm-2 col-lg-2" id="@divID">
+  <label>@Messages("roles.proofreader")</label>
+  <div class="input-group">
+    @form.filter.input(divID, filterProofreaders)
+    <span class="input-group-btn">
+      @button.select(divID, btnSelectProofreaders)
+    </span>
+  </div>
+  <select multiple="multiple" size="15" class="form-control">
+  @for(proofreader <- proofreaders) {
+    <option title="@proofreader.getName() (@proofreader.getEmail())" value="@proofreader.getId()">@proofreader.getName()</option>
+  }
+  </select>
+</div>
+
+<script>
+$(function() {
+$( document ).tooltip({
+    track: true
+  });
+});
+</script>
+
+<script>
+function get@{divID}() {
+    var optionTexts = [];
+    $("#@divID select option:selected").each(function() {
+        optionTexts.push($(this).val());
+    });
+    var quotedCSV = optionTexts.join(' ');
+    return quotedCSV;
+}
+</script>

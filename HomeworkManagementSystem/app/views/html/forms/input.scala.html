@@ -1,0 +1,5 @@
+@(id:String, typ:String, formvalue:String, message:String, placeholder:Integer)
+<div class="form-group @if(flash.contains(id)){has-error}">
+  <input type="@typ" name="@id" class="form-control" value="@formvalue" @if(placeholder.equals(1)){placeholder="@Messages(message)"}>
+  @if(flash.contains(id)){<font size=2px color=red>@flash.get(id)</font>}
+</div>

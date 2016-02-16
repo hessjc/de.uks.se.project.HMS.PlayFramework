@@ -1,0 +1,187 @@
+# Subtask
+
+subtasks:
+
+    - !!models.Subtask
+        id:          1
+        name:        "Teilaufgabe 1"
+        description: "Sie müssen für die erste Teilaufgabe.."
+        points:      2.5
+        assignment:
+               !!models.Assignment
+                  id: 1
+
+    - !!models.Subtask
+        id:          2
+        name:        "Teilaufgabe 2"
+        description: "Sie müssen für die zweite Teilaufgabe.."
+        points:      2.0
+        assignment:
+               !!models.Assignment
+                  id: 1
+
+    - !!models.Subtask
+        id:          3
+        name:        "Teilaufgabe 3"
+        description: "Sie müssen für die dritte Teilaufgabe.."
+        points:      3.5
+        additional:  "true"
+        assignment:
+               !!models.Assignment
+                  id: 1
+
+    - !!models.Subtask
+        id:          4
+        name:        "Teilaufgabe 1"
+        description: "Sie müssen für die erste Teilaufgabe.."
+        points:      4.0
+        assignment:
+               !!models.Assignment
+                  id: 2
+
+    - !!models.Subtask
+        id:          5
+        name:        "Teilaufgabe 2"
+        description: "Sie müssen für die zweite Teilaufgabe.."
+        points:      3.0
+        additional:  "true"
+        assignment:
+               !!models.Assignment
+                  id: 2
+
+    - !!models.Subtask
+        id:          6
+        name:        "Teilaufgabe 1"
+        description: "Sie müssen für die erste Teilaufgabe.."
+        points:      5.0
+        assignment:
+               !!models.Assignment
+                  id: 3
+
+    - !!models.Subtask
+        id:          7
+        name:        "Teilaufgabe 1"
+        description: "Sie müssen für die erste Teilaufgabe.."
+        points:      6.0
+        assignment:
+               !!models.Assignment
+                  id: 4
+
+    - !!models.Subtask
+        id:          8
+        name:        "Teilaufgabe 2"
+        description: "Sie müssen für die zweite Teilaufgabe.."
+        points:      2.0
+        assignment:
+               !!models.Assignment
+                  id: 4
+
+    - !!models.Subtask
+        id:          9
+        name:        "Teilaufgabe 1"
+        description: "Sie müssen für die erste Teilaufgabe.."
+        points:      3.5
+        assignment:
+               !!models.Assignment
+                  id: 5
+
+    - !!models.Subtask
+        id:          10
+        name:        "Teilaufgabe 2"
+        description: "Sie müssen für die zweite Teilaufgabe.."
+        points:      4.5
+        additional:  "true"
+        assignment:
+               !!models.Assignment
+                  id: 5
+
+    - !!models.Subtask
+        id:          11
+        name:        "Teilaufgabe 3"
+        description: "Sie müssen für die dritte Teilaufgabe.."
+        points:      5.5
+        assignment:
+               !!models.Assignment
+                  id: 5
+
+    - !!models.Subtask
+        id:          12
+        name:        "Teilaufgabe 1"
+        description: "Sie müssen für die erste Teilaufgabe.."
+        points:      1.5
+        assignment:
+               !!models.Assignment
+                  id: 6
+
+    - !!models.Subtask
+        id:          13
+        name:        "Teilaufgabe 2"
+        description: "Sie müssen für die zweite Teilaufgabe.."
+        points:      3.5
+        assignment:
+               !!models.Assignment
+                  id: 6
+
+    - !!models.Subtask
+        id:          14
+        name:        "Teilaufgabe 3"
+        description: "Sie müssen für die dritte Teilaufgabe.."
+        points:      4.0
+        additional:  "true"
+        assignment:
+               !!models.Assignment
+                  id: 6
+
+    - !!models.Subtask
+        id:          15
+        name:        "Teilaufgabe 1"
+        description: "Sie müssen für die erste Teilaufgabe.."
+        points:      2.0
+        assignment:
+               !!models.Assignment
+                  id: 7
+
+    - !!models.Subtask
+        id:          16
+        name:        "Teilaufgabe 2"
+        description: "Sie müssen für die zweite Teilaufgabe.."
+        points:      3.5
+        assignment:
+               !!models.Assignment
+                  id: 7
+
+    - !!models.Subtask
+        id:          17
+        name:        "Teilaufgabe 1"
+        description: "Sie müssen für die erste Teilaufgabe.."
+        points:      2.5
+        assignment:
+               !!models.Assignment
+                  id: 8
+
+    - !!models.Subtask
+        id:          18
+        name:        "Teilaufgabe 2"
+        description: "Sie müssen für die zweite Teilaufgabe.."
+        points:      6.0
+        assignment:
+               !!models.Assignment
+                  id: 8
+
+    - !!models.Subtask
+        id:          19
+        name:        "Teilaufgabe 1"
+        description: "Sie müssen für die erste Teilaufgabe.."
+        points:      2.5
+        assignment:
+               !!models.Assignment
+                  id: 9
+
+    - !!models.Subtask
+        id:          20
+        name:        "Teilaufgabe 1"
+        description: "Sie müssen für die erste Teilaufgabe.."
+        points:      0.5
+        assignment:
+               !!models.Assignment
+                  id: 10

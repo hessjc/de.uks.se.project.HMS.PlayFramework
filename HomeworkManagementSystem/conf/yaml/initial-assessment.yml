@@ -1,0 +1,687 @@
+ # Assessment
+
+ assessments:
+
+ - !!models.Assessment
+     id:               1
+     duty:
+            !!models.Duty
+                 id: 1
+     proofreader:
+            !!models.User
+                 id: 1
+
+ - !!models.Assessment
+     id:               2
+     duty:
+            !!models.Duty
+                 id: 2
+     proofreader:
+            !!models.User
+                 id: 11
+
+ - !!models.Assessment
+     id:               3
+     duty:
+            !!models.Duty
+                 id: 3
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               4
+     duty:
+            !!models.Duty
+                 id: 4
+     proofreader:
+            !!models.User
+                 id: 1
+                 
+ - !!models.Assessment
+     id:               5
+     duty:
+            !!models.Duty
+                 id: 5
+     proofreader:
+            !!models.User
+                 id: 15
+                 
+ - !!models.Assessment
+     id:               6
+     duty:
+            !!models.Duty
+                 id: 6
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               7
+     duty:
+            !!models.Duty
+                 id: 7
+     proofreader:
+            !!models.User
+                 id: 3
+
+ - !!models.Assessment
+     id:               8
+     duty:
+            !!models.Duty
+                 id: 8
+     proofreader:
+            !!models.User
+                 id: 17
+
+ - !!models.Assessment
+     id:               9
+     duty:
+            !!models.Duty
+                 id: 9
+     proofreader:
+            !!models.User
+                 id: 16
+
+ - !!models.Assessment
+     id:               10
+     duty:
+            !!models.Duty
+                 id: 10
+     proofreader:
+            !!models.User
+                 id: 3
+
+ - !!models.Assessment
+     id:               11
+     duty:
+            !!models.Duty
+                 id: 11
+     proofreader:
+            !!models.User
+                 id: 16
+
+ - !!models.Assessment
+     id:               12
+     duty:
+            !!models.Duty
+                 id: 12
+     proofreader:
+            !!models.User
+                 id: 16
+                 
+ - !!models.Assessment
+     id:               13
+     duty:
+            !!models.Duty
+                 id: 13
+     proofreader:
+            !!models.User
+                 id: 15
+                 
+ - !!models.Assessment
+     id:               14
+     duty:
+            !!models.Duty
+                 id: 14
+     proofreader:
+            !!models.User
+                 id: 11
+                 
+ - !!models.Assessment
+     id:               15
+     duty:
+            !!models.Duty
+                 id: 15
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               16
+     duty:
+            !!models.Duty
+                 id: 16
+     proofreader:
+            !!models.User
+                 id: 1
+                 
+ - !!models.Assessment
+     id:               17
+     duty:
+            !!models.Duty
+                 id: 17
+     proofreader:
+            !!models.User
+                 id: 16
+                 
+ - !!models.Assessment
+     id:               18
+     duty:
+            !!models.Duty
+                 id: 18
+     proofreader:
+            !!models.User
+                 id: 15
+                 
+ - !!models.Assessment
+     id:               19
+     duty:
+            !!models.Duty
+                 id: 19
+     proofreader:
+            !!models.User
+                 id: 11
+                 
+ - !!models.Assessment
+     id:               20
+     duty:
+            !!models.Duty
+                 id: 20
+     proofreader:
+            !!models.User
+                 id: 1
+                 
+ - !!models.Assessment
+     id:               21
+     duty:
+            !!models.Duty
+                 id: 21
+     proofreader:
+            !!models.User
+                 id: 3
+
+ - !!models.Assessment
+     id:               22
+     duty:
+            !!models.Duty
+                 id: 22
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               23
+     duty:
+            !!models.Duty
+                 id: 23
+     proofreader:
+            !!models.User
+                 id: 3
+                 
+ - !!models.Assessment
+     id:               24
+     duty:
+            !!models.Duty
+                 id: 24
+     proofreader:
+            !!models.User
+                 id: 1
+                 
+ - !!models.Assessment
+     id:               25
+     duty:
+            !!models.Duty
+                 id: 25
+     proofreader:
+            !!models.User
+                 id: 17
+                 
+ - !!models.Assessment
+     id:               26
+     duty:
+            !!models.Duty
+                 id: 26
+     proofreader:
+            !!models.User
+                 id: 16
+
+ - !!models.Assessment
+     id:               27
+     duty:
+            !!models.Duty
+                 id: 27
+     proofreader:
+            !!models.User
+                 id: 15
+                 
+ - !!models.Assessment
+     id:               28
+     duty:
+            !!models.Duty
+                 id: 28
+     proofreader:
+            !!models.User
+                 id: 3
+                 
+ - !!models.Assessment
+     id:               29
+     duty:
+            !!models.Duty
+                 id: 29
+     proofreader:
+            !!models.User
+                 id: 2
+
+ - !!models.Assessment
+     id:               30
+     duty:
+            !!models.Duty
+                 id: 30
+     proofreader:
+            !!models.User
+                 id: 1
+
+ - !!models.Assessment
+     id:               31
+     duty:
+            !!models.Duty
+                 id: 31
+     proofreader:
+            !!models.User
+                 id: 17
+
+ - !!models.Assessment
+     id:               32
+     duty:
+            !!models.Duty
+                 id: 32
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               33
+     duty:
+            !!models.Duty
+                 id: 33
+     proofreader:
+            !!models.User
+                 id: 15
+                 
+ - !!models.Assessment
+     id:               34
+     duty:
+            !!models.Duty
+                 id: 34
+     proofreader:
+            !!models.User
+                 id: 1
+                 
+ - !!models.Assessment
+     id:               35
+     duty:
+            !!models.Duty
+                 id: 35
+     proofreader:
+            !!models.User
+                 id: 1
+                 
+ - !!models.Assessment
+     id:               36
+     duty:
+            !!models.Duty
+                 id: 36
+     proofreader:
+            !!models.User
+                 id: 3
+
+ - !!models.Assessment
+     id:               37
+     duty:
+            !!models.Duty
+                 id: 37
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               38
+     duty:
+            !!models.Duty
+                 id: 38
+     proofreader:
+            !!models.User
+                 id: 2
+
+ - !!models.Assessment
+     id:               39
+     duty:
+            !!models.Duty
+                 id: 39
+     proofreader:
+            !!models.User
+                 id: 15
+                 
+ - !!models.Assessment
+     id:               40
+     duty:
+            !!models.Duty
+                 id: 40
+     proofreader:
+            !!models.User
+                 id: 16
+
+ - !!models.Assessment
+     id:               41
+     duty:
+            !!models.Duty
+                 id: 41
+     proofreader:
+            !!models.User
+                 id: 17
+
+ - !!models.Assessment
+     id:               42
+     duty:
+            !!models.Duty
+                 id: 42
+     proofreader:
+            !!models.User
+                 id: 1
+                 
+ - !!models.Assessment
+     id:               43
+     duty:
+            !!models.Duty
+                 id: 43
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               44
+     duty:
+            !!models.Duty
+                 id: 44
+     proofreader:
+            !!models.User
+                 id: 1
+                 
+ - !!models.Assessment
+     id:               45
+     duty:
+            !!models.Duty
+                 id: 45
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               46
+     duty:
+            !!models.Duty
+                 id: 46
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               47
+     duty:
+            !!models.Duty
+                 id: 47
+     proofreader:
+            !!models.User
+                 id: 11
+
+ - !!models.Assessment
+     id:               48
+     duty:
+            !!models.Duty
+                 id: 48
+     proofreader:
+            !!models.User
+                 id: 16
+
+ - !!models.Assessment
+     id:               49
+     duty:
+            !!models.Duty
+                 id: 49
+     proofreader:
+            !!models.User
+                 id: 17
+
+ - !!models.Assessment
+     id:               50
+     duty:
+            !!models.Duty
+                 id: 50
+     proofreader:
+            !!models.User
+                 id: 17
+
+ - !!models.Assessment
+     id:               51
+     duty:
+            !!models.Duty
+                 id: 51
+     proofreader:
+            !!models.User
+                 id: 17
+
+ - !!models.Assessment
+     id:               52
+     duty:
+            !!models.Duty
+                 id: 52
+     proofreader:
+            !!models.User
+                 id: 3
+                 
+ - !!models.Assessment
+     id:               53
+     duty:
+            !!models.Duty
+                 id: 53
+     proofreader:
+            !!models.User
+                 id: 15
+                 
+ - !!models.Assessment
+     id:               54
+     duty:
+            !!models.Duty
+                 id: 54
+     proofreader:
+            !!models.User
+                 id: 11
+                 
+ - !!models.Assessment
+     id:               55
+     duty:
+            !!models.Duty
+                 id: 55
+     proofreader:
+            !!models.User
+                 id: 11
+                 
+ - !!models.Assessment
+     id:               56
+     duty:
+            !!models.Duty
+                 id: 56
+     proofreader:
+            !!models.User
+                 id: 15
+                 
+ - !!models.Assessment
+     id:               57
+     duty:
+            !!models.Duty
+                 id: 57
+     proofreader:
+            !!models.User
+                 id: 16
+
+ - !!models.Assessment
+     id:               58
+     duty:
+            !!models.Duty
+                 id: 58
+     proofreader:
+            !!models.User
+                 id: 16
+                 
+ - !!models.Assessment
+     id:               59
+     duty:
+            !!models.Duty
+                 id: 59
+     proofreader:
+            !!models.User
+                 id: 1
+
+ - !!models.Assessment
+     id:               60
+     duty:
+            !!models.Duty
+                 id: 60
+     proofreader:
+            !!models.User
+                 id: 2
+
+ - !!models.Assessment
+     id:               61
+     duty:
+            !!models.Duty
+                 id: 61
+     proofreader:
+            !!models.User
+                 id: 3
+
+ - !!models.Assessment
+     id:               62
+     duty:
+            !!models.Duty
+                 id: 62
+     proofreader:
+            !!models.User
+                 id: 15
+                 
+ - !!models.Assessment
+     id:               63
+     duty:
+            !!models.Duty
+                 id: 63
+     proofreader:
+            !!models.User
+                 id: 17
+                 
+ - !!models.Assessment
+     id:               64
+     duty:
+            !!models.Duty
+                 id: 64
+     proofreader:
+            !!models.User
+                 id: 3
+                 
+ - !!models.Assessment
+     id:               65
+     duty:
+            !!models.Duty
+                 id: 65
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               66
+     duty:
+            !!models.Duty
+                 id: 66
+     proofreader:
+            !!models.User
+                 id: 1
+                 
+ - !!models.Assessment
+     id:               67
+     duty:
+            !!models.Duty
+                 id: 67
+     proofreader:
+            !!models.User
+                 id: 16
+
+ - !!models.Assessment
+     id:               68
+     duty:
+            !!models.Duty
+                 id: 68
+     proofreader:
+            !!models.User
+                 id: 17
+                 
+ - !!models.Assessment
+     id:               69
+     duty:
+            !!models.Duty
+                 id: 69
+     proofreader:
+            !!models.User
+                 id: 2
+
+ - !!models.Assessment
+     id:               70
+     duty:
+            !!models.Duty
+                 id: 70
+     proofreader:
+            !!models.User
+                 id: 15
+
+ - !!models.Assessment
+     id:               71
+     duty:
+            !!models.Duty
+                 id: 71
+     proofreader:
+            !!models.User
+                 id: 2
+
+ - !!models.Assessment
+     id:               72
+     duty:
+            !!models.Duty
+                 id: 72
+     proofreader:
+            !!models.User
+                 id: 3
+                 
+ - !!models.Assessment
+     id:               73
+     duty:
+            !!models.Duty
+                 id: 73
+     proofreader:
+            !!models.User
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               74
+     duty:
+            !!models.Duty
+                 id: 74
+     proofreader:
+            !!models.User
+                 id: 1
+                 
+ - !!models.Assessment
+     id:               75
+     duty:
+            !!models.Duty
+                 id: 75
+     proofreader:
+            !!models.User
+                 id: 11
+                 
+ - !!models.Assessment
+     id:               76
+     duty:
+            !!models.Duty
+                 id: 76
+     proofreader:
+            !!models.User
+                 id: 15

@@ -1,0 +1,36 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic("Participant") {
+		<div class="col-sm-8 col-lg-9">
+			@dynamic("IsParticipant") {
+				<div class="panel-group">
+					<legend>@Messages("account.lecture") @Messages("roles.student")</legend>
+					@for((semester, lectures) <- AccountController.myParticipantLectures()) {
+						@lecture.lecturesWithSemester(semester, lectures)
+					}
+				</div>
+			}
+			
+			@dynamic("IsProofreader") {
+				<div class="panel-group spacer-top-10">
+					<legend>@Messages("account.lecture") @Messages("roles.proofreader")</legend>
+					@for((semester, lectures) <- AccountController.myProofreaderLectures()) {
+						@lecture.lecturesWithSemester(semester, lectures)
+					}
+				</div>
+			}
+			
+			@dynamic("IsLectureadmin") {
+				<div class="panel-group spacer-top-10">
+					<legend>@Messages("account.lecture") @Messages("roles.lectureadmin")</legend>
+					@for((semester, lectures) <- AccountController.myLectureadminLectures()) {
+						@lecture.lecturesWithSemester(semester, lectures)
+					}
+				</div>
+			}
+		</div>
+	}
+}

@@ -1,0 +1,58 @@
+@(user: models.User)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import play.api.libs._
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic("User") {
+		<div class="col-9 col-sm-9 col-lg-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">@Messages("account.user")</div>
+				<div class="panel-body">
+					<div id="containerName" class="accountBlock">
+						@account.userinfo.name(user)
+					</div>
+					<div id="containerMatNumber" class="accountBlock">
+						@account.userinfo.matriculationNumber(user)
+					</div>
+					<div id="containerPassword" class="accountBlock">
+						@account.userinfo.password(user)
+					</div>
+					<div class="accountBlock">
+						@account.userinfo.email(user)
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-3 col-sm-3 col-lg-3" align="right">
+			<div>
+				<div class="row"  align="center">
+					<div class="col-lg-12">
+						<img src="https://secure.gravatar.com/avatar/@Codecs.md5(user.getEmail().getBytes())?s=125&d=identicon" class="img-thumbnail"><br>
+						@user.getFirstName() @user.getLastName()
+					</div>
+				</div>
+			</div>
+	
+			<div>
+				<div class="row" align="center">
+					<div class="col-lg-12">
+						<h4>@Messages("account.user.activities")</h4>
+					</div>
+				</div>
+			</div>
+		
+			<div>
+				<div class="row">
+					<div class="col-lg-12">
+						@Messages("account.user.lastlogin"):<br>
+						@util.dateformat(user.getLastLogin, Messages("user.myprofile.lastlogin"))
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+}
+@util.pjax()

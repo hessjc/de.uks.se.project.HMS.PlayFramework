@@ -1,0 +1,15 @@
+@main() {
+	<div class="col-sm-12 col-lg-7">
+		<div class="jumbotron visible-lg">
+			<p class="lead">Das Homework Management System ist ein...</p>
+			<img src="@routes.Assets.at("mockups/parts/headbar.png")" class="img-rounded">	
+			<img src="@routes.Assets.at("mockups/parts/login.png")" class="img-polaroid">
+			<img src="@routes.Assets.at("mockups/parts/register.png")" class="img-circle">
+			<a class="btn btn-large btn-success" href="#">mehr erfahren?.. </a>
+		</div>
+	</div>
+	
+	<div class="col-sm-12 col-lg-5">
+		@user.register(forms.UserForms.RegistrationForm())
+	</div>
+}

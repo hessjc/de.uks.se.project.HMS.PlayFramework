@@ -1,0 +1,71 @@
+@(valuation: models.Valuation, valuationForm:Form[forms.ValuationForms.ValuationForm])
+@import helper._
+@import helper.twitterBootstrap._
+@import utils.UserUtil
+
+@subtask = @{valuation.getSubtask()}
+@duty = @{valuation.getAssessment().getDuty()}
+@editable = @{!duty.isCorrected() || UserUtil.isLectureAdminOfLecture(duty.getAssignment().getLecture(), User.findBySession(session()))}
+@vid = @{valuation.id}
+<div class="panel-group" id="accordion">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse_val@valuation.getId()">
+					@if(valuation.isCorrected()) { <div id="corrected_valuation@valuation.getId()" class="alert alert-info">Bewertung der Teilaufgabe @subtask.getName() <i class="fa fa-caret-down"></i></div> }
+				</a>
+			</h4>
+		</div>
+		<div id="collapse_val@valuation.getId()" class="panel-collapse collapse @if(!valuation.isCorrected()) { in }">
+			<div class="panel-body">
+					@helper.form(routes.AssessmentController.saveValuation(valuation.getAssessment().getId(), valuation.getId()), 'id -> s"form_valuation$vid", 'container -> s"valuation$vid", 'class -> "js-pjax") {
+				<div class="row">
+					<div class="col-8 col-sm-8 col-lg-8">
+						<table class="table">
+							<tr>
+								<td>Name der Teilaufgabe: </td><td>@subtask.getName()<td>
+							</tr><tr>
+								<td>Beschreibung: </td><td>@subtask.getDescription()<td>
+							</td><tr>
+								<td>Maximalpunktzahl: </td><td><b>@subtask.getPoints()</b><td>
+							</tr>
+						</table>
+					</div>
+					<div class="col-4 col-sm-4 col-lg-4">
+						<input type="hidden" name="points" value="@subtask.getPoints()" />
+						<div class="form-group @if(flash.contains("points")) {has-error}">
+						
+            			@inputText(valuationForm("resultpoints"),
+							'_label -> "Erreichte Punkte",
+							'class -> "form-control",
+            				if(editable){'enabled -> "enabled"} else {'disabled -> "disabled"})
+						@if(flash.contains("points")) { <font size=2px color=red>@flash.get("points")</font> }
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-10 col-sm-10 col-lg-10">
+						<div class="form-group @if(flash.contains("comment")) {has-error}">
+							@textarea(valuationForm("comment"),
+								'rows -> 3,
+								'cols -> 50,
+								'_label -> "Kommentar",
+								'placeholder -> "Kommentar",
+								'class -> "form-control",
+								if(editable){'enabled -> "enabled"} else {'disabled -> "disabled"}
+							)
+							@if(flash.contains("comment")) { <font size=2px color=red>@flash.get("comment")</font> }
+						</div>
+					</div>
+					<div class="col-sm-2 col-lg-2">
+						@if(editable) {
+							@button.save(size="btn-lg")
+						}
+					</div>
+				</div>
+				}
+				<br>
+			</div>
+		</div>
+	</div>
+</div>

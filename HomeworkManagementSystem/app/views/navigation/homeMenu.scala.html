@@ -1,0 +1,67 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import security.HDSDynamicResourceHandler.ADMINISTRATOR
+@import utils.PlayHelper.context
+
+@mainMenu(linkname: String) = {
+	<div class="panel-heading">
+		<h4 class="panel-title">
+				@linkname
+		</h4>
+	</div>
+}
+
+@restrictedMainLink(categoryName: String, restriction: String)(body:Html) = {
+	@dynamic(restriction) {
+		@unrestrictedMainLink(categoryName)(body)
+	}
+}
+
+@unrestrictedMainLink(categoryName: String)(body:Html) = {
+	<div class="panel panel-default">
+		@mainMenu(categoryName)
+		<div class="panel-collapse collapse-in">
+			<div class="panel-body">
+				@body
+			</div>
+		</div>
+	</div>
+}
+
+@restrictedSubLink(linkname: String, linkurl:String, restriction: String) = {
+	@dynamic(restriction) {
+		<ul class="list-unstyled">
+			<a href="@linkurl">@linkname</a>
+		</ul>
+	}
+}
+
+@link(linkname: String) = @{context() + linkname}
+
+@dynamic("User") {
+	<div class="col-sm-4 col-lg-3">
+		<div class="panel-group" id="accordion">
+			@unrestrictedMainLink(Messages("homemenu.myhome")){
+				@restrictedSubLink(Messages("homemenu.mylectures"), link("account/mylectures"), "Participant")
+				@restrictedSubLink(Messages("homemenu.myassessments"), link("account/myassessments"), "Participant")
+				@restrictedSubLink(Messages("homemenu.mydutys"), link("account/mydutys"), "Proofreader")
+				@restrictedSubLink(Messages("homemenu.mymessages"), link("account/mymessages"), "Participant")
+			}
+			
+			@unrestrictedMainLink(Messages("homemenu.lecture")){
+				@restrictedSubLink(Messages("homemenu.alllectures"), link("lecture"), "User")
+				@restrictedSubLink(Messages("homemenu.createlecture"), link("lecture/create"), ADMINISTRATOR)
+			}
+			
+			@restrictedMainLink(Messages("homemenu.administration"), ADMINISTRATOR){
+				@restrictedSubLink(Messages("homemenu.administration.roles"), link("administration/roles"), ADMINISTRATOR)
+				@restrictedSubLink(Messages("homemenu.administration.users"), link("administration/users"), ADMINISTRATOR)
+				@restrictedSubLink(Messages("homemenu.administration.semester"), link("administration/semester"), ADMINISTRATOR)
+				@*
+					@restrictedSubLink("Veranstaltungen verwalten", link("administration/lectures"), ADMINISTRATOR)
+					@restrictedSubLink("Abgaben verwalten", link("administration/dutys"), ADMINISTRATOR)
+				*@
+			}
+		</div>
+	</div>
+}

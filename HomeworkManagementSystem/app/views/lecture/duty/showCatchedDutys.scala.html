@@ -1,0 +1,32 @@
+@(lecture: models.Lecture)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic("IsLectureadminOfLecture") {
+		<div class="col-12 col-sm-12 col-lg-9">
+			<legend>Zugeordnete Abgaben</legend>
+			<h4>@lecture.getSemester().getSemester @lecture.getName()</h4>
+			@if(flash.contains("released")) {
+			<div class="alert alert-success">@flash.get("released")</div>
+			}
+			<table class="table">
+			@for(assignment <- lecture.getAssignments()) {
+				@if(Duty.findCatchedDutysByAssignmentID(assignment.getId()).size() != 0) {
+				<tr><th colspan="4">@assignment.getName()</th></tr>
+				<tr><th>ID</th><th>hochgeladen von (Matrikelnummer)</th><th>Korrekteur</th><th></th></tr>
+				}
+				@for(duty <- Duty.findCatchedDutysByAssignmentID(assignment.getId())) {
+					@helper.form(routes.DutyController.releaseDuty(lecture.getId(), duty.getId())) {
+					<tr>
+						<td>@duty.getId()</td><td>@duty.getUser().getMatrikelNumber()</td><td>@duty.getAssessment().getProofreader().getLastName(), @duty.getAssessment().getProofreader().getFirstName()</td>
+						<td><button type="submit" class="btn btn-primary">Zur&uuml;cklegen</button></td>
+					</tr>
+					}
+				}
+			}
+			</table>
+		</div>
+	}
+}

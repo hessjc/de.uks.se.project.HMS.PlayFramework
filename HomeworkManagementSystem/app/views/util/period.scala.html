@@ -1,0 +1,14 @@
+@(date: org.joda.time.DateTime)@import org.joda.time.format.PeriodFormat
+@import org.joda.time.Period
+@import org.joda.time.Days
+@import org.joda.time.DateTime
+@import org.joda.time.PeriodType
+@{defining(new Period(new DateTime, date)){period=>
+	if(date == null){
+		Messages("never")
+	} else if(period.toStandardDays().getDays == 0) {
+		Messages("today")
+	} else {
+		Messages("still") + " " + Days.standardDaysIn(period).getDays() + " " + Messages("days")
+	}
+}}

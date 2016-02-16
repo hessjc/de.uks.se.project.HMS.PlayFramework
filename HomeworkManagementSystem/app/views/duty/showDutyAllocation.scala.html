@@ -1,0 +1,15 @@
+@(lect: models.Lecture) 
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._ 
+
+@main() {
+@navigation.homeMenu() 
+@dynamic("IsLectureadminOfLecture") {
+<div class="col-12 col-sm-12 col-lg-9" >
+  <legend>Abgabenzuweisung</legend>
+  <div class="row" id="dutyAllocationTable">
+    @allocation(lect)
+  </div>
+</div>
+}
+}

@@ -1,0 +1,8 @@
+@(user: User, lecture: Lecture)
+Howdy @user.getName(),
+
+one of your dutys for the lecture @lecture.getName() was evaluated by a proofreader.
+Just have a look at your results at @routes.AccountController.showMyAssessments().absoluteURL(request()).
+
+Cheers,
+The HMS-Team

@@ -1,0 +1,17 @@
+@(loginForm: Form[provider.SimpleUserPassAuthProvider.SimpleLogin], registerForm: Form[provider.SimpleUserPassAuthProvider.SimpleAuthSignup])
+
+@main() {
+	<div class="col-12 col-sm-12 col-lg-7">
+		<div class="jumbotron">
+			<p class="lead">Das Homework Management System ist ein...</p>
+			<img src="@routes.Assets.at("mockups/parts/headbar.png")" class="img-rounded">	
+			<img src="@routes.Assets.at("mockups/parts/login.png")" class="img-polaroid">
+			<img src="@routes.Assets.at("mockups/parts/register.png")" class="img-circle">
+			<a class="btn btn-large btn-success" href="#">mehr erfahren?.. </a>
+		</div>
+	</div>
+
+	<div class="col-12 col-sm-12 col-lg-5">
+		@user.register(registerForm)
+	</div>
+}

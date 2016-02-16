@@ -1,0 +1,19 @@
+@(id:String, users:List[models.User])
+@import play.api.libs._
+<select id="@id" name="@id">
+  @for(user <- users) {
+  <option value="@user.getEmail()" data-name="@user.getEmail()">@user.getName()</option>
+  }
+</select>
+
+<script>
+function format(state) {
+  var originalOption = state.element;
+  return "<img class='flag' src='https://secure.gravatar.com/avatar/@Codecs.md5("$(originalOption).data('name')".getBytes())?s=20&d=identicon'/> " + state.text + " ("+ $(originalOption).data('name') + ")";
+}
+$("#@id").select2({
+  formatResult: format,
+  formatSelection: format,
+  escapeMarkup: function(m) { return m; }
+});
+</script>

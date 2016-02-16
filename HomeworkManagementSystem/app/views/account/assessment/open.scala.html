@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOpen">@Messages("account.assessment.closedassessments.not") <i class="fa fa-caret-down"></i></a>
+        </h4>
+    </div>
+    <div id="collapseOpen" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <th>@Messages("semester")</th><th>@Messages("lecture")</th><th>@Messages("assignment")</th>
+                    @for(duty <- AccountController.myDutys()) {
+                    @if(!duty.corrected) {
+                    <tr>
+                      <td>@duty.getAssignment().getLecture().getSemester().getSemester()</td>
+                       <td>@duty.getAssignment().getLecture().getName()</td>
+                      <td><a href="@routes.AssignmentController.showAssignment(duty.getAssignment().getLecture().getId(), duty.getAssignment().getId())">@duty.getAssignment().getName()</a></td>
+                    </tr>
+                    }
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

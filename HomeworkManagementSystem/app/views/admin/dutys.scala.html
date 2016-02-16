@@ -1,0 +1,18 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import security.HDSDynamicResourceHandler.ADMINISTRATOR
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic(ADMINISTRATOR) {
+		<div class="col-12 col-sm-8 col-lg-9">
+			Idee:
+			
+			Naechsten "Deadlines" einfuegen.
+			<br>
+			Abgabe fuerr xyz am 31.xx.2013
+			- Noch keine Abgabe gemacht -
+		</div>
+	}
+	
+}

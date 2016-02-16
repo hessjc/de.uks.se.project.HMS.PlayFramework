@@ -1,0 +1,140 @@
+ # User
+
+ users:
+
+ - !!models.User
+     id:               1
+     email:            juergen@fast.de
+     firstName:        Juergen
+     lastName:         Fast
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     matrikelNumber:   123456
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: Administrator
+
+ - !!models.User
+     id:               2
+     email:            jan@hess.de
+     firstName:        Jan
+     lastName:         Hess
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     matrikelNumber:   654321
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: Administrator
+
+ - !!models.User
+     id:               3
+     email:            andreas@scharf.de
+     firstName:        Andreas
+     lastName:         Scharf
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: Administrator
+
+ - !!models.User
+     id:               4
+     email:            andreas@koch.de
+     firstName:        Andreas
+     lastName:         Koch
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: Administrator
+
+ - !!models.User
+     id:               5
+     email:            student1@student.de
+     firstName:        Stu
+     lastName:         Dent
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     matrikelNumber:   500001
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: Student
+
+ - !!models.User
+     id:               6
+     email:            student2@student.de
+     firstName:        Stu
+     lastName:         Dent
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     matrikelNumber:   500002
+     emailValidated:   false
+     role:
+            !!models.Roles
+                 name: Student
+
+ - !!models.User
+     id:               7
+     email:            student3@student.de
+     firstName:        Stu
+     lastName:         Dent
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     matrikelNumber:   500003
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: Student
+
+ - !!models.User
+     id:               8
+     email:            lecture1@admin.de
+     firstName:        Lecture
+     lastName:         Admin
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: User
+
+ - !!models.User
+     id:               9
+     email:            lecture2@admin.de
+     firstName:        Lecture
+     lastName:         Admin
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: User
+
+ - !!models.User
+     id:               10
+     email:            proof1@reader.de
+     firstName:        Proof
+     lastName:         Reader
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: User
+
+ - !!models.User
+     id:               11
+     email:            proof2@reader.de
+     firstName:        Proof
+     lastName:         Reader
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: User
+
+ - !!models.User
+     id:               12
+     email:            proof3@reader.de
+     firstName:        Proof
+     lastName:         Reader
+     password:         "{SHA}5en6G6MezRroT3XKqkdPOmY/BfQ="
+     emailValidated:   true
+     role:
+            !!models.Roles
+                 name: User

@@ -1,0 +1,5 @@
+@(url:Call, disabled:Boolean = false, tooltip : String = Messages("add"), size:String = "btn-xs")
+
+<a @if(!disabled){href="@url"} else{ class="disabled" }>
+	<button type="submit" class="btn btn-success pull-right @size" @if(disabled){disabled="disabled"} title='@tooltip'><i class="fa fa-plus fa-lg"></i></button>
+</a>

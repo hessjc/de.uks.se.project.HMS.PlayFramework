@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     29.08.2013 10:42:48                                                        
+
+     HomeworkManagementSystem    
+                        
+     ascharf                                                                
+     ====================================================================== -->
+<project name="HomeworkManagementSystem-linux" default="dist-all">
+	<import file="build.xml" />
+
+	<!-- Overwrite jacoco-cover to use linux style -->
+	<target name="jacoco-cover">
+		<exec executable="${env.PLAY_HOME}/play" failonerror="true">
+			<arg value="jacoco:cover" />
+		</exec>
+	</target>
+
+	<!-- Overwrite play-compile to use linux style -->
+	<target name="play-compile">
+		<exec executable="${env.PLAY_HOME}/play" failonerror="true">
+			<arg value="compile" />
+		</exec>
+	</target>
+
+	<!-- Overwrite play-clean to use linux style -->
+	<target name="play-clean">
+		<exec executable="${env.PLAY_HOME}/play" failonerror="true">
+			<arg value="clean" />
+		</exec>
+	</target>
+
+	<!-- Overwrite play-dist to use linux style -->
+	<target name="play-dist">
+		<exec executable="${env.PLAY_HOME}/play" failonerror="true">
+			<arg value="dist" />
+		</exec>
+	</target>
+
+	<!-- Overwrite play-test to use linux style -->
+	<target name="play-test">
+		<exec executable="${env.PLAY_HOME}/play" failonerror="true">
+			<arg value="test" />
+		</exec>
+	</target>
+
+</project>

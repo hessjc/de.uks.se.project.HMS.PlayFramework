@@ -1,0 +1,14 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+@main() {
+	@navigation.homeMenu()
+	<div class="col-12 col-sm-8 col-lg-9">
+		<legend>Alle Veranstaltungen</legend>
+		<div class="panel-group">
+			@for(semester <- Semester.findAll()) {
+				@lecture.lecturesWithSemester(semester, Lecture.findLecturesBySemester(semester))
+			}
+		</div>
+	</div>
+}

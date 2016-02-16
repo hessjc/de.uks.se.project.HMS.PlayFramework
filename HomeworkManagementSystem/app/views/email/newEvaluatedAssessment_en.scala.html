@@ -1,0 +1,12 @@
+@(user: User, lecture: Lecture)
+
+Howdy @user.getName(),
+<br /><br />
+<p>
+one of your dutys for the lecture @lecture.getName() was evaluated by a proofreader.<br />
+Just have a look at your results <a href="@routes.AccountController.showMyAssessments().absoluteURL(request())">here</a>.<br />
+</p>
+<p>
+Cheers,<br />
+<i>The HMS-Team</i>
+</p>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     29.08.2013 10:42:48                                                        
+
+     HomeworkManagementSystem    
+                        
+     ascharf                                                                
+     ====================================================================== -->
+<project name="HomeworkManagementSystem" default="play-compile">
+	<property environment="env" />
+
+	<property name="tempdist-folder" value="tempdist" />
+	<property name="play-dist-folder" value="target/universal" />
+	<property name="target-folder" value="product" />
+
+	<target name="clean-publish" depends="clean-compile" />
+	<target name="clean-compile" depends="clean,play-compile" />
+
+	<condition property="distConditions">
+		<and>
+			<isset property="additionalDir" />
+			<isset property="dist-suffix" />
+		</and>
+	</condition>
+
+	<echo>Using Play: ${env.PLAY}</echo>
+
+	<target name="jacoco-cover">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="jacoco:cover" />
+		</exec>
+	</target>
+
+	<target name="play-compile">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="compile"/>
+		</exec>
+	</target>
+
+	<target name="play-test">
+		<echo>Properties: ${ebean.props.file}</echo>
+		<exec executable="cmd" failonerror="true">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="test" />
+		</exec>
+	</target>
+
+	<target name="play-test-only">
+		<echo>Class: ${test.class}</echo>
+		<exec executable="cmd" failonerror="true">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="test-only ${test.class}" />
+		</exec>
+	</target>
+
+	<target name="debug-run">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="debug" />
+			<arg value="run" />
+		</exec>
+	</target>
+
+	<target name="clean">
+		<echo>Cleaning ${target-folder}</echo>
+		<delete dir="${target-folder}" />
+		<mkdir dir="${target-folder}" />
+
+		<echo>Cleaning project ${basedir}</echo>
+		<antcall target="play-clean" />
+	</target>
+
+	<target name="play-clean">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="clean" />
+		</exec>
+	</target>
+
+	<target name="publish-local">
+		<echo>Cleaning project ${basedir}</echo>
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="publish-local" />
+		</exec>
+	</target>
+
+	<target name="switch-to" if="switch-to-dir">
+		<echo>Removing current configuration</echo>
+		<delete dir="conf/yaml" />
+		<delete dir="conf/play-simple-authentication" />
+		<delete file="conf/additional.conf" />
+
+		<echo>Copy configuration from ${switch-to-dir}</echo>
+		<copy todir="conf">
+			<fileset dir="${switch-to-dir}" />
+		</copy>
+	</target>
+
+
+	<target name="switch-to-test-db-mail">
+		<property name="switch-to-dir" value="distfiles/test-db-mail" />
+		<antcall target="switch-to" />
+	</target>
+
+	<target name="switch-to-production">
+		<property name="switch-to-dir" value="distfiles/production" />
+		<antcall target="switch-to" />
+	</target>
+
+	<target name="switch-to-test-db">
+		<property name="switch-to-dir" value="distfiles/test-db" />
+		<antcall target="switch-to" />
+	</target>
+
+	<target name="dist-all" depends="clean">
+		<mkdir dir="${tempdist-folder}" />
+
+		<antcall target="dist-test-db" />
+		<antcall target="dist-test-db-mail" />
+		<antcall target="dist-production" />
+
+		<echo>Clean temporary files</echo>
+		<delete dir="${tempdist-folder}" />
+
+		<antcall target="switch-to-test-db" />
+
+		<echo>Build finished, switched back to test configuration</echo>
+	</target>
+
+	<target name="play-dist">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="dist" />
+		</exec>
+	</target>
+
+
+	<target name="dist" if="distConditions">
+		<echo>Clean temporary files</echo>
+
+		<echo>Build the project</echo>
+		<antcall target="play-dist"/>
+
+		<pathconvert property="hms-dist-zip">
+			<fileset dir="${play-dist-folder}">
+				<include name="**/HomeworkManagementSystem*.zip" />
+			</fileset>
+		</pathconvert>
+
+		<echo>Unzip the project</echo>
+		<delete dir="${tempdist-folder}" />
+		<mkdir dir="${tempdist-folder}" />
+		<unzip src="${hms-dist-zip}" dest="${tempdist-folder}" />
+
+		<dirset dir="${tempdist-folder}" id="dest.dir">
+			<include name="HomeworkManagementSystem*" />
+		</dirset>
+		<pathconvert property="destdir" refid="dest.dir" />
+
+		<echo>Copy additional files</echo>
+		<copy todir="${destdir}/">
+			<fileset dir="additional/${additionalDir}" />
+		</copy>
+
+		<echo>Making scripts executable</echo>
+		<chmod dir="${destdir}" perm="ugo+rx" includes="**/*.sh" />
+
+		<echo>Zip the project</echo>
+		<basename file="${hms-dist-zip}" property="hms-dist-zip-name" suffix=".zip" />
+		<zip destfile="${target-folder}/${hms-dist-zip-name}-${dist-suffix}.zip" basedir="${tempdist-folder}" />
+
+	</target>
+
+	<target name="dist-production">
+		<echo>Build production version of project ${ant.project.name}</echo>
+
+		<property name="additionalDir" value="production" />
+		<property name="dist-suffix" value="product" />
+
+		<antcall target="switch-to-production" />
+		<antcall target="dist" />
+
+		<echo>Build production version of project ${ant.project.name} finished!</echo>
+	</target>
+
+	<target name="dist-test-db">
+		<echo>Build test version of project ${ant.project.name}</echo>
+
+		<property name="additionalDir" value="test" />
+		<property name="dist-suffix" value="test" />
+
+		<antcall target="switch-to-test-db" />
+		<antcall target="dist" />
+
+		<echo>Build test version of project ${ant.project.name} finished!</echo>
+	</target>
+
+	<target name="dist-test-db-mail">
+		<echo>Build test-db-mail version of project ${ant.project.name}</echo>
+
+		<property name="additionalDir" value="test" />
+		<property name="dist-suffix" value="db-mail" />
+
+		<antcall target="switch-to-test-db-mail" />
+		<antcall target="dist" />
+
+		<echo>Build test-db-mail version of project ${ant.project.name} finished!</echo>
+	</target>
+</project>

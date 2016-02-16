@@ -1,0 +1,156 @@
+ # Duty
+
+ dutys:
+
+ - !!models.Duty
+     id:               1
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 1/500001/Aufgabenblatt 1_500001.zip"
+     uploadedDateTime: 2013-08-08 18:43:16
+     assignment:
+            !!models.Assignment
+                 id: 1
+     user:
+            !!models.User
+                 id: 5
+
+ - !!models.Duty
+     id:               2
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 1/500002/Aufgabenblatt 1_500002.zip"
+     uploadedDateTime: 2013-08-08 18:45:58
+     assignment:
+            !!models.Assignment
+                 id: 1
+     user:
+            !!models.User
+                 id: 6
+ - !!models.Duty
+     id:               3
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 1/500003/Aufgabenblatt 1_500003.zip"
+     uploadedDateTime: 2013-08-08 18:59:09
+     assignment:
+            !!models.Assignment
+                 id: 1
+     user:
+            !!models.User
+                 id: 7
+
+ - !!models.Duty
+     id:               4
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 2/500002/Aufgabenblatt 2_500002.zip"
+     uploadedDateTime: 2013-10-15 09:34:54
+     assignment:
+            !!models.Assignment
+                 id: 2
+     user:
+            !!models.User
+                 id: 6
+
+ - !!models.Duty
+     id:               5
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 2/500003/Aufgabenblatt 2_500003.zip"
+     uploadedDateTime: 2013-10-15 03:34:21
+     assignment:
+            !!models.Assignment
+                 id: 2
+     user:
+            !!models.User
+                 id: 7
+
+ - !!models.Duty
+     id:               6
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 3/500001/Aufgabenblatt 3_500001.zip"
+     uploadedDateTime: 2013-10-15 13:45:40
+     assignment:
+            !!models.Assignment
+                 id: 3
+     user:
+            !!models.User
+                 id: 5
+
+ - !!models.Duty
+     id:               7
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 3/500002/Aufgabenblatt 3_500002.zip"
+     uploadedDateTime: 2013-10-15 11:34:23
+     assignment:
+            !!models.Assignment
+                 id: 3
+     user:
+            !!models.User
+                 id: 6
+
+ - !!models.Duty
+     id:               8
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 3/500003/Aufgabenblatt 3_500003.zip"
+     uploadedDateTime: 2013-10-15 17:19:46
+     assignment:
+            !!models.Assignment
+                 id: 3
+     user:
+            !!models.User
+                 id: 7
+                 
+ - !!models.Duty
+     id:               9
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 4/500002/Aufgabenblatt 4_500002.zip"
+     uploadedDateTime: 2013-10-15 23:05:04
+     assignment:
+            !!models.Assignment
+                 id: 4
+     user:
+            !!models.User
+                 id: 6
+                 
+ - !!models.Duty
+     id:               10
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 4/500003/Aufgabenblatt 4_500003.zip"
+     uploadedDateTime: 2013-10-15 10:09:51
+     assignment:
+            !!models.Assignment
+                 id: 4
+     user:
+            !!models.User
+                 id: 7
+                 
+ - !!models.Duty
+     id:               11
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 5/500001/Aufgabenblatt 5_500001.zip"
+     uploadedDateTime: 2013-10-15 17:19:46
+     assignment:
+            !!models.Assignment
+                 id: 5
+     user:
+            !!models.User
+                 id: 5
+                 
+ - !!models.Duty
+     id:               12
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 5/500002/Aufgabenblatt 3_500002.zip"
+     uploadedDateTime: 2013-10-15 00:01:32
+     assignment:
+            !!models.Assignment
+                 id: 5
+     user:
+            !!models.User
+                 id: 6
+                 
+ - !!models.Duty
+     id:               13
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 6/500001/Aufgabenblatt 3_500001.zip"
+     uploadedDateTime: 2013-10-15 02:31:39
+     assignment:
+            !!models.Assignment
+                 id: 6
+     user:
+            !!models.User
+                 id: 5
+
+ - !!models.Duty
+     id:               14
+     uploadedFile:     "/uploads/WS 2011_2012/Software Engineering 1/Aufgabenblatt 6/500003/Aufgabenblatt 3_500003.zip"
+     uploadedDateTime: 2013-10-15 12:54:53
+     assignment:
+            !!models.Assignment
+                 id: 6
+     user:
+            !!models.User
+                 id: 7

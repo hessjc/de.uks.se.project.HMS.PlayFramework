@@ -1,0 +1,31 @@
+<li>
+          <form class="form-inline navbar-form" role="form" action="@routes.UserController.login()" method="post">
+          <table>
+            <tr>
+              <td>
+                <div class="form-group">
+                  <input name="login" type="text" class="form-control" id="inputUser" placeholder="@Messages("user.email")/@Messages("user.matriculation")">
+                </div>
+              </td>
+              <td>&nbsp;</td>
+              <td>
+                <div class="form-group">
+                  <input name="password" type="password" class="form-control" id="inputPassword" placeholder="@Messages("user.password")">
+                </div>
+              </td>
+              <td>&nbsp;</td>
+              <td><button type="submit" class="btn btn-default btn-sm"><i class="fa fa-sign-in"></i></button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"><font size="1em"> @Messages("signin.stay")</font></td>
+              <td>&nbsp;</td>
+              <td>
+                <div class="form-group">
+                  <a data-toggle="modal" data-target="#modalResetPassword" href=""><font size="1em">Passwort vergessen?</font></a>
+                </div>
+              </td>
+              <td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+            </table>
+          </form>
+        </li>

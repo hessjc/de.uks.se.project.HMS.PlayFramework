@@ -1,0 +1,87 @@
+@(assignmentForm: Form[forms.AssignmentForms.AssignmentForm], idL: Long)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import helper._
+@import helper.twitterBootstrap._
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic("IsLectureadminOfLecture") {	
+		@helper.form(routes.AssignmentController.saveAssignmentCreate(idL)) {
+			
+			<div class="col-12 col-sm-8 col-lg-9">
+				<legend>Aufgabe anlegen</legend>
+				<div class="row">
+					<div class="col-lg-5">
+						<div class="form-group @if(flash.contains("name")) {has-error}">
+							<label class="control-label" for="titel">Name der Aufgabe</label>
+							<input type="text" name="name" placeholder="" class="form-control" value="@assignmentForm("name").value">
+							@if(flash.contains("name")) { <font size=2px color=red>@flash.get("name")</font> }
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-5">
+						<div class="form-group @if(flash.contains("description")) {has-error}">
+							<label class="control-label">Beschreibung</label>
+							<textarea rows="3" cols="50" name = "description" class="form-control">@assignmentForm("description").value</textarea>
+							@if(flash.contains("description")) { <font size=2px color=red>@flash.get("description")</font> }
+						</div>
+					</div>
+				</div>
+ 				<div class="row">
+					<div class="col-lg-3">
+						<div class="form-group @if(flash.contains("deadline")) {has-error}">
+							<label class="control-label">Abgabeschluss</label>
+							<label class="control-label">(Format: jjjj-mm-tt)</label>
+							<input type="date" name="deadline" class="form-control" value="@assignmentForm("deadline").value">
+							@if(flash.contains("deadline")) { <font size=2px color=red>@flash.get("deadline")</font> }
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-3">
+						<div class="form-group @if(flash.contains("multiplicator")) {has-error}">
+							<label class="control-label" for="weight">Gewichtung (Multiplikator)</label>
+							<input  class="form-control" type="number" name="multiplicator" value="@assignmentForm("multiplicator").value">
+							@if(flash.contains("multiplicator")) { <font size=2px color=red>@flash.get("multiplicator")</font> }
+						</div>
+					</div>
+				</div> 
+				
+				
+				
+				<div class="row">
+					<div class="col-lg-5">
+						<div class="form-group">
+							@textarea(assignmentForm("comment"), 
+									args = 'rows -> 3, 
+									'cols -> 50,
+									'_label -> "Kommentar // Fehler in Aufgabenstellung",
+									'class -> "form-control"
+							)
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-1">
+						<div class="form-group">
+							@checkbox(assignmentForm("additional"), '_label -> "Zusatzblatt")
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-lg-1">
+						<button class=" btn btn-success" type="submit">Erstellen</button>
+					</div>
+				</div>
+				<br>
+				<br>
+				<br>
+			</div>
+		}
+	}
+}

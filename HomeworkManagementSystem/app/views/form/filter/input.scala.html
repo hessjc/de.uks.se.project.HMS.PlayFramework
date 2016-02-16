@@ -1,0 +1,8 @@
+@(divID: String, filterID: String)
+<input type="text" class="form-control" id="@filterID" placeholder="[@Messages("filter")]">
+
+<script>
+$(function() {
+  $('#@divID select').filterByText($('#@filterID'));
+});
+</script>

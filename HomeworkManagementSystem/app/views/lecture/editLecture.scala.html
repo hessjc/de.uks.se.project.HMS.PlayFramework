@@ -1,0 +1,295 @@
+@(editLectureForm: Form[forms.LectureForms.EditLectureForm], addForm: Form[forms.LectureForms.AddForm])
+
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import helper._
+@import helper.twitterBootstrap._
+
+@main() {
+  @navigation.homeMenu()
+  @dynamic("IsLectureadminOfLecture") {
+  @helper.form(routes.LectureController.saveLectureEdit(editLectureForm.get().id)) {    
+  <div class="col-9 col-sm-9 col-lg-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">@Messages("lecture.edit")</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row row-padded">
+          <div class="col-lg-9 col-sm-9 col-xs-9">
+            @html.forms.label("lecture.name")
+            @html.forms.input("name", "text", editLectureForm("name").value, "lecture.name", 0)
+          </div>
+        </div>
+        <div class="row row-padded">
+          <div class="col-lg-6 col-sm-6 col-xs-6">
+            @html.forms.label("semester")
+            @html.forms.select.semesters("semester", Semester.findAll(), editLectureForm("semester").value)
+          </div>
+        </div>        
+        <div class="row row-padded">
+          <div class="col-lg-6 col-sm-6 col-xs-6">
+            @html.forms.label("deadline.registration")
+            <div class="bfh-datepicker" data-placeholder="@editLectureForm("deadline").value" data-format="y-m-d" data-date="@editLectureForm("deadline").value" data-name="closingdate" data-min="today"></div>
+          </div>
+        </div>
+        <div class="row row-padded">
+          <div class="col-lg-12 col-sm-12 col-xs-12">
+            @html.forms.label("description")
+            @html.forms.textarea("description", 3, 50, editLectureForm("description").value)
+          </div>
+        </div>
+      </div>
+      <div class="panel-heading">
+        <h3 class="panel-title">@Messages("duty")</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row row-padded">
+         <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-group @if(flash.contains("optionalDutys")) {has-error}">
+              <label for="optionalDutysSpinner">@Messages("lecture.optional.dutys.count")</label>
+              <input id="optionalDutysSpinner" value="@editLectureForm.get().optionalDutys" name="optionalDutys" title="@Messages("lecture.optional.dutys.count.fulltext")">
+            </div>
+          </div>
+        </div>
+        <div class="row row-padded">
+          <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-group @if(flash.contains("minimumPercentageForExamination")) {has-error}">
+              <label for="lowerProcentualBounderyOfDutysSpinner">@Messages("lecture.optional.dutys.percentage")</label>
+              <input id="lowerProcentualBounderyOfDutysSpinner" value="@editLectureForm.get().lowerProcentualBounderyOfDutys" name="lowerProcentualBounderyOfDutys" title="@Messages("lecture.optional.dutys.percentage.fulltext")">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-heading">
+        <h3 class="panel-title">@Messages("lecture.admission.examination")</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row row-padded">
+          <div class="col-lg-12 col-sm-12 col-xs-12">
+          <div class="form-group @if(flash.contains("closingdate")) {has-error}">
+            <label for="minimumPercentageForExaminationSpinner">@Messages("lecture.admission.examination.percentage.min")</label>
+            <input id="minimumPercentageForExaminationSpinner" value="@editLectureForm.get().minimumPercentageForExamination"
+              name="minimumPercentageForExamination" title="@Messages("lecture.admission.examination.percentage.min.fulltext")">
+          </div>
+        </div>
+      </div>
+      <div class="row row-padded">
+        <div class="col-lg-2 col-sm-2 col-xs-2">
+          <label for="bounds">@Messages("lecture.admission.examination.grade")</label>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-xs-1 col-xs-offset-9">
+          <i class="fa fa-plus-square fa-lg" value="+" id="plusBtn"></i> <i
+            class="fa fa-minus-square fa-lg" value="-" id="minusBtn"></i>
+        </div>
+      </div>
+       <div class="row">
+         <div class="pull-right">
+           @button.save()
+         </div>
+        </div>
+        }
+        
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Betreuung</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-lg-6">
+                <div class="row">
+                <div class="col-lg-12">
+                  @helper.form(routes.LectureController.addLectureadmin(editLectureForm.get().id)) {
+                    @if(flash.contains("participantDeleted")) {
+                      <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        @flash.get("participantDeleted")
+                      </div>
+                    }
+                    <div class="col-lg-11 col-sm-11 col-xs-11">
+                        @select(addForm("name"), 
+                            options = options(Lecture.findAllNonLectureadminsOfLectureAsList(editLectureForm.get().id)),
+                            '_label -> Messages("roles.lectureadmin"),
+                            'class -> "form-control"
+                        )
+                    </div>
+                    <div class="col-lg-1 col-sm-1 col-xs-1 spacer-top-30">
+                      @button.addSubmit()
+                    </div>
+                  }
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  @for((lectureadmin,count) <- Lecture.findLectureByID(editLectureForm.get().id).getLectureadmins().zipWithIndex) {
+                    <div class="row text-right">
+                      <h6>@lectureadmin.getLastName(), @lectureadmin.getFirstName() (@lectureadmin.getEmail())
+                      <a data-toggle="modal" data-target="#modalLectureadmin@count" href="">
+                        <i class="fa fa-times red"></i>
+                      </a></h6>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalLectureadmin@count" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">@Messages("roles.lectureadmin") entfernen</h4>
+                          </div>
+                          <div class="modal-body">
+                            Wollen Sie den Benutzer
+                            <h4>@lectureadmin.getLastName(), @lectureadmin.getFirstName() (@lectureadmin.getEmail())</h4>
+                            aus der Liste der Lectureadmins entfernen?
+                          </div>
+                          <div class="modal-footer">
+                            <form method="post"  action="@routes.LectureController.deleteLectureadmin(editLectureForm.get().id)">
+                              <input type="hidden" name="id" value="@lectureadmin.getId" />
+                              @button.cancel(size = "btn-sm")
+                              @button.delete(size = "btn-sm")
+                            </form>
+                          </div>
+                        </div><!-- /.modal-content -->
+                      </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-lg-12">
+                  @helper.form(routes.LectureController.addProofreader(editLectureForm.get().id)) {
+                    <div class="col-lg-11 col-sm-11 col-xs-11">
+                      @select(addForm("name"), 
+                              options = options(Lecture.findAllNonProofreadersOfLectureAsList(editLectureForm.get().id)),
+                              '_label -> "Korrekteur",
+                              'class -> "form-control"
+                      )
+                    </div>
+                    <div class="col-lg-1 col-sm-1 col-xs-1 spacer-top-30">
+                      @button.addSubmit()
+                    </div>
+                  }
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  @for((proofreader,count) <- Lecture.findLectureByID(editLectureForm.get().id).getProofreaders().zipWithIndex) {
+                    <div class="row text-right">
+                      <h6>@proofreader.getLastName(), @proofreader.getFirstName() (@proofreader.getEmail())
+                      <a data-toggle="modal" data-target="#modalProofreader@count" href="">
+                        <i class="fa fa-times red"></i>
+                      </a></h6>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalProofreader@count" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Proofreader entfernen</h4>
+                          </div>
+                          <div class="modal-body">
+                            Wollen Sie den Benutzer
+                            <h4>@proofreader.getLastName(), @proofreader.getFirstName() (@proofreader.getEmail())</h4>
+                            aus der Liste der Proofreader entfernen?
+                          </div>
+                          <div class="modal-footer">
+                            <form method="post"  action="@routes.LectureController.deleteProofreader(editLectureForm.get().id)">
+                              <input type="hidden" name="id" value="@proofreader.getId" />
+                              @button.cancel(size = "btn-sm")
+                              @button.delete(size = "btn-sm")
+                            </form>
+                          </div>
+                        </div><!-- /.modal-content -->
+                      </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                  }
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  }
+} 
+<script>
+  $(function() {
+    var optionalDutysSpinner = $("#optionalDutysSpinner").spinner({
+      min : 0
+    });
+    var lowerProcentualBounderyOfDutys = $(
+        "#lowerProcentualBounderyOfDutysSpinner").spinner({
+      step : 5,
+      min : 0,
+      max : 100,
+      numberFormat : "%"
+    });
+    var minimumPercentageForExaminationSpinner = $(
+        "#minimumPercentageForExaminationSpinner").spinner({
+      step : 5,
+      min : 0,
+      max : 100,
+      numberFormat : "%"
+    });
+  });
+  
+  $("#optionalDutysSpinner").numeric();
+  $("#lowerProcentualBounderyOfDutysSpinner").numeric();
+  $("#minimumPercentageForExaminationSpinner").numeric();
+</script>
+
+<script>
+  $(function() {
+    var tooltips = $("[title]").tooltip({
+      position : {
+        my : "left+30 center",
+        at : "right"
+      }
+    });
+  });
+</script>
+
+
+<script type="text/javascript" charset="utf-8">
+  var index = 0;
+
+  var plus = function() {
+    jsRoutes.controllers.Application.plus(index).ajax({
+      success : function(data) {
+        $("#result").after(data);
+        index += 1;
+      },
+      error : function() {
+        alert("Error!")
+      }
+    })
+  };
+
+  var minus = function() {
+    jsRoutes.controllers.Application.minus(index).ajax({
+      success : function(data) {
+        $("#examination"+index).remove();
+        if (index != 0) {
+          index -= 1;
+        }
+      },
+      error : function() {
+        alert("Error!")
+      }
+    })
+  };
+
+  $("#createLectureForm").submit(function(e) {
+    var optionTexts = [];
+    for (var i = 0; i < index; i++) {
+      optionTexts.push($("#percentageSpinner" + i).spinner("value"));
+      optionTexts.push($("#stepSpinner" + i).spinner("value"));
+    }
+    var quotedCSV = optionTexts.join(' ');
+    $("#bonuses").val(quotedCSV);
+  });
+
+  $('#plusBtn').click(plus);
+  $('#minusBtn').click(minus);
+</script>

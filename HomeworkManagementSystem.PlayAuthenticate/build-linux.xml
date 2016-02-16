@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     29.08.2013 10:42:48                                                        
+
+     PlaySimpleAuthentication    
+                        
+     ascharf                                                                
+     ====================================================================== -->
+<project name="PlaySimpleAuthentication-linux" default="clean-publish">
+	<import file="build.xml" />
+
+	<!-- Overwrite play-compile to use linux style -->
+	<target name="play-compile">
+		<exec executable="${env.PLAY_HOME}/play" failonerror="true">
+			<arg value="compile" />
+		</exec>
+	</target>
+
+	<!-- Overwrite play-clean to use linux style -->
+	<target name="play-clean">
+		<exec executable="${env.PLAY_HOME}/play" failonerror="true">
+			<arg value="clean" />
+		</exec>
+	</target>
+
+	<!-- Overwrite play-publish-local to use linux style -->
+	<target name="play-publish-local">
+		<exec executable="${env.PLAY_HOME}/play" failonerror="true">
+			<arg value="publish-local" />
+		</exec>
+	</target>
+
+</project>

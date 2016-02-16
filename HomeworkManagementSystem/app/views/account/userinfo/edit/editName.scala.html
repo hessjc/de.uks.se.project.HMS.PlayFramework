@@ -1,0 +1,38 @@
+@(user: models.User)
+@import helper._
+@import helper.twitterBootstrap._
+@import scala.collection.mutable.Map
+
+<legend>@Messages("user.name")&nbsp;&nbsp;&nbsp;</legend>
+<div>
+@defining(forms.AccountForms.NameForm().bind(Map("id" -> user.getIdentifier, "firstName" -> user.getFirstName(), "lastName" -> user.getLastName()))) { form =>
+	@helper.form(routes.AccountController.editNameSave(user.getId), 'id -> "form_containerName", 'container -> "containerName", 'class ->  "js-pjax",
+							'successMessage -> Messages("user.edit.name")) {
+		<div class="row">
+			<div class="col-lg-3 col-sm-3 col-xs-3">@Messages("user.firstname"):</div>
+			<div class="col-lg-4 col-sm-4 col-xs-4">
+				<div class="form-group @if(flash.contains("firstname")) {has-error}">
+					<input type="hidden" name="id" value="@form("id").value">
+					<input type="text" class="form-control" name="firstName" placeholder="@user.getFirstName()" value="@form("firstName").value" required="true">
+				</div>
+				@if(flash.contains("firstname")) { <font size=2px color=red>@flash.get("firstname")</font> }
+			</div>
+			<div class="col-lg-1 col-sm-1 col-xs-1">
+				@button.save()
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3 col-sm-3 col-xs-3">@Messages("user.lastname"):</div>
+			<div class="col-lg-4 col-sm-4 col-xs-4">
+				<div class="form-group @if(flash.contains("lastname")) {has-error}">
+					<input type="text" class="form-control" name="lastName" placeholder="@user.getLastName()" value="@form("lastName").value" required="true">
+				</div>
+				@if(flash.contains("lastname")) { <font size=2px color=red>@flash.get("lastname")</font> }
+			</div>
+		</div>
+	}
+	<script>
+		$("#form_containerName").validate();
+	</script>
+}
+</div>

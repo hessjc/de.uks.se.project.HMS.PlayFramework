@@ -1,0 +1,6 @@
+@(action: play.api.mvc.Call, args: (Symbol,String)*)(body: => Html)
+
+@import helper._
+@import scala.collection.immutable.List
+
+@form(action, (args ++ (List(('role -> "form"),('class -> "form-inline")))):_*)(body)

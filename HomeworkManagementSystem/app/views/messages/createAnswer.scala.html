@@ -1,0 +1,109 @@
+@(lecture: models.Lecture, assignment: models.Assignment, duty: models.Duty, answerForm: Form[forms.MessageForms.AnswerForm])
+
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import helper._
+@import helper.twitterBootstrap._
+
+@message = @{Message.findMessageByID(answerForm.get().id)}
+@topMessage = @{message.getConversationParent()}
+@user = @{User.findBySession(session())}
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic("IsParticipantOfLecture") {	
+		<div class="col-12 col-sm-12 col-lg-9">
+			@helper.form(
+				null match {
+					case null if(assignment != null) => {routes.MessageController.saveAssignmentAnswerCreate(assignment.getLecture().getId(), assignment.getId(), answerForm.get().id)}
+					case null if(lecture != null) => {routes.MessageController.saveLectureAnswerCreate(lecture.getId(), answerForm.get().id)}
+					case null if(duty != null) => {routes.MessageController.saveDutyAnswerCreate(duty.getAssignment().getLecture().getId(), duty.getAssignment().getId(), duty.getId(), answerForm.get().id)}
+				}
+			) {
+			
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group @if(flash.contains("text")) {has-error}">
+							@textarea(answerForm("text"), 
+									args = '_label -> "Antwort", 
+									'class -> "form-control"
+							)
+							@if(flash.contains("text")) { <font size=2px color=red>@flash.get("text")</font> }
+						</div>
+					</div>
+				</div>	
+				
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-success">Hinzuf&uuml;gen</button>
+					</div>
+				</div>
+				
+				<br>
+				<br>
+				<br>
+				
+				<div class="tree">
+		    		<ul>
+			        	<li>
+			        		@if(topMessage == message) {
+								<span style="width:500px">
+							} else {
+								<spanOpacity style="width:500px">
+							}
+									@if(topMessage.getSender().getId() == user.getId()) {
+										<spanMy class="badge badge-my-center" style="width:93%">
+											<spanMy class="badge badge-my-left" style="width:50%">
+						            			@topMessage.getHead()
+						            		</spanMy>
+						            		<spanMy class="badge badge-my-center" style="width:21%">
+			    								Ich
+			    							</spanMy>
+			    							<spanMy class="badge badge-my-right" style="width:27%">
+						            			@util.dateformat(message.getDate(), Messages("date.format"))
+						       				</spanMy>
+						   				</spanMy>
+									} else {
+										@if(topMessage.getSender().isLectureadminOf().contains(topMessage.getConversationLecture())) {
+											<spanAdmin class="badge badge-admin-center" style="width:93%">
+												<spanAdmin class="badge badge-admin-left" style="width:52%">
+			    									@topMessage.getHead()
+			    								</spanAdmin>
+			    								<spanAdmin class="badge badge-admin-center" style="width:21%">
+													Lectureadmin
+												</spanAdmin>
+												<spanAdmin class="badge badge-admin-right" style="width:27%">
+													@util.dateformat(topMessage.getDate(), Messages("date.format"))
+												</spanAdmin>
+											</spanAdmin>
+										} else {
+											<spanStudent class="badge badge-student-center" style="width:93%">
+												<spanStudent class="badge badge-student-left" style="width:52%">
+		    										@topMessage.getHead()
+		    									</spanStudent>
+		    									<spanStudent class="badge badge-student-center" style="width:21%">
+													Student
+												</spanStudent>
+												<spanStudent class="badge badge-student-right" style="width:27%">
+													@util.dateformat(topMessage.getDate(), Messages("date.format"))
+												</spanStudent>
+											</spanStudent>
+										}
+									}
+					            	<br>
+						            @Html(topMessage.getBody())
+					        @if(topMessage == message) {
+								</span>
+							} else {
+								</spanOpacity>
+							}
+			             	@messages.showAnswer(topMessage, message, topMessage.getLecture(), topMessage.getAssignment(), topMessage.getDuty())
+			        	</li>
+		    		</ul>
+				</div>
+			}
+		</div>
+	}
+}
+<script src="@routes.Assets.at("javascripts/nicEdit.js")" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(function(){nicEditors.allTextAreas({iconsPath:'@routes.Assets.at("images/nicEditorIcons.gif")'});});</script>

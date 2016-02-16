@@ -1,0 +1,63 @@
+@(lecture: models.Lecture)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+@main() {
+    @navigation.homeMenu()
+    @dynamic("IsLectureadminOfLecture") {
+    <div class="col-12 col-sm-12 col-lg-9">
+        <legend>@Messages("assessment.table") @lecture.getName() - @lecture.getSemester().getSemester()</legend>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead style="font-size: 7pt">
+                    <th>@Messages("user.matriculation") - @Messages("user.name")</th>
+                    @for(i <- 1 to Assignment.findAssignmentsByLectureID(lecture.getId()).size()) {
+                    <th>@Messages("duty") @i</th>
+                    }
+                    <th>@Messages("duty.no")</th>
+                    <th>@Messages("percentage.overall")</th>
+                </thead>
+                <tbody style="font-size: 8pt">
+                @for(user <- lecture.getUsers()) {
+                <tr>
+                    <td>@user.getMatrikelNumber() - @user.getName()</td>
+                    @for(assignment <- Assignment.findAssignmentsByLectureID(lecture.getId())) {
+                        @defining(Duty.findDutyByUserANDAssignment(user, assignment)){ duty =>
+                        @if(duty != null) {
+                            @defining(Assessment.findAssessmentByDutyID(duty.id)){ assessment =>
+                            @if(assessment != null) {
+                            <td>
+                                <a href="@routes.DutyController.downloadDuty(assignment.getLecture().getId(), duty.id)">
+                                @Assessment.percentageByDutyIDAsString(duty.id)<br>
+                                </a>
+                                @if(duty.corrected){
+                                <i class="fa fa-check"></i>
+                                } else {
+                                <i class="fa fa-times"></i>
+                                }
+                                <a href="@routes.AssessmentController.evaluateDuty(assessment.id)">
+                                @assessment.proofreader match {
+                                    case u:User => {@u.getName()}
+                                    case _ => {Nicht zugewiesen}
+                                }
+                                </a>
+                            </td>
+                            } else { 
+                            <td>- - -</td>
+                            }
+                            }
+                        } else { 
+                            <td>- - -</td>
+                        }
+                        }
+                    }
+                    <td>@controllers.AssessmentController.noConsideredAssessments(user.getId, lecture.getId())</td>
+                    <td>@controllers.AssessmentController.overallPercentageAssessment(user.getId, lecture.getId()) %</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        </div>
+    </div>
+	}
+}

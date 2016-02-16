@@ -1,0 +1,11 @@
+# Semester
+
+semesters:
+
+    - !!models.Semester
+        id:         2
+        semester:   WS 2013/2014
+        
+    - !!models.Semester
+        id:         1
+        semester:   SS 2013

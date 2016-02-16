@@ -1,0 +1,25 @@
+@(role: models.Roles)
+
+<div class="col-12 col-sm-12 col-lg-12">
+	<br>
+	<table class="table table-hover">
+		<tr>
+			<td><h4>Rollenname:</h4></td>
+				<td>
+					<ul>
+						@role.getName
+					</ul>
+				</td>
+		</tr>
+		<tr>
+			<td><h4>Benutzer mit Rolle:</h4></td>
+			<td>
+				<ul>
+				@for(user <- role.getUsers) {
+					@user.getEmail()<br>
+				}
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     29.08.2013 10:42:48                                                        
+
+     PlaySimpleAuthentication    
+                        
+     ascharf                                                                
+     ====================================================================== -->
+<project name="PlaySimpleAuthentication" default="play-compile">
+	<property environment="env" />
+
+	<target name="clean-publish" depends="clean-compile,play-publish-local" />
+	<target name="clean-compile" depends="play-clean,play-compile" />
+	<target name="compile-publish" depends="play-compile,play-publish-local" />
+
+	<echo>Using Play: ${env.PLAY}</echo>
+
+	<target name="play-compile">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="compile" />
+		</exec>
+	</target>
+
+	<target name="play-clean">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="clean" />
+		</exec>
+	</target>
+
+	<target name="play-publish-local">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.PLAY}/play.bat" />
+			<arg value="publish-local" />
+		</exec>
+	</target>
+
+</project>

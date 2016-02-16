@@ -1,0 +1,88 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+@user = @{User.findBySession(session())}
+
+@main() {
+    @navigation.homeMenu()
+    @dynamic("Participant") {
+    	<div class="col-sm-8 col-lg-9">
+        	<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Nachrichten
+						<br>
+						<span class="badge badge-my-right">Ich</span>
+						<span class="badge badge-student-right">Student</span>
+						<span class="badge badge-admin-right">Lectureadmin/Proofreader</span>
+					</h3>
+				</div>
+				<div class="panel-body">
+					@for(message <- user.getMyMessages()) {
+						<span class="badge badge-semester" style="width:12%">
+							@message.getSemester().getSemester()
+						</span>
+						<span class="badge badge-lecture" style="width:18%">
+							@message.getConversationLecture().getName()
+						</span>
+						@if(message.getConversationAssignment() != null) {
+							<span class="badge badge-assignment" style="width:13%">
+								@message.getConversationAssignment().getName()
+							</span>
+						}
+						@if(message.getConversationDuty() != null) {
+							<span class="badge badge-assignment" style="width:13%">
+								@message.getConversationDuty().getAssignment().getName()
+							</span>
+							<span class="badge badge-duty" style="width:9%">
+								@if(message.getConversationParent().getSender().getId() == user.getId()) {
+									Abgabe
+								} else {
+									@message.getConversationParent().getSender().getMatrikelNumber()
+								}
+							</span>
+						}
+				    	@if(message.getSender().getId() == user.getId()) {
+					    	<a href="@routes.UserController.showMessage(message.getId())">
+								<span class="badge badge-my-right" style="width:44%">
+				           			@message.getHead()
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									Ich
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									@util.dateformat(message.getDate(), Messages("date.format"))
+								</span>
+							</a>
+						} else {
+							@if(message.getSender().isLectureadminOf().contains(message.getConversationLecture()) || message.getSender().isProofreaderOf().contains(message.getConversationLecture())) {
+								<a href="@routes.UserController.showMessage(message.getId())">
+									<span class="badge badge-admin-right" style="width:44%">
+										@message.getVeryShortHead()
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										@if(message.getSender().isLectureadminOf().contains(message.getConversationLecture())) {
+											Lectureadmin
+										} else {
+											Proofreader
+										}
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										@util.dateformat(message.getDate(), Messages("date.format"))
+									</span>
+								</a>
+							} else {
+								<a href="@routes.UserController.showMessage(message.getId())">
+									<span class="badge badge-student-right" style="width:44%">
+										@message.getShortHead()
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										Student
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										@util.dateformat(message.getDate(), Messages("date.format"))
+									</span>
+								</a>
+							}
+						}
+			       		<br>
+					}
+				</div>
+			</div>  
+    	</div>
+    }
+}

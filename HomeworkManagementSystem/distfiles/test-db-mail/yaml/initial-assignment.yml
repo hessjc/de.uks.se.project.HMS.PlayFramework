@@ -1,0 +1,187 @@
+# Assignment
+
+assignments:
+
+    - !!models.Assignment
+        id:          1
+        name:        "Aufgabenblatt 1"
+        description: "Das erste Aufgabenblatt"
+        deadline:    2011-01-01 22:59:59
+        multiplicator: 1
+        comment:     "Fehler in Aufgabenstellung 1, 2 und 3"
+        additional:  false
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:          2
+        name:        "Aufgabenblatt 2"
+        description: "Das zweite Aufgabenblatt"
+        deadline:    2011-01-08 22:59:59
+        additional:  false
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 1
+    - !!models.Assignment
+        id:          3
+        name:        "Aufgabenblatt 3"
+        description: "Das dritte Aufgabenblatt"
+        deadline:    2011-01-15 22:59:59
+        additional:  false
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:          4
+        name:        "Aufgabenblatt 4"
+        description: "Das vierte Aufgabenblatt"
+        additional:  false
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 1
+                  
+    - !!models.Assignment
+        id:          5
+        name:        "Aufgabenblatt 5"
+        description: "Das fünfte Aufgabenblatt"
+        additional:  true
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:          6
+        name:        "Aufgabenblatt 6"
+        description: "Das sechste Aufgabenblatt"
+        additional:  false
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:          7
+        name:        "Aufgabenblatt 1"
+        description: "Das erste Aufgabenblatt"
+        additional:  false
+        completed:  false
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:          8
+        name:        "Aufgabenblatt 2"
+        description: "Das zweite Aufgabenblatt"
+        additional:  false
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:          9
+        name:        "Aufgabenblatt 3"
+        description: "Das dritte Aufgabenblatt"
+        additional:  true
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:          10
+        name:        "Aufgabenblatt 4"
+        description: "Das vierte Aufgabenblatt"
+        additional:  false
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:          11
+        name:        "Aufgabenblatt 5"
+        description: "Das fünfte Aufgabenblatt"
+        additional:  true
+        completed:  false
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:          12
+        name:        "Aufgabenblatt 1"
+        description: "Das erste Aufgabenblatt"
+        additional:  false
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 3
+                  
+    - !!models.Assignment
+        id:          13
+        name:        "Aufgabenblatt 2"
+        description: "Das zweite Aufgabenblatt"
+        additional:  true
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 3
+
+    - !!models.Assignment
+        id:          14
+        name:        "Aufgabenblatt 3"
+        description: "Das dritte Aufgabenblatt"
+        additional:  false
+        completed:  false
+        lecture:
+               !!models.Lecture
+                  id: 3
+                  
+    - !!models.Assignment
+        id:          15
+        name:        "Aufgabenblatt 1"
+        description: "Das erste Aufgabenblatt"
+        additional:  false
+        completed:  true
+        lecture:
+               !!models.Lecture
+                  id: 4
+
+    - !!models.Assignment
+        id:          16
+        name:        "Aufgabenblatt 5"
+        description: "Das drite Aufgabenblatt"
+        additional:  false
+        completed:  false
+        lecture:
+               !!models.Lecture
+                  id: 4
+                  
+    - !!models.Assignment
+        id:          17
+        name:        "Project Game Developement"
+        description: "Fertigmachen"
+        additional:  false
+        completed:  false
+        lecture:
+               !!models.Lecture
+                  id: 5
+
+    - !!models.Assignment
+        id:          18
+        name:        "HDS Aufgabe"
+        description: "Prototyp"
+        additional:  false
+        completed:  false
+        lecture:
+               !!models.Lecture
+                  id: 6

@@ -1,0 +1,42 @@
+@(lecture: models.Lecture, assignment: models.Assignment, duty: models.Duty, messageForm: Form[forms.MessageForms.MessageForm])
+
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import helper._
+@import helper.twitterBootstrap._
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic("IsParticipantOfLecture") {	
+		<div class="col-12 col-sm-12 col-lg-9">
+			@helper.form(
+				null match {
+					case null if(assignment != null) => {routes.MessageController.saveAssignmentMessageCreate(assignment.getLecture().getId(), assignment.getId())}
+					case null if(lecture != null) => {routes.MessageController.saveLectureMessageCreate(lecture.getId())}
+					case null if(duty != null) => {routes.MessageController.saveDutyMessageCreate(duty.getAssignment().getLecture().getId(), duty.getAssignment().getId(), duty.getId())}
+				}
+			) {
+			
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group @if(flash.contains("text")) {has-error}">
+							@textarea(messageForm("text"), 
+									args = '_label -> "Nachricht", 
+									'class -> "form-control"
+							)
+							@if(flash.contains("text")) { <font size=2px color=red>@flash.get("text")</font> }
+						</div>
+					</div>
+				</div>	
+				
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-success">Hinzuf&uuml;gen</button>
+					</div>
+				</div>
+			}
+		</div>
+	}
+}
+<script src="@routes.Assets.at("javascripts/nicEdit.js")" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(function(){nicEditors.allTextAreas({iconsPath:'@routes.Assets.at("images/nicEditorIcons.gif")'});});</script>

@@ -1,0 +1,32 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import security.HDSDynamicResourceHandler.ADMINISTRATOR
+
+@main() {
+	@dynamic(ADMINISTRATOR) {
+		@navigation.homeMenu()
+		<div class="col-sm-8 col-lg-9">
+		<legend>Alle Semester</legend>
+			<ul class="list-group">
+				@for(semester <- models.Semester.findAll()) {
+					<li class="list-group-item">@semester.getSemester</li>
+				}
+			</ul>
+		</div>
+		<div class="col-sm-8 col-lg-9">
+			<div class=row">
+				<legend>Neues Semester anlegen</legend>
+				@helper.form(action = routes.SemesterController.createSemester(), 'method -> "post", 'class -> "form-horizontal",  'role  -> "form") {
+					<div class="form-group @if(flash.contains("semester")){has-error}">
+					 	<div class="col-sm-10 col-lg-10">
+							<input id="semester" type="text" name="semester" class="form-control" rel="popover" placeholder='@if(flash.contains("semester")){@flash.get("semester")} Format: "SS yyyy" oder "WS yyyy/yyyy"'>
+						</div>
+						<div class="col-sm-2 col-lg-2">
+							<button class=" btn btn-success" type="submit">Anlegen</button>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	}
+}

@@ -1,0 +1,132 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseClosed">@Messages("account.assessment.closedassessments") <i class="fa fa-caret-down"></i></a>
+        </h4>
+    </div>
+    <div id="collapseClosed" class="panel-collapse collapse">
+    	<div class="panel-body">
+	    	<div class="panel-group" id="accordion">
+	    		@for(semester <- AccountController.mySemester()) {
+	    			<div class="panel-heading">
+						<h4 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#semester_@semester.getId()">
+						    	@semester.getSemester()
+						        <i class="fa fa-caret-down"></i>
+						   	</a>
+						</h4>
+					</div>
+					<div id="semester_@semester.getId()" class="panel-collapse collapse">
+    					<div class="panel-body">
+	    					<div class="panel-group" id="accordion">
+	    						@for(lecture <- AccountController.myLectures()) {
+	    							@if(lecture.getSemester() == semester) {
+		    							<div class="panel-heading">
+											<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#lecture_@lecture.getId()">
+											    	@lecture.getName()
+											        <i class="fa fa-caret-down"></i>
+											   	</a>
+											</h4>
+										</div>
+										<div id="lecture_@lecture.getId()" class="panel-collapse collapse">
+					    					<div class="panel-body">
+						    					<div class="panel-group" id="accordion">
+													@for(duty <- AccountController.myDutys()) {
+														@if(duty.isCorrected() && duty.getAssignment().getLecture() == lecture) {
+														    <div class="panel-heading">
+														        <h4 class="panel-title">
+														            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#duty_@duty.getId()">
+														            	@duty.getAssignment().getName()
+														            	<i class="fa fa-caret-down"></i>
+														            </a>
+														        </h4>
+														    </div>
+													    	<div id="duty_@duty.getId()" class="panel-collapse collapse">
+													        	<div class="panel-body">
+														        	<div class="panel-group" id="accordion">
+														            	<div class="table-responsive">
+														                	<table class="table">
+														                    	<th>@Messages("assignment")</th><th>@Messages("resultpoints")<th>@Messages("points")<th>@Messages("percentage")</th><th>@Messages("queries")</th>
+																	            	<tr>
+																	                    <td><a href="@routes.AssignmentController.showAssignment(duty.getAssignment().getLecture().getId(), duty.getAssignment().getId())">@duty.getAssignment().getName()</a></td>
+																	                    <td><b>@Assessment.resultpointsByDutyID(duty.getId())</b></td>
+																	                    <td>@Assessment.pointsByDutyID(duty.getId())</td>
+																	                    <td><b>@Assessment.percentageByDutyID(duty.getId()) %</b></td>
+																	                    <td class="text-center">@button.addMessage(routes.MessageController.createDutyMessage(duty.getAssignment().getLecture().getId(), duty.getAssignment().getId(), duty.getId()), false, "Neue Nachricht")</td>
+																	             	</tr>
+																	                <tr></tr>
+																	                <tr><th>@Messages("subtask.name")</th><th colspan="3">@Messages("comment")</th><th>@Messages("assessment.points")</th><th>@Messages("additional")</th></tr>
+																	                @for((valuation,count) <- duty.getAssessment().getValuations().zipWithIndex) {
+																	               		<tr>
+																	                    	<td>@valuation.getSubtask().getName()</td><td colspan="3">@valuation.getComment()</td><td>@valuation.getResultpoints() / @valuation.getSubtask().getPoints()</td>
+																	                        <td>@if(valuation.getSubtask().isAdditional()) { x }</td>
+																	                    </tr>
+																	            	}
+														                	</table>
+														            	</div>
+														            </div>
+													        	</div>
+													    	  
+																@if(!duty.getMessages().isEmpty()) {
+																	<div class="tree">
+														    			<ul>
+														    				@for(message <- duty.getMessages()) {
+																        		<li>
+																					<span style="width:500px">
+																           				<spanMy class="badge badge-my-center" style="width:93%">
+																							<spanMy class="badge badge-my-left" style="width:50%">
+																           						@message.getHead()
+																           					</spanMy>
+																           					<spanMy class="badge badge-my-center" style="width:21%">
+													    										Ich
+													    									</spanMy>
+													    									<spanMy class="badge badge-my-right" style="width:27%">
+														            							@util.dateformat(message.getDate(), Messages("date.format"))
+														            						</spanMy>
+														            					</spanMy>
+																           				@button.addMessage(routes.MessageController.createDutyAnswer(duty.getAssignment().getLecture().getId(), duty.getAssignment().getId(), duty.getId(), message.getId()), false, "Neue Antwort")
+																           				<br>
+															                   			@Html(message.getBody())
+															                   		</span>
+															                   		@messages.showAnswer(message, null, null, null, duty)
+															        			</li>
+																			}
+															    		</ul>
+																	</div>
+																} 
+																
+															</div>
+												    	}                     
+												    }
+											    </div>
+											</div>
+										</div>
+									}		    
+								}		    
+						    </div>
+			    		</div>
+			    	</div>
+		    	}
+		    </div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	$(function () {
+		$('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Einklappen');
+		$('.tree li.parent_li > span').on('click', function (e) {
+			var children = $(this).parent('li.parent_li').find(' > ul > li');
+		   	if (children.is(":visible")) {
+		    	children.hide('fast');
+		        $(this).attr('title', 'Ausklappen').find(' > i').addClass().removeClass();
+		  	} else {
+				children.show('fast');
+				$(this).attr('title', 'Einklappen').find(' > i').addClass().removeClass();
+			}
+			e.stopPropagation();
+		});
+	});
+</script>

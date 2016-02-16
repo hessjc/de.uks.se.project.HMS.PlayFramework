@@ -1,0 +1,23 @@
+@(i: Int)
+<div id="examination@i">
+  <div class="col-lg-5 col-sm-5 col-xs-12">
+    <div class="form-group @if(flash.contains("percentageSpinner@i")) {has-error}">
+      <label>@Messages("lecture.admission.examination.percentage") </label>
+      <input id="percentageSpinner@i" name="percentageSpinner@i" value="0">
+    </div>
+  </div>
+  <div class="col-lg-7 col-sm-7 col-xs-12">
+    <div class="form-group @if(flash.contains("stepSpinner@i")) {has-error}">
+        <input id="stepSpinner@i" name="stepSpinner@i" value="0">
+      <label>@Messages("lecture.admission.examination.grade.step")</label>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $("#percentageSpinner@i").spinner({step: 5, min: 0});
+  $("#percentageSpinner@i").width(40);
+  $("#stepSpinner@i").spinner({step: 0.3, min: 0});
+  $("#stepSpinner@i").width(50);
+  $("#percentageSpinner@i").numeric();
+  $("#stepSpinner@i").numeric();
+</script>

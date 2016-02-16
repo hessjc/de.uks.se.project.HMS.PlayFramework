@@ -1,0 +1,59 @@
+@(registerForm: Form[provider.SimpleUserPassAuthProvider.SimpleAuthSignup])
+@import be.objectify.deadbolt.java.views.html._
+
+@subjectNotPresent() {
+
+  @helper.form(routes.UserController.register) {
+    <h2>@Messages("register")</h2>
+    <h4>@Messages("software.engineering")</h4>
+    
+    <table width="100%">
+      <tr>
+        <td>
+          @html.forms.input("firstName", "text", registerForm("firstName").value, "user.firstname", 1)
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          @html.forms.input("lastName", "text", registerForm("lastName").value, "user.lastname", 1)
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          @html.forms.input("matrikelNumber", "text", registerForm("matrikelNumber").value, "user.matriculation.optional", 1)
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          @html.forms.input("signupEmail", "text", registerForm("signupEmail").value, "user.email", 1)
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          @html.forms.input("repeatSignupEmail", "text", registerForm("repeatSignupEmail").value, "user.email.repeat", 1)
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          @html.forms.input("signupPassword", "password", registerForm("signupPassword").value, "user.password", 1)
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          @html.forms.input("repeatSignupPassword", "password", registerForm("repeatSignupPassword").value, "user.password.repeat", 1)
+        </td>
+      </tr>
+    </table>
+    
+    <div class="form-group">
+      @if(flash.contains("accountEmail")) { <font size=2px color=red>@flash.get("accountEmail")</font> }
+    
+      @if(registerForm.hasGlobalErrors) { 
+                  <p class="error">
+                  <span class="label label-danger">@registerForm.globalError.message</span>
+              </p>
+          }
+    </div>
+    
+    <button type="submit" class="btn btn-success btn-lg pull-right">Registrieren</button>
+  }
+}

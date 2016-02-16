@@ -1,0 +1,62 @@
+@import be.objectify.deadbolt.java.views.html._
+@import play.api.libs._
+@import utils.Breadcrumps
+
+<nav class="navbar" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#hsm-navbar-headbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="@routes.Application.index()">@Messages("homeworkmanagementsystem.title")</a>
+    </div>
+    @subjectPresent() {
+      <div class="hidden-sm hidden-xs">
+        <ul class="nav navbar-nav navbar-left">
+        @for((name, url) <- Breadcrumps.findBreadcrumps(request.path())){
+          <li>
+            <a href="@url" class="breadcrump">> @name</a>
+          </li>
+        }
+        </ul>
+      </div>
+    }
+    <div id="hsm-navbar-headbar-collapse" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+      @subjectPresentOr() {
+        @user.logout()
+      }{
+        @user.login()
+      }
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Modal -->
+<div class="modal fade" id="modalResetPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Passwort zurücksetzen</h4>
+      </div>
+      <form method="post"  action="@routes.UserController.resetPassword()">
+        <div class="modal-body">
+          <label>E-Mail-Adresse eingeben</label>
+          <input name="email" type="email" class="form-control" id="email" placeholder="E-Mail-Adresse">
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary btn-sm" type="submit">Anfordern</button>
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+  $(function(){
+    $('[rel~="tooltip"]').tooltip();
+  });
+</script>

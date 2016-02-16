@@ -1,0 +1,23 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import security.HDSDynamicResourceHandler.ADMINISTRATOR
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic(ADMINISTRATOR) {
+		<div class="col-12 col-sm-8 col-lg-9">
+			<legend>Benutzer verwalten</legend>
+			<select name="user" class="form-control">
+				@for(user <- User.findAll()) {
+					<option value="@routes.UserController.showUser(user.getId)">@user.getLastName(), @user.getFirstName() (@user.getEmail())</option>
+				}
+			</select>
+			
+			<script type="text/javascript">
+				$("select[name='user']").change(function() {
+					location.href = $(this).val();
+				});
+			</script>
+		</div>
+	}
+}

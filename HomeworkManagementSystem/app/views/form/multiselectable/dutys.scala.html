@@ -1,0 +1,37 @@
+@(dutys: List[Duty], divID: String, filterDutys: String, btnSelectDutys: String)
+
+<div class="col-3 col-sm-3 col-lg-3" id="@divID">
+  <label>@Messages("duty")</label>
+  <div class="input-group">
+    @form.filter.input(divID, filterDutys)
+    <span class="input-group-btn">
+      @button.select(divID, btnSelectDutys)
+    </span>
+  </div>
+  <select multiple="multiple" size="15" class="form-control">
+  @for(duty <- dutys) {
+    <option @if(duty.isCatched) { title="@duty.getAssessment().getProofreader().getName() (@duty.getAssessment().getProofreader().getEmail())" } value="@duty.getId()" @if(duty.isCorrected) { class="corrected" } else { @if(Assessment.oneValuationCorrected(duty.getAssessment.getId())) { class="evaluated" }  }>@duty.getUser().getName(), @duty.getUser().getMatrikelNumber()</option> 
+  
+    @if(duty.isCatched) {
+    <script>
+    $(function() {
+    $( document ).tooltip({
+        track: true
+      });
+    });
+    </script>
+    }
+  }
+  </select>
+</div>
+
+<script>
+function get@{divID}() {
+    var optionTexts = [];
+    $("#@divID select option:selected").each(function() {
+        optionTexts.push($(this).val());
+    });
+    var quotedCSV = optionTexts.join(' ');
+    return quotedCSV;
+}
+</script>

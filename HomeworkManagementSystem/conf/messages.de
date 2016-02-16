@@ -1,0 +1,191 @@
+never=Niemals
+still=Noch
+days=Tage
+yes=Ja
+no=Nein
+
+software.engineering=Software-Engineering
+
+delete=Entfernen
+edit=Bearbeiten
+save=Speichern
+add=Hinzufügen
+cancel=Abbrechen
+create=Erstellen
+signin=Anmelden
+signin.stay=Angemeldet bleiben
+signout=Abmelden
+correct=Korrigieren
+show=Ansehen
+select=Auswählen
+select.all=Alle Auswählen
+register=Registrieren
+
+semester=Semester
+lecture=Veranstaltung
+assignment=Aufgabenblatt
+assessment=Bewertung
+count=Anzahl
+duty=Abgabe
+duty.no=Keine Abgabe
+duty.all=Alle Abgaben
+duty.catched=zugewiesene Abgaben
+info=Information
+resultpoints=Erreichte Punkte
+points=Gesamtpunkte
+percentage=Prozent
+percentage.overall=Gesamtresultat
+queries=Rückfragen
+comment=Kommentar
+additional=Zusatz
+description=Beschreibung
+bound=Schranke
+filter=Filter
+
+changelog=Changelog
+
+account.user=Meine Accountinformationen
+account.user.activities=Kontoaktivitäten
+account.user.lastlogin=Letzte Anmeldung
+account.assessment.closedassessments=Abgeschlossene Bewertungen
+account.assessment.closedassessments.not=Offene Bewertungen
+account.assessment.queries=Bei Rückfragen zu dieser Bewertung ist der zuständige Korrekteur hiermit zu erreichen.
+account.lecture=Veranstaltungen als
+
+user.name=Name
+user.firstname=Vorname
+user.lastname=Nachname
+user.student=Student
+user.matriculation=Matrikelnummer
+user.matriculation.optional=Matrikelnummer (nur für Studenten)
+user.password=Passwort
+user.password.repeat=Passwort (Wiederholung)
+user.email=E-Mail-Adresse
+user.email.repeat=E-Mail-Adresse (Wiederholung)
+user.myprofile=Mein Profil
+user.myprofile.lastlogin=d. MMMM yyyy HH:mm:ss
+user.edit.matriculationnumber=Matrikelnummer erfolgreich geändert!
+user.edit.name=Daten erfolgreich geändert!
+user.edit.password=Passwort erfolgreich geändert!
+
+roles.admin=Administrator
+roles.lectureadmin=Vorlesungsbetreuer
+roles.proofreader=Korrekteur
+roles.proofreader.all=Alle Korrekteure
+roles.proofreader.selected=Ausgewählte Korrekteure
+roles.student=Student
+
+assessment.table=Bewertungstabelle für
+assessment.evaluated.email.subject=Neue Bewertung von Aufgabe {0} für Vorlesung {1} {2}
+assessment.evaluated.not=Unbewertet
+assessment.points=Teilpunkte
+
+message.lecture=Veranstaltungen
+message.assignment=Aufgabenblätter
+
+assignment.close=Aufgaben können nach Abschluss unter Umständen nur noch eingeschränkt bearbeitet werden. Bist du sicher, dass du die Aufgabe jetzt abschließen willst?
+assignment.completed=Die Aufgabe ist bereits abgeschlossen
+assignment.aresubtaskeditable=Möglichkeit zum Bearbeiten der Teilaufgaben prüfen
+assignment.aresubtaskeditable.true=Die Teilaufgaben wurden zum erneuten Bearbeiten freigegeben (dies ist nur möglich, da es noch keine Abgaben zu dem Aufgabenblatt gibt)!
+assignment.aresubtaskeditable.false=Es gibt bereits Abgaben zu dem Aufgabenblatt, daher ist ein weiteres Bearbeiten der Teilaufgaben nicht möglich!
+assignment.subtask.create=Neue Teilaufgabe anlegen
+assignment.incomplete=Dieses Aufgabenblatt wurde noch nicht abgeschlossen. Schließen Sie das Aufgabenblatt ab, um anderen Benutzergruppen den Zugriff zu gewähren.
+assignment.subtask.delete.success=Die Teilaufgabe wurde erfolgreich gelöscht
+
+subtask.name=Name der Teilaufgabe
+
+deadline=Abgabefrist
+deadline.optional=Abgabefrist (optional)
+deadline.registration=Einschreibungsfrist
+deadline.expired=Die Abgabefrist ist abgelaufen.
+deadline.format=d. MMMM yyyy
+date.format=dd.MM.yyyy HH:mm
+deadline.none=Keine Abgabefrist
+deadline.unknown=Unbekannt
+
+duty.catch.deadlinenotover=Die Aufgabe ist noch nicht geschlossen.
+duty.catch.successful=Die Abgabe (ID: {0}) wurde dir zugeordnet!
+dutys.catch.successful=Die Abgaben IDs: {0} wurden den Usern {1} erfolgreich zugeordnet!
+duty.catch.error=Es muss mindestens eine Abgabe und ein Korrekteur ausgewählt sein!
+duty.release.success=Ausgewählte Abgaben {0} der Korrekteure {1} erfolgreich freigegeben!
+duty.release.error=Es muss mindestens eine Abgabe bzw. ein Korrekteur ausgewählt sein
+duty.upload.wrongformat=Es werden ausschließlich Abgaben als Zip-, Jar- oder PDF-Datei akzeptiert.
+duty.upload.toobig=Abgaben über 50 MB sind nicht möglich!
+duty.upload.successful=Abgabe erfolgreich hochgeladen.
+duty.upload.failure=Upload fehlgeschlagen. Bitte versuchen Sie es erneut.
+duty.uploadedDateTime.format=d. MMMM yyyy HH:mm:ss
+duty.evaluation.done=abgeschlossene Korrekturen
+duty.evaluation.notdone=offene Korrekturen
+
+homemenu.myhome=Mein Account
+homemenu.mylectures=Meine Veranstaltungen
+homemenu.myassessments=Meine Bewertungen
+homemenu.mydutys=Meine Korrekturen
+homemenu.mymessages=Meine Nachrichten
+homemenu.lecture=Veranstaltung
+homemenu.alllectures=Alle Veranstaltungen
+homemenu.createlecture=Veranstaltung anlegen
+homemenu.administration=Administration
+homemenu.administration.roles=Rollen verwalten
+homemenu.administration.semester=Semester verwalten
+homemenu.administration.users=Benutzer verwalten
+
+lecture.create=Veranstaltung anlegen
+lecture.edit=Veranstaltung bearbeiten
+lecture.name=Name der Veranstaltung
+lecture.optional.dutys.count=Anzahl optionaler Abgaben
+lecture.optional.dutys.count.fulltext=Die Anzahl der optionalen Abgaben, die unabhängig der später markierten optionalen Abgaben, im Endergebnis nicht berücksichtigt werden.
+lecture.optional.dutys.percentage=Untere prozentuale Grenze der Abgaben
+lecture.optional.dutys.percentage.fulltext=Die prozentuale Untergrenze, die bei jeder Abgabe zu dieser Veranstaltung erreicht werden muss, um eine Abgabe zu erreichen, die in das Endergbnis eingeht.
+lecture.admission.examination=Klausurzulassung
+lecture.admission.examination.count=Anzahl der Notenverbesserungen
+lecture.admission.examination.percentage.min=zu erreichende Prozentzahl
+lecture.admission.examination.percentage.min.fulltext=Diese Prozentzahl muss insgesamt erreicht werden, um zu der Klausur zugelassen zu werden
+lecture.admission.examination.percentage=Prozentzahl
+lecture.admission.examination.grade=Notenverbesserung
+lecture.admission.examination.grade.step=Notenverbesserungsschritt
+lecture.delete.success={0}: {1} erfolgreich gelöscht
+lecture.join.mustHaveMatrikelnumber=Du musst deinem Account eine Matrikelnummer hinzufügen, um dich in Vorlesungen einzuschreiben.
+lecture.lectureadmin.delete.success={0} ({1}) erfolgreich entfernt
+lecture.proofreader.delete.success={0} ({1}) erfolgreich entfernt
+lecture.allocate.dutys=Abgabenzuweisung
+
+semester.create.success=Semester {0} erfolgreich angelegt
+semester.create.error.wrongformat=Geben Sie ein Semester im korrekten Format ein.
+semester.create.error.wsinvalidyears=Die angegebenen Jahre sind nicht aufeinanderfolgend.
+
+error.accessforbidden=Auf diese Daten können Sie nicht zugreifen
+error.notfound=Die angeforderte Seite konnte nicht gefunden werden
+
+# Override default Play's validation messages
+
+# --- Constraints
+constraint.required=Required
+constraint.min=Minimum value: {0}
+constraint.max=Maximum value: {0}
+constraint.minLength=Minimum length: {0}
+constraint.maxLength=Maximum length: {0}
+constraint.email=Email
+
+## --- Formats
+format.date=Date (''{0}'')
+format.numeric=Numeric
+format.real=Real
+
+## --- Meta
+meta.description=Hausaufgabenabgabesystem der Software Engineering Research Group - HomeworkManagementSystem-Project
+meta.author=Jürgen Fast // Jan Hess
+
+## --- System
+homeworkmanagementsystem.title=Hausaufgabenverwaltungssystem
+homeworkmanagementsystem.index.title=Willkommen im Hausaufgabenverwaltungssystem
+
+## --- Play authenticate
+playauthenticate.core.application.name=Hausaufgabenverwaltungssystem
+playauthenticate.core.application.shortname=HMS
+
+playauthenticate.core.exception.signupuser_failed=Einloggen fehlgeschlagen. Cache und Cookies im Browser löschen kann hier helfen!
+
+playauthenticate.password.verify_signup.subject=HMS: Vervollständige deine Anmeldung
+playauthenticate.password.verify_email.subject=HMS: Bestätige deine e-mail Addresse
+playauthenticate.password.reset_email.subject=HMS: Anleitung zum Passwortzurücksetzen

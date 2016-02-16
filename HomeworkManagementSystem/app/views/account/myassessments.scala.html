@@ -1,0 +1,14 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+@main() {
+    @navigation.homeMenu()
+    @dynamic("Participant") {
+    <div class="col-sm-8 col-lg-9">
+        <div class="panel-group" id="accordion">
+        @account.assessment.closed()
+        @account.assessment.open()
+        </div>
+    </div>
+    }
+}

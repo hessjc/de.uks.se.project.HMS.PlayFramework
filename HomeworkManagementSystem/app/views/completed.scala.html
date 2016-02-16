@@ -1,0 +1,20 @@
+@(loginForm: Form[provider.SimpleUserPassAuthProvider.SimpleLogin], user: models.User)
+
+@main() {
+	<div class="col-12 col-sm-12 col-lg-12">
+		<div class="jumbotron">
+			@user.getEmail() angelegt
+			<br>
+			<br>
+			TODO:
+			<br>
+			Nach erfolgreicher Registrierung muss der E-Mail-Bestätigungslink zur E-Mail-Validierung bestätigt werden.<br>
+			Nachdem der Nutzer(User) validiert wurde kann er sich nun anmelden.<br>
+			Nach dem aller ersten Anmeldevorgang:<br>
+			- User kann sich zum Student "ernennen", indem er seine Matrikelnummer einträgt.<br>
+				-> Bestimmte Menüpunkte (ShowLectures, ShowDutys, Assignmentpapers now visible etc.)<br>
+			- User bleibt User falls nicht..<br>
+		</div><
+
+	</div>
+}

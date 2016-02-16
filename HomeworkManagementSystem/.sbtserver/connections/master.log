@@ -1,0 +1,34 @@
+New log file opened at Tue Feb 16 09:43:27 CET 2016 by 27020@Jan-PC
+Taking next connection to: 32970
+New client attempting to connect on port: 32971-32970
+  Address = /192.168.1.10:32970
+This client on port 32971 has uuid a72b7b03-2eef-4880-a2ef-b46dfea3ac2b configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-a72b7b03-2eef-4880-a2ef-b46dfea3ac2b
+Taking next connection to: 32970
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 32970
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 32970
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 32970
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 32970
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 32970
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 32970
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 32970
+Checking to see if clients are empty...
+No non-daemon clients connected after 3 min. Shutting down.
+Server socket thread exiting.
+0 clients open, will close them...
+All client sockets have been closed.
+Closing the 27020@Jan-PC logs at Tue Feb 16 10:07:28 CET 2016, goodbye.

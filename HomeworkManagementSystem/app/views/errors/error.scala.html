@@ -1,0 +1,9 @@
+@(errorMessageKey: String)
+
+@flash.put("error", Messages(errorMessageKey))
+
+@if(Application.SessionAvailable()){
+	@lecture.lectures()
+} else {
+	@index()
+}

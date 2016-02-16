@@ -1,0 +1,294 @@
+@(user: User, lecture: models.Lecture)
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import security.HDSDynamicResourceHandler.ADMINISTRATOR
+
+@user = @{User.findBySession(session())}
+@hasMessage = @{User.findBySession(session()).hasMessageInLecture(lecture)}
+
+@main() {
+	@navigation.homeMenu()
+	<div class="col-sm-8 col-lg-9">
+		<legend>
+			@lecture.getName()
+			@dynamic(ADMINISTRATOR) {
+				<a data-toggle="modal" data-target="#modalDeleteLecture" href="" class="btn btn-danger btn-xs pull-right spacer-left">
+					<i class="fa fa-trash-o" title='@Messages("delete")'></i>
+				</a>
+			}	
+			@dynamic("IsLectureadminOfLecture") {
+				@button.edit(routes.LectureController.editLecture(lecture.getId()))
+				<a data-toggle="modal" data-target="#modalSendMailToAll" href="" class="btn btn-info btn-xs pull-right spacer-left">
+					<i class="fa fa-envelope" title='Mail an alle Teilnehmer senden'> Mail an alle Teilnehmer senden</i>
+				</a>
+			}
+			@dynamic("IsParticipantOfLecture"){
+				@if(!lecture.getLectureadmins().isEmpty){
+					<a class="btn btn-info btn-xs pull-right" href="mailto: @lecture.getLectureadmins().iterator().next().getEmail()?subject=Frage von @user.getName() (@user.getMatrikelNumber()) zu Vorlesung @lecture.getSemester().getSemester @lecture.getName()"><span class="fa fa-question"> Frage zur Vorlesung</span></a>
+				}
+			}
+		</legend>
+		@dynamic(ADMINISTRATOR) {
+		<!-- Modal -->
+		<div class="modal fade" id="modalDeleteLecture" tabindex="-1" role="dialog" aria-labelledby="delete-lecture" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Best&auml;tigung zum L&ouml;schen einer Veranstaltung</h4>
+					</div>
+					<div class="modal-body">
+						Wollen Sie die Veranstaltung
+						<h4>@lecture.getSemester().getSemester: @lecture.getName()</h4>
+						<div class="well well-sm">@lecture.getDescription()</div>
+						 <b><u>und alle daran verkn&uuml;pften Daten</u></b> wirklich l&ouml;schen?</br></br>
+					</div>
+					<div class="modal-footer">
+						<form method="post" action="@routes.LectureController.deleteLecture()">
+							<input type="hidden" name="id" value="@lecture.getId()" />
+							@button.cancel(size="btn-sm")
+							@button.delete(size="btn-sm")
+						</form>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		}
+		@dynamic("IsLectureadminOfLecture") {
+		<!-- Modal -->
+		<div class="modal fade" id="modalSendMailToAll" tabindex="-1" role="dialog" aria-labelledby="send-mail-to-all" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">E-Mail an alle Teilnehmer senden</h4>
+					</div>
+					<form method="post" action="@routes.LectureController.sendMailToAll(lecture.getId())">
+						<div class="modal-body">
+							<input name="subject" type="text" class="form-control" placeholder="E-Mail-Betreff eingeben"></input>
+							<textarea name="text" class="form-control" rows="5" placeholder="E-Mail-Text eingeben"></textarea>
+						</div>
+						<div class="modal-footer">
+								@button.cancel(size="btn-sm")
+								<button class="btn btn-success btn-sm pull-right spacer-left" type="submit"><i class="fa fa-envelope"> Senden</i></button>
+						</div>
+					</form>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		}
+		
+		<h4>@lecture.getSemester().getSemester - @Messages("deadline.registration"): @if(lecture.getClosingdate()==null) { Keine Frist } else { <font class="red">@util.dateformat(lecture.getClosingdate(),Messages("deadline.format"))</font> }</h4>
+		<h6>Anzahl der eingeschriebenen Teilnehmer: @lecture.getUsers().size()</h6>
+		<table class="table">
+			<thead>
+				<th colspan="2">Beschreibung</th>
+			</thead>
+			<tr><td colspan="2">@Html(lecture.getDescription())</td></tr>
+			<thead>
+				<th colspan="2">Ansprechpartner</th>
+			</thead>
+			<tr><td colspan="2">
+			@for((user, count) <- lecture.getLectureadmins().zipWithIndex) {
+				<a href="mailto:@user.getEmail()?subject=Frage von @user.getName() (@user.getMatrikelNumber()) zu Vorlesung @lecture.getSemester().getSemester @lecture.getName()">@user.getFirstName() @user.getLastName()</a>@if(!((count+1) == lecture.getLectureadmins().size())) {, }
+			}
+			</td></tr>
+			@dynamic("IsLectureadminOfLecture") {
+			<thead>
+				<th colspan="2">Korrekteure</th>
+			</thead>
+			<tr><td colspan="2">
+			@for((user, count) <- lecture.getProofreaders().zipWithIndex) {
+				<a href="mailto:@user.getEmail()">@user.getFirstName() @user.getLastName()</a>@if(!((count+1) == lecture.getProofreaders().size())) {, }
+			}
+			</td><tr>
+			}
+			<thead>
+                <th title="@Messages("lecture.optional.dutys.count.fulltext")">@Messages("lecture.optional.dutys.count")</th>
+                <th title="@Messages("lecture.optional.dutys.percentage.fulltext")">@Messages("lecture.optional.dutys.percentage")</th>
+            </thead>
+            <tr>
+              <td>@lecture.getOptionalDutys()</td>
+              <td>@lecture.getLowerProcentualBounderyOfDutys()</td>
+            </tr>
+            @if(lecture.getMinimumPercentageForExamination>0 || lecture.getBonuses().size()>0) {
+            <thead>
+              <th title="@Messages("lecture.admission.examination.percentage.min.fulltext")">@Messages("lecture.admission.examination")</th>
+              <th>@Messages("lecture.admission.examination.count")</th>
+            </thead>
+            <tr>
+              <td>min. @lecture.getMinimumPercentageForExamination()%</td>
+              <td>@lecture.getBonuses().size()</td>
+            </tr>
+            @for(bonus <- lecture.getBonuses()) {
+            <tr><td><td>@Messages("lecture.admission.examination.percentage"): @bonus.getPercentage() &nbsp;&nbsp;&nbsp; @Messages("lecture.admission.examination.grade"): @bonus.getBonus()</td></tr>
+            }
+            }
+		</table>
+		
+		@dynamic("IsNotParticipantOfLecture") {
+			@if(!utils.DateHelper.isExpired(lecture.getClosingdate())) {
+			<a data-toggle="modal" data-target="#modalJoin" href=""><button type="button" class="btn btn-success btn-primary">Einschreiben</button></a>
+			<!-- Modal -->
+			<div class="modal fade" id="modalJoin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Veranstaltung beitreten</h4>
+						</div>
+						<div class="modal-body">
+							Wollen Sie der Veranstaltung
+							<h4>@lecture.getSemester().getSemester @lecture.getName()</h4>
+							<h6>@Html(lecture.getDescription())</h6></br>
+							wirklich beitreten?
+						</div>
+						<div class="modal-footer">
+							<a href="@routes.LectureController.joinLecture(lecture.getId())" class="btn btn-success fa fa-check" title='@Messages("Yes")'></a>
+							<button type="button" class="btn btn-danger fa fa-times" data-dismiss="modal" title='@Messages("No")'></button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			}
+		}
+		
+		@dynamic("IsUserAndNoProofReaderOrLectureAdmin") {
+			<div class=row">
+				<a data-toggle="modal" data-target="#modalJoin" href="" class="col-lg-2 col-sm-3 col-xs-3"><button type="button" class="btn btn-success btn-primary" disabled="disabled">Einschreiben</button></a> <span  class="col-lg-10 col-sm-9 col-xs-9">@Messages("lecture.join.mustHaveMatrikelnumber")</span>
+			</div>
+		}
+		
+		@dynamic("IsParticipantOfLecture") {
+			<legend>Aufgabenbl&auml;tter		
+				@dynamic("IsLectureadminOfLecture") {
+				<a href="@routes.AssignmentController.createAssignment(lecture.getId())"><button type="button" class="btn btn-success btn-xs pull-right">Neues Aufgabenblatt hinzuf&uuml;gen</button></a>
+				}
+			</legend>
+			
+			<table class="table table-hover">
+				<thead>
+					<th class="col-lg-2">Name</th><th>Teilaufgaben</th><th class="col-lg-4">Kommentar</th><th>Multiplikator</th><th>Zusatz?</th>@dynamic("IsParticipantOfLectureOnly"){<th>Abgabe</th><th>Punkte</th><th>Prozent</th><th class="col-lg-2"></th>}
+				</thead>
+				@for((assignment, count) <- Assignment.findAssignmentsByLectureID(lecture.getId()).zipWithIndex) {
+					@if(assignment.isCompleted()){
+						@singleAssignment(user, assignment)
+					} else {
+						@dynamic("IsLectureadminOfLecture"){
+							@singleAssignment(user, assignment)	
+						}
+					}
+				}
+				@dynamic("IsParticipantOfLectureOnly") {
+				<tr>
+					<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><h4><b>@AssessmentController.overallPercentageAssessment(User.findBySession(session()).getId, lecture.getId()) %</b></h4></td>
+				</tr>
+				}
+			</table>
+		}	
+		<br>
+		
+		@dynamic("IsLectureadminOfLecture") {
+            <a href="@routes.AssessmentController.showAssessments(lecture.getId())"><button type="button" class="btn btn-info btn-primary">Zeige Ergebnisse der Kursteilnehmer</button></a>
+			<a href="@routes.DutyController.showCatchedDutys(lecture.getId())"><button type="button" class="btn btn-warning">Zugeordnete Abgaben</button></a>
+			<a href="@routes.DutyController.showDutyAllocation(lecture.getId())"><button type="button" class="btn btn-warning">@Messages("lecture.allocate.dutys")</button></a>
+		}
+		<br>
+		<br>
+		
+		@dynamic("IsParticipantOfLecture") {
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Nachrichten
+						@button.addMessage(routes.MessageController.createLectureMessage(lecture.getId()), false, "Neue Nachricht")
+						<br>
+						<span class="badge badge-my-right">Ich</span>
+						<span class="badge badge-student-right">Student</span>
+						<span class="badge badge-admin-right">Lectureadmin</span>					
+					</h3>
+				</div>
+				<div class="tree">
+	    			<ul>
+		    			@if(lecture.getMessages().isEmpty() || !hasMessage) {
+							Keine Nachrichten vorhanden
+						}
+	    				@for(message <- lecture.getMessagesAsList()) {
+	    					@if(user.canSee(message)) {
+			        			<li>
+				        			<span style="width:500px">
+								    	@if(message.getSender().getId() == user.getId()) {
+											<spanMy class="badge badge-my-center" style="width:93%">
+												<spanMy class="badge badge-my-left" style="width:50%">
+				           							@message.getHead()
+				           						</spanMy>
+				           						<spanMy class="badge badge-my-center" style="width:21%">
+    												Ich
+    											</spanMy>
+    											<spanMy class="badge badge-my-right" style="width:27%">
+				           							@util.dateformat(message.getDate(), Messages("date.format"))
+				           						</spanMy>
+				           					</spanMy>
+										} else {
+											@if(message.getSender().isLectureadminOf().contains(message.getConversationLecture())) {
+												<spanAdmin class="badge badge-admin-center" style="width:93%">
+													<spanAdmin class="badge badge-admin-left" style="width:52%">
+    													@message.getHead()
+    												</spanAdmin>
+    												<spanAdmin class="badge badge-admin-center" style="width:21%">
+														Lectureadmin
+													</spanAdmin>
+													<spanAdmin class="badge badge-admin-right" style="width:27%">
+														@util.dateformat(message.getDate(), Messages("date.format"))
+													</spanAdmin>
+												</spanAdmin>
+											} else {
+												<spanStudent class="badge badge-student-center" style="width:93%">
+													<spanStudent class="badge badge-student-left" style="width:52%">
+    													@message.getHead()
+    												</spanStudent>
+    												<spanStudent class="badge badge-student-center" style="width:21%">
+														Student
+													</spanStudent>
+													<spanStudent class="badge badge-student-right" style="width:27%">
+														@util.dateformat(message.getDate(), Messages("date.format"))
+													</spanStudent>
+												</spanStudent>
+											}
+										}
+				           				@if(user.canAnswer(message)) {
+				           					@button.addMessage(routes.MessageController.createLectureAnswer(lecture.getId(), message.getId()), false, "Neue Antwort")
+				           				} else {
+				           					@button.addMessage(routes.MessageController.createLectureAnswer(lecture.getId(), message.getId()), true, "Neue Antwort")
+				           				}
+				           				<br>
+				                   		@Html(message.getBody())
+				                   	</span>
+				                   	@messages.showAnswer(message, null, lecture, null, null)
+			        			</li>
+		        			}
+						}
+		    		</ul>
+				</div>
+			</div>
+		}
+		
+	</div>
+	
+	<script>
+		$(function () {
+		    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Einklappen');
+		    $('.tree li.parent_li > span').on('click', function (e) {
+		        var children = $(this).parent('li.parent_li').find(' > ul > li');
+		        if (children.is(":visible")) {
+		            children.hide('fast');
+		            $(this).attr('title', 'Ausklappen').find(' > i').addClass().removeClass();
+		        } else {
+		            children.show('fast');
+		            $(this).attr('title', 'Einklappen').find(' > i').addClass().removeClass();
+		        }
+		        e.stopPropagation();
+		    });
+		});
+	</script>
+}

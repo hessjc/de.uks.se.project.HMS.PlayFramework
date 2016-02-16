@@ -1,0 +1,57 @@
+PlaySimpleAuthentication Plugin
+==========================================
+
+1. General
+
+This plugin is an extension for the "Play Authenticate" plugin which facilitates the use of "local" username/password verification.
+
+2. Usage
+
+To use this plugin, follow these steps:
+
+2.1 Add the plugin to your project dependencies in "Build.scala", e.g.:
+
+	val appDependencies = Seq(
+		...
+		
+		"de.uks.se" %% "play-simple-authentication" % "0.1-SNAPSHOT"
+	)
+	
+2.2 Add the following configuration files:
+
+	* ${yourProject}/conf/playauthenticate.conf
+	
+		This file configures the "Play Authenticate" part, e.g. some mail configuration must be done here.
+	
+	* ${yourProject}/conf/simpleauth.conf
+	
+		This file configures the "PlaySimpleAuthentication" part. You have to specify your implementations of 
+		"util.CallAuthFactory" and "util.UserFactory".
+	
+	* ${yourProject}/conf/smtp.conf
+	
+		This file configurs the "Play Easymail" part. Here you define all mailing settings.
+		
+	Examples configurations can be found in "resources/conf" of the PlaySimpleAuthentication plugin.
+	
+2.3 Implement the required interfaces "util.CallAuthFactory" and "util.UserFactory". PlaySimpleAuthentication uses these interfaces during the different
+	phases "signup" and "login". 
+	
+	Don't forget to specify your implementations in "${yourProject}/conf/simpleauth.conf" as described in 2.2.
+	
+2.4 Create your views for "Signup" and "Login". You can use the built-in 
+		
+		"provider.SimpleUserPassAuthProvider.SimpleAuthSignup" and 
+		"provider.SimpleUserPassAuthProvider.SimpleLogin"
+		
+	as data objects for your forms.
+	
+2.5 Create your controllers.
+
+	Your controller should at least handle the following three cases:
+	
+	a) Signup an user. The controller is expected to call "UsernamePasswordAuthProvider.handleSignup(ctx())" after validating the signup form.
+	b) Login an user. The controller is expected to call "UsernamePasswordAuthProvider.handleLogin(ctx())" after validating the login form.
+	c) Logout an user. The controller is expected to call "PlayAuthenticate.logout(session())" after validating the login form.
+	
+	

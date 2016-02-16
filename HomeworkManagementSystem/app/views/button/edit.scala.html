@@ -1,0 +1,3 @@
+@(url:Call, disabled:Boolean = false, tooltip : String = Messages("edit"))
+
+<a id="editButton" @if(!disabled){href="@url"} class="btn btn-warning btn-xs pull-right spacer-left @if(disabled){disabled}"><i class="fa fa-edit" title='@tooltip'></i></a>

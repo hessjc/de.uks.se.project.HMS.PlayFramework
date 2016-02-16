@@ -1,0 +1,46 @@
+@import utils.StringHelper
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseDone">@Messages("duty.evaluation.done") <i class="fa fa-caret-down"></i></a>
+        </h4>
+    </div>
+    <div id="collapseDone" class="panel-collapse collapse">
+        <div class="panel-body">
+            @for((semester,assessmentsPerLecture) <- AssessmentController.myEvaluatedAssessmentsPerSemester()) {
+            @for((lecture,assessments) <- assessmentsPerLecture) {
+            @defining(StringHelper.safeString(semester.getSemester + "_" + lecture.getName())) { uid =>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse_@uid">@semester.getSemester @lecture.getName() <i class="fa fa-caret-down"></i></a>
+                        </h4>
+                    </div>
+                    <div id="collapse_@uid" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <th>@Messages("assignment")</th><th>@Messages("user.lastname"), @Messages("user.firstname")</th><th>@Messages("user.matriculation")</th><th></th>
+                                    @for(assessment <- assessments) {
+                                    @if(assessment.duty.corrected) {
+                                    <tr>
+                                        <td>@assessment.duty.getAssignment().getName()</td>
+                                        <td>@assessment.duty.user.getLastName(), @assessment.duty.user.getFirstName()</td>
+                                        <td>@assessment.duty.user.getMatrikelNumber()</td>
+                                        <td><a href="@routes.AssessmentController.evaluateDuty(assessment.id)"><button class="btn btn-success">@Messages("show")</button></a></td>
+                                    </tr>
+                                    }
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            }
+            }
+            </div>
+        </div>
+    </div>
+</div>

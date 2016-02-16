@@ -1,0 +1,738 @@
+ # Valuation
+
+ valuations:
+
+ - !!models.Valuation
+     id:               1
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 1
+     subtask:
+            !!models.Subtask
+                 id: 1
+
+ - !!models.Valuation
+     id:               2
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 1
+     subtask:
+            !!models.Subtask
+                 id: 2
+                 
+ - !!models.Valuation
+     id:               3
+     resultpoints:     3.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 1
+     subtask:
+            !!models.Subtask
+                 id: 3
+
+ - !!models.Valuation
+     id:               4
+     resultpoints:     2.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 2
+     subtask:
+            !!models.Subtask
+                 id: 1
+
+ - !!models.Valuation
+     id:               5
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 2
+     subtask:
+            !!models.Subtask
+                 id: 2
+                 
+ - !!models.Valuation
+     id:               6
+     resultpoints:     3.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 2
+     subtask:
+            !!models.Subtask
+                 id: 3
+
+ - !!models.Valuation
+     id:               7
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 3
+     subtask:
+            !!models.Subtask
+                 id: 1
+
+ - !!models.Valuation
+     id:               8
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 3
+     subtask:
+            !!models.Subtask
+                 id: 2
+                 
+ - !!models.Valuation
+     id:               9
+     resultpoints:     3.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 3
+     subtask:
+            !!models.Subtask
+                 id: 3
+                 
+
+ - !!models.Valuation
+     id:               10
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 4
+     subtask:
+            !!models.Subtask
+                 id: 1
+
+ - !!models.Valuation
+     id:               11
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 4
+     subtask:
+            !!models.Subtask
+                 id: 2
+                 
+ - !!models.Valuation
+     id:               12
+     resultpoints:     3.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 4
+     subtask:
+            !!models.Subtask
+                 id: 3
+
+ - !!models.Valuation
+     id:               13
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 5
+     subtask:
+            !!models.Subtask
+                 id: 1
+
+ - !!models.Valuation
+     id:               14
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 5
+     subtask:
+            !!models.Subtask
+                 id: 2
+                 
+ - !!models.Valuation
+     id:               15
+     resultpoints:     2.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 5
+     subtask:
+            !!models.Subtask
+                 id: 3
+                 
+ - !!models.Valuation
+     id:               16
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 6
+     subtask:
+            !!models.Subtask
+                 id: 1
+
+ - !!models.Valuation
+     id:               17
+     resultpoints:     0.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 6
+     subtask:
+            !!models.Subtask
+                 id: 2
+                 
+ - !!models.Valuation
+     id:               18
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 6
+     subtask:
+            !!models.Subtask
+                 id: 3
+                 
+ - !!models.Valuation
+     id:               19
+     resultpoints:     2.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 7
+     subtask:
+            !!models.Subtask
+                 id: 1
+
+ - !!models.Valuation
+     id:               20
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 7
+     subtask:
+            !!models.Subtask
+                 id: 2
+                 
+ - !!models.Valuation
+     id:               21
+     resultpoints:     3.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 7
+     subtask:
+            !!models.Subtask
+                 id: 3
+                 
+ - !!models.Valuation
+     id:               22
+     resultpoints:     4.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 8
+     subtask:
+            !!models.Subtask
+                 id: 4
+
+ - !!models.Valuation
+     id:               23
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 8
+     subtask:
+            !!models.Subtask
+                 id: 5
+                 
+ - !!models.Valuation
+     id:               24
+     resultpoints:     2.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 9
+     subtask:
+            !!models.Subtask
+                 id: 4
+
+ - !!models.Valuation
+     id:               25
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 9
+     subtask:
+            !!models.Subtask
+                 id: 5
+
+ - !!models.Valuation
+     id:               26
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 10
+     subtask:
+            !!models.Subtask
+                 id: 4
+
+ - !!models.Valuation
+     id:               27
+     resultpoints:     2.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 10
+     subtask:
+            !!models.Subtask
+                 id: 5
+                 
+ - !!models.Valuation
+     id:               28
+     resultpoints:     4.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 11
+     subtask:
+            !!models.Subtask
+                 id: 4
+
+ - !!models.Valuation
+     id:               29
+     resultpoints:     2.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 11
+     subtask:
+            !!models.Subtask
+                 id: 5
+
+ - !!models.Valuation
+     id:               30
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 12
+     subtask:
+            !!models.Subtask
+                 id: 4
+
+ - !!models.Valuation
+     id:               31
+     resultpoints:     0.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 12
+     subtask:
+            !!models.Subtask
+                 id: 5
+                 
+ - !!models.Valuation
+     id:               32
+     resultpoints:     4.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 13
+     subtask:
+            !!models.Subtask
+                 id: 4
+
+ - !!models.Valuation
+     id:               33
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 13
+     subtask:
+            !!models.Subtask
+                 id: 5
+
+ - !!models.Valuation
+     id:               34
+     resultpoints:     0.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 14
+     subtask:
+            !!models.Subtask
+                 id: 4
+
+ - !!models.Valuation
+     id:               35
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 14
+     subtask:
+            !!models.Subtask
+                 id: 5
+
+ - !!models.Valuation
+     id:               36
+     resultpoints:     2.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 15
+     subtask:
+            !!models.Subtask
+                 id: 4
+
+ - !!models.Valuation
+     id:               37
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 15
+     subtask:
+            !!models.Subtask
+                 id: 5
+                 
+                 
+
+ - !!models.Valuation
+     id:               38
+     resultpoints:     3.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 16
+     subtask:
+            !!models.Subtask
+                 id: 6
+
+ - !!models.Valuation
+     id:               39
+     resultpoints:     0.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 16
+     subtask:
+            !!models.Subtask
+                 id: 7
+
+ - !!models.Valuation
+     id:               40
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 16
+     subtask:
+            !!models.Subtask
+                 id: 8
+
+ - !!models.Valuation
+     id:               41
+     resultpoints:     3.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 16
+     subtask:
+            !!models.Subtask
+                 id: 9
+                 
+ - !!models.Valuation
+     id:               42
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 17
+     subtask:
+            !!models.Subtask
+                 id: 6
+
+ - !!models.Valuation
+     id:               43
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 17
+     subtask:
+            !!models.Subtask
+                 id: 7
+
+ - !!models.Valuation
+     id:               44
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 17
+     subtask:
+            !!models.Subtask
+                 id: 8
+
+ - !!models.Valuation
+     id:               45
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 17
+     subtask:
+            !!models.Subtask
+                 id: 9
+
+ - !!models.Valuation
+     id:               46
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 18
+     subtask:
+            !!models.Subtask
+                 id: 6
+
+ - !!models.Valuation
+     id:               47
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 18
+     subtask:
+            !!models.Subtask
+                 id: 7
+
+ - !!models.Valuation
+     id:               48
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 18
+     subtask:
+            !!models.Subtask
+                 id: 8
+
+ - !!models.Valuation
+     id:               49
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 18
+     subtask:
+            !!models.Subtask
+                 id: 9
+                 
+ - !!models.Valuation
+     id:               50
+     resultpoints:     2.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 19
+     subtask:
+            !!models.Subtask
+                 id: 6
+
+ - !!models.Valuation
+     id:               51
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 19
+     subtask:
+            !!models.Subtask
+                 id: 7
+
+ - !!models.Valuation
+     id:               52
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 19
+     subtask:
+            !!models.Subtask
+                 id: 8
+
+ - !!models.Valuation
+     id:               53
+     resultpoints:     2.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 19
+     subtask:
+            !!models.Subtask
+                 id: 9
+
+ - !!models.Valuation
+     id:               54
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 20
+     subtask:
+            !!models.Subtask
+                 id: 6
+
+ - !!models.Valuation
+     id:               55
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 20
+     subtask:
+            !!models.Subtask
+                 id: 7
+
+ - !!models.Valuation
+     id:               56
+     resultpoints:     0.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 20
+     subtask:
+            !!models.Subtask
+                 id: 8
+
+ - !!models.Valuation
+     id:               57
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 20
+     subtask:
+            !!models.Subtask
+                 id: 9
+
+ - !!models.Valuation
+     id:               58
+     resultpoints:     5.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 21
+     subtask:
+            !!models.Subtask
+                 id: 6
+
+ - !!models.Valuation
+     id:               59
+     resultpoints:     1.5
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 21
+     subtask:
+            !!models.Subtask
+                 id: 7
+
+ - !!models.Valuation
+     id:               60
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 21
+     subtask:
+            !!models.Subtask
+                 id: 8
+
+ - !!models.Valuation
+     id:               61
+     resultpoints:     1.0
+     comment:          ""
+     corrected:        true
+     assessment:
+            !!models.Assessment
+                 id: 21
+     subtask:
+            !!models.Subtask
+                 id: 9

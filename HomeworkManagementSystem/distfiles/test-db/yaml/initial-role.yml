@@ -1,0 +1,13 @@
+# Role
+
+roles:
+
+    - !!models.Roles
+        name:       Administrator
+
+    - !!models.Roles
+        name:       User
+
+    - !!models.Roles
+        name:       Student
+

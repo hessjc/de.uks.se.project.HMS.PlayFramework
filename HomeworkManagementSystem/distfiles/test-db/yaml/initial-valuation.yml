@@ -1,0 +1,323 @@
+ # Valuation
+
+ valuations:
+
+ - !!models.Valuation
+     id:               1
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 1
+     subtask:
+            !!models.Subtask
+                 id: 1
+
+ - !!models.Valuation
+     id:               2
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 1
+     subtask:
+            !!models.Subtask
+                 id: 2
+
+ - !!models.Valuation
+     id:               3
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 1
+     subtask:
+            !!models.Subtask
+                 id: 3
+                 
+ - !!models.Valuation
+     id:               4
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 2
+     subtask:
+            !!models.Subtask
+                 id: 1
+
+ - !!models.Valuation
+     id:               5
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 2
+     subtask:
+            !!models.Subtask
+                 id: 2
+
+ - !!models.Valuation
+     id:               6
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 2
+     subtask:
+            !!models.Subtask
+                 id: 3
+                 
+ - !!models.Valuation
+     id:               7
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 3
+     subtask:
+            !!models.Subtask
+                 id: 1
+
+ - !!models.Valuation
+     id:               8
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 3
+     subtask:
+            !!models.Subtask
+                 id: 2
+
+ - !!models.Valuation
+     id:               9
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 3
+     subtask:
+            !!models.Subtask
+                 id: 3
+
+ - !!models.Valuation
+     id:               10
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 4
+     subtask:
+            !!models.Subtask
+                 id: 4
+
+ - !!models.Valuation
+     id:               11
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 4
+     subtask:
+            !!models.Subtask
+                 id: 5
+
+ - !!models.Valuation
+     id:               12
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 5
+     subtask:
+            !!models.Subtask
+                 id: 4
+
+ - !!models.Valuation
+     id:               13
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 5
+     subtask:
+            !!models.Subtask
+                 id: 5
+
+ - !!models.Valuation
+     id:               14
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 6
+     subtask:
+            !!models.Subtask
+                 id: 6
+
+ - !!models.Valuation
+     id:               15
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 7
+     subtask:
+            !!models.Subtask
+                 id: 6
+
+ - !!models.Valuation
+     id:               16
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 8
+     subtask:
+            !!models.Subtask
+                 id: 6
+
+ - !!models.Valuation
+     id:               17
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 9
+     subtask:
+            !!models.Subtask
+                 id: 7
+
+ - !!models.Valuation
+     id:               18
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 9
+     subtask:
+            !!models.Subtask
+                 id: 8
+                 
+ - !!models.Valuation
+     id:               19
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 10
+     subtask:
+            !!models.Subtask
+                 id: 7
+
+ - !!models.Valuation
+     id:               20
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 10
+     subtask:
+            !!models.Subtask
+                 id: 8
+                 
+ - !!models.Valuation
+     id:               21
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 11
+     subtask:
+            !!models.Subtask
+                 id: 9
+                 
+ - !!models.Valuation
+     id:               22
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 11
+     subtask:
+            !!models.Subtask
+                 id: 10
+                 
+ - !!models.Valuation
+     id:               23
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 11
+     subtask:
+            !!models.Subtask
+                 id: 11
+                 
+ - !!models.Valuation
+     id:               24
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 12
+     subtask:
+            !!models.Subtask
+                 id: 9
+                 
+ - !!models.Valuation
+     id:               25
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 12
+     subtask:
+            !!models.Subtask
+                 id: 10
+                 
+ - !!models.Valuation
+     id:               26
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 12
+     subtask:
+            !!models.Subtask
+                 id: 11
+                 
+ - !!models.Valuation
+     id:               27
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 13
+     subtask:
+            !!models.Subtask
+                 id: 12
+
+ - !!models.Valuation
+     id:               28
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 13
+     subtask:
+            !!models.Subtask
+                 id: 13
+
+ - !!models.Valuation
+     id:               29
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 13
+     subtask:
+            !!models.Subtask
+                 id: 14
+
+ - !!models.Valuation
+     id:               30
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 14
+     subtask:
+            !!models.Subtask
+                 id: 12
+
+ - !!models.Valuation
+     id:               31
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 14
+     subtask:
+            !!models.Subtask
+                 id: 13
+
+ - !!models.Valuation
+     id:               32
+     comment:          ""
+     assessment:
+            !!models.Assessment
+                 id: 14
+     subtask:
+            !!models.Subtask
+                 id: 14

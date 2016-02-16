@@ -1,0 +1,74 @@
+@(subForm: Form[forms.AssignmentForms.SubtaskForm], editing: Boolean)
+
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import helper._
+@import helper.twitterBootstrap._
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic("IsLectureadminOfLecture") {	
+		<div class="col-12 col-sm-12 col-lg-9">
+				<legend>@subForm.get().assignment.getLecture().getName() - @subForm.get().assignment.getName() - Teilaufgabe @if(editing) {@subForm.get().name} else {erstellen}</legend>
+				@helper.form(
+					if(!editing) {
+						routes.SubtaskController.saveSubtaskCreate(subForm.get().assignment.getLecture().getId(), subForm.get().assignment.getId())
+					}else{
+						routes.SubtaskController.saveSubtaskEdit(subForm.get().assignment.getLecture().getId(), subForm.get().assignment.getId(), subForm.get().id)
+					}) {
+							<div class="row">
+								<div class="col-lg-3">
+									<div class="form-group @if(flash.contains("name")) {has-error}">
+										<label class="control-label">Name der Teilaufgabe</label>
+										<input type="text" name="name" class="form-control" value="@subForm("name").value">
+										@if(flash.contains("name")) { <font size=2px color=red>@flash.get("name")</font> }
+									</div>
+								</div>
+							</div>	
+							
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="form-group">
+										@textarea(subForm("description"), 
+													args = '_label -> "Beschreibung", 
+													'class -> "form-control"
+										)
+									</div>
+								</div>
+							</div>	
+							
+							<div class="row">
+								<div class="col-lg-3">
+									<div class="form-group @if(flash.contains("points")) {has-error}">
+										<label class="control-label">Punkte der Teilaufgabe</label>
+										<input type="text" name="points" class="form-control" value="@subForm("points").value">
+										@if(flash.contains("points")) { <font size=2px color=red>@flash.get("points")</font> }
+									</div>
+								</div>
+							</div>	
+							
+							<div class="row">
+								<div class="col-lg-1">
+									<div class="form-group">
+										@checkbox(subForm("additional"), '_label -> "Zusatzaufgabe")
+									</div>
+								</div>
+							</div>
+							
+							<br>
+							<div class="control-group">
+								<div class="controls">
+								    @if(!editing) {
+										<button type="submit" class="btn btn-success">Hinzuf&uuml;gen</button>
+									} else {
+										<button type="submit" class="btn btn-warning">Speichern</button>
+									}
+								</div>
+							</div>
+				}
+		</div>
+		
+	}
+}
+<script src="@routes.Assets.at("javascripts/nicEdit.js")" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(function(){nicEditors.allTextAreas({iconsPath:'@routes.Assets.at("images/nicEditorIcons.gif")'});});</script>

@@ -1,0 +1,12 @@
+@(date: org.joda.time.DateTime, form: String)
+
+@import org.joda.time.format.DateTimeFormat
+@import org.joda.time.DateTime
+
+@{defining(DateTimeFormat.forPattern(form)){format =>
+	if(date == null){
+		Messages("deadline.unknown")
+	} else {
+		format.print(date)
+	}
+}}

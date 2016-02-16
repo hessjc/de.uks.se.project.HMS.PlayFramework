@@ -1,0 +1,2 @@
+@(disabled:Boolean = false, tooltip : String = Messages("delete"), size:String = "btn-xs")
+<button class="btn btn-danger @size pull-right spacer-left @if(disabled){disabled}" type="submit"><i class="fa fa-trash-o" title="@tooltip"></i></button>

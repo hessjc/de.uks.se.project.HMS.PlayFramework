@@ -1,0 +1,25 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import security.HDSDynamicResourceHandler.ADMINISTRATOR
+
+<footer class="navbar navbar-fixed-top hidden-sm hidden-xs">
+	<div class="container">
+		<ul class="nav navbar-nav navbar-left">
+			<li><a href='@Html("mailto: hms@cs.uni-kassel.de")'><span class="fa fa-envelope"> Feedback</span></a></li>
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+				@dynamicOr(ADMINISTRATOR) {
+				<li>
+					<a href='@routes.Application.changelog()'>
+				}{
+					<li class="navbar-text">
+				}
+				Current Version: @play.Play.application().configuration().getString("application.version")
+				@dynamic(ADMINISTRATOR) {
+					</a>
+				}
+				</li>
+		</ul>
+	</div>
+</footer>

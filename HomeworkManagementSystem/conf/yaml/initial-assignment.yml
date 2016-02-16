@@ -1,0 +1,548 @@
+# Assignment
+
+assignments:
+
+    - !!models.Assignment
+        id:            1
+        name:          "Aufgabenblatt 1"
+        description:   "Das erste Aufgabenblatt"
+        deadline:      2011-01-01 22:59:59
+        multiplicator: 1
+        comment:       "Fehler in Aufgabenstellung 1, 2 und 3"
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:            2
+        name:          "Aufgabenblatt 2"
+        description:   "Das zweite Aufgabenblatt"
+        deadline:      2011-01-08 22:59:59
+        multiplicator: 2
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:            3
+        name:          "Aufgabenblatt 3"
+        description:   "Das dritte Aufgabenblatt"
+        deadline:      2011-01-15 22:59:59
+        multiplicator: 1
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:            4
+        name:          "Aufgabenblatt 4"
+        description:   "Das vierte Aufgabenblatt"
+        deadline:      2011-01-22 22:59:59
+        multiplicator: 1
+        additional:    false
+        completed:     false
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:            5
+        name:          "Aufgabenblatt 5"
+        description:   "Das vierte Aufgabenblatt"
+        deadline:      2011-02-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:            6
+        name:          "Aufgabenblatt 6"
+        description:   "Das sechste Aufgabenblatt"
+        deadline:      2011-02-12 03:12:12
+        multiplicator: 2
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:            7
+        name:          "Aufgabenblatt 7"
+        description:   "Das siebte Aufgabenblatt"
+        deadline:      2011-02-14 04:59:59
+        multiplicator: 1
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:            8
+        name:          "Aufgabenblatt 8"
+        description:   "Das achte Aufgabenblatt"
+        deadline:      2011-01-08 22:59:59
+        multiplicator: 2
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:            9
+        name:          "Aufgabenblatt 9"
+        description:   "Das neunte Aufgabenblatt"
+        deadline:      2011-03-01 13:45:59
+        multiplicator: 1
+        additional:    false
+        completed:     false
+        lecture:
+               !!models.Lecture
+                  id: 1
+                  
+    - !!models.Assignment
+        id:            10
+        name:          "Aufgabenblatt 10"
+        description:   "Das zehnte Aufgabenblatt"
+        deadline:      2013-02-08 12:59:59
+        multiplicator: 1
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 1
+                  
+    - !!models.Assignment
+        id:            11
+        name:          "Aufgabenblatt 11"
+        description:   "Das elfte Aufgabenblatt"
+        deadline:      2013-02-08 12:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     false
+        lecture:
+               !!models.Lecture
+                  id: 1
+
+    - !!models.Assignment
+        id:            21
+        name:          "Aufgabenblatt 1"
+        description:   "Das erste Aufgabenblatt"
+        deadline:      2014-01-01 22:59:59
+        multiplicator: 2
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:            22
+        name:          "Aufgabenblatt 2"
+        description:   "Das zweite Aufgabenblatt"
+        deadline:      2014-01-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     false
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:            23
+        name:          "Aufgabenblatt 3"
+        description:   "Das dritte Aufgabenblatt"
+        deadline:      2013-01-15 22:59:59
+        multiplicator: 2
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:            24
+        name:          "Aufgabenblatt 4"
+        description:   "Das vierte Aufgabenblatt"
+        deadline:      2011-01-22 22:59:59
+        multiplicator: 1
+        additional:    false
+        completed:     false
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:            25
+        name:          "Aufgabenblatt 5"
+        description:   "Das vierte Aufgabenblatt"
+        deadline:      2011-02-08 22:59:59
+        multiplicator: 2
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:            26
+        name:          "Aufgabenblatt 6"
+        description:   "Das sechste Aufgabenblatt"
+        deadline:      2011-02-12 03:12:12
+        multiplicator: 1
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:            27
+        name:          "Aufgabenblatt 7"
+        description:   "Das siebte Aufgabenblatt"
+        deadline:      2011-02-14 04:59:59
+        multiplicator: 2
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:            28
+        name:          "Aufgabenblatt 8"
+        description:   "Das achte Aufgabenblatt"
+        deadline:      2011-01-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:            29
+        name:          "Aufgabenblatt 9"
+        description:   "Das neunte Aufgabenblatt"
+        deadline:      2011-03-01 13:45:59
+        multiplicator: 1
+        additional:    false
+        completed:     false
+        lecture:
+               !!models.Lecture
+                  id: 2
+
+    - !!models.Assignment
+        id:            31
+        name:          "Aufgabenblatt 1"
+        description:   "Das erste Aufgabenblatt"
+        deadline:      2011-01-01 22:59:59
+        multiplicator: 1
+        comment:       "Fehler in Aufgabenstellung 1, 2 und 3"
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 3
+
+    - !!models.Assignment
+        id:            32
+        name:          "Aufgabenblatt 2"
+        description:   "Das zweite Aufgabenblatt"
+        deadline:      2011-01-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 3
+
+    - !!models.Assignment
+        id:            33
+        name:          "Aufgabenblatt 3"
+        description:   "Das dritte Aufgabenblatt"
+        deadline:      2011-01-15 22:59:59
+        multiplicator: 2
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 3
+
+    - !!models.Assignment
+        id:            34
+        name:          "Aufgabenblatt 4"
+        description:   "Das vierte Aufgabenblatt"
+        deadline:      2011-01-22 22:59:59
+        multiplicator: 1
+        additional:    false
+        completed:     false
+        lecture:
+               !!models.Lecture
+                  id: 3
+
+    - !!models.Assignment
+        id:            41
+        name:          "Aufgabenblatt 1"
+        description:   "Das erste Aufgabenblatt"
+        deadline:      2011-01-01 22:59:59
+        multiplicator: 1
+        comment:       "Fehler in Aufgabenstellung 1, 2 und 3"
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 4
+
+    - !!models.Assignment
+        id:            42
+        name:          "Aufgabenblatt 2"
+        description:   "Das zweite Aufgabenblatt"
+        deadline:      2011-01-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 4
+
+    - !!models.Assignment
+        id:            43
+        name:          "Aufgabenblatt 3"
+        description:   "Das dritte Aufgabenblatt"
+        deadline:      2011-01-15 22:59:59
+        multiplicator: 2
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 4
+
+    - !!models.Assignment
+        id:            44
+        name:          "Aufgabenblatt 4"
+        description:   "Das vierte Aufgabenblatt"
+        deadline:      2011-01-22 22:59:59
+        multiplicator: 2
+        additional:    false
+        completed:     false
+        lecture:
+               !!models.Lecture
+                  id: 4
+
+    - !!models.Assignment
+        id:            45
+        name:          "Aufgabenblatt 5"
+        description:   "Das vierte Aufgabenblatt"
+        deadline:      2011-02-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 4
+
+    - !!models.Assignment
+        id:            46
+        name:          "Aufgabenblatt 6"
+        description:   "Das sechste Aufgabenblatt"
+        deadline:      2011-02-12 03:12:12
+        multiplicator: 1
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 4
+
+    - !!models.Assignment
+        id:            47
+        name:          "Aufgabenblatt 7"
+        description:   "Das siebte Aufgabenblatt"
+        deadline:      2011-02-14 04:59:59
+        multiplicator: 2
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 4
+
+    - !!models.Assignment
+        id:            48
+        name:          "Aufgabenblatt 8"
+        description:   "Das achte Aufgabenblatt"
+        deadline:      2011-01-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 4
+
+    - !!models.Assignment
+        id:            51
+        name:          "Aufgabenblatt 1"
+        description:   "Das erste Aufgabenblatt"
+        deadline:      2011-01-01 22:59:59
+        multiplicator: 1
+        comment:       "Fehler in Aufgabenstellung 1 und 2"
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 5
+
+    - !!models.Assignment
+        id:            52
+        name:          "Aufgabenblatt 2"
+        description:   "Das zweite Aufgabenblatt"
+        deadline:      2011-01-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 5
+
+    - !!models.Assignment
+        id:            53
+        name:          "Aufgabenblatt 3"
+        description:   "Das dritte Aufgabenblatt"
+        deadline:      2011-01-15 22:59:59
+        multiplicator: 2
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 5
+
+    - !!models.Assignment
+        id:            61
+        name:          "Aufgabenblatt 1"
+        description:   "Das erste Aufgabenblatt"
+        deadline:      2011-01-01 22:59:59
+        multiplicator: 1
+        comment:       "Fehler in Aufgabenstellung 3"
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 6
+
+    - !!models.Assignment
+        id:            62
+        name:          "Aufgabenblatt 2"
+        description:   "Das zweite Aufgabenblatt"
+        deadline:      2011-01-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 6
+
+    - !!models.Assignment
+        id:            63
+        name:          "Aufgabenblatt 3"
+        description:   "Das dritte Aufgabenblatt"
+        deadline:      2011-01-15 22:59:59
+        multiplicator: 2
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 6
+
+    - !!models.Assignment
+        id:            64
+        name:          "Aufgabenblatt 4"
+        description:   "Das vierte Aufgabenblatt"
+        deadline:      2011-01-22 22:59:59
+        multiplicator: 1
+        additional:    false
+        completed:     false
+        lecture:
+               !!models.Lecture
+                  id: 6
+
+    - !!models.Assignment
+        id:            65
+        name:          "Aufgabenblatt 5"
+        description:   "Das vierte Aufgabenblatt"
+        deadline:      2011-02-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 6
+
+    - !!models.Assignment
+        id:            66
+        name:          "Aufgabenblatt 6"
+        description:   "Das sechste Aufgabenblatt"
+        deadline:      2011-02-12 03:12:12
+        multiplicator: 2
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 6
+
+    - !!models.Assignment
+        id:            67
+        name:          "Aufgabenblatt 7"
+        description:   "Das siebte Aufgabenblatt"
+        deadline:      2011-02-14 04:59:59
+        multiplicator: 2
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 6
+
+    - !!models.Assignment
+        id:            68
+        name:          "Aufgabenblatt 8"
+        description:   "Das achte Aufgabenblatt"
+        deadline:      2011-01-08 22:59:59
+        multiplicator: 1
+        additional:    true
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 6
+
+    - !!models.Assignment
+        id:            69
+        name:          "Aufgabenblatt 9"
+        description:   "Das neunte Aufgabenblatt"
+        deadline:      2011-03-01 13:45:59
+        multiplicator: 1
+        additional:    false
+        completed:     false
+        lecture:
+               !!models.Lecture
+                  id: 6
+                  
+    - !!models.Assignment
+        id:            70
+        name:          "Aufgabenblatt 10"
+        description:   "Das zehnte Aufgabenblatt"
+        deadline:      2013-02-08 12:59:59
+        multiplicator: 1
+        additional:    false
+        completed:     true
+        lecture:
+               !!models.Lecture
+                  id: 6

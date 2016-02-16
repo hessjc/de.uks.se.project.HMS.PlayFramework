@@ -1,0 +1,16 @@
+@(divID: String, btnID: String, disabled: Boolean = false, tooltip: String = Messages("select.all"))
+
+<button type="button" class="btn btn-primary" @if(disabled){disabled="disabled"} title="@tooltip" id="@btnID"><i class="fa fa-files-o"></i></button>
+
+<script>
+$(document).ready(function() {
+  // select all button
+  $('#@btnID').click(function() {
+    if($('#@divID select option').prop('selected')) {
+      $('#@divID select option').prop('selected', false);
+    } else { 
+      $('#@divID select option').prop('selected', true);
+    }
+  });
+});
+</script>

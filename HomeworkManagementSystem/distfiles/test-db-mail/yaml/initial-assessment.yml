@@ -1,0 +1,87 @@
+ # Assessment
+
+ assessments:
+
+ - !!models.Assessment
+     id:               1
+     duty:
+            !!models.Duty
+                 id: 1
+
+ - !!models.Assessment
+     id:               2
+     duty:
+            !!models.Duty
+                 id: 2
+                 
+ - !!models.Assessment
+     id:               3
+     duty:
+            !!models.Duty
+                 id: 3
+                 
+ - !!models.Assessment
+     id:               4
+     duty:
+            !!models.Duty
+                 id: 4
+                 
+ - !!models.Assessment
+     id:               5
+     duty:
+            !!models.Duty
+                 id: 5
+                 
+ - !!models.Assessment
+     id:               6
+     duty:
+            !!models.Duty
+                 id: 6
+                 
+ - !!models.Assessment
+     id:               7
+     duty:
+            !!models.Duty
+                 id: 7
+                 
+ - !!models.Assessment
+     id:               8
+     duty:
+            !!models.Duty
+                 id: 8
+                 
+ - !!models.Assessment
+     id:               9
+     duty:
+            !!models.Duty
+                 id: 9
+                 
+ - !!models.Assessment
+     id:               10
+     duty:
+            !!models.Duty
+                 id: 10
+                 
+ - !!models.Assessment
+     id:               11
+     duty:
+            !!models.Duty
+                 id: 11
+                 
+ - !!models.Assessment
+     id:               12
+     duty:
+            !!models.Duty
+                 id: 12
+                 
+ - !!models.Assessment
+     id:               13
+     duty:
+            !!models.Duty
+                 id: 13
+                 
+ - !!models.Assessment
+     id:               14
+     duty:
+            !!models.Duty
+                 id: 14

@@ -1,0 +1,33 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import security.HDSDynamicResourceHandler.ADMINISTRATOR
+
+@main() {
+	@navigation.homeMenu()
+	@dynamic(ADMINISTRATOR) {
+		<div class="col-12 col-sm-8 col-lg-9">
+			<legend>Rollen verwalten</legend>
+			<div class="tabbable tabs-left">
+				<ul class="nav nav-tabs">
+					@for((myrole, count) <- models.Roles.findAll().zipWithIndex) {
+						@if(count==0) {
+							<li class="active"><a href="#tab@count" data-toggle="tab">@myrole.getName</a></li>
+						} else { 
+							<li><a href="#tab@count" data-toggle="tab">@myrole.getName</a></li>
+						}
+					}
+				</ul>
+				<div class="tab-content">
+					@for((myrole, count) <- models.Roles.findAll().zipWithIndex) {
+						@if(count==0) {
+							<div class="tab-pane active" id="tab@count">
+						} else { 
+							<div class="tab-pane" id="tab@count"> 
+						}
+							@role.showrole(myrole)
+						</div>
+					}
+			</div>
+		</div>
+	}
+}

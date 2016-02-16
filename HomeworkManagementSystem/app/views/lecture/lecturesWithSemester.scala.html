@@ -1,0 +1,22 @@
+@(semester: Semester, lectures: Collection[Lecture])
+
+@if(!lectures.isEmpty){
+	<div class="panel panel-default">
+			
+		<div class="panel-heading">
+			<h4 class="panel-title">@semester.getSemester</h4>
+		</div>
+		
+		<div class="panel-collapse collapse-in">
+			<div class="panel-body">
+				<ul class="list-unstyled-own">
+				@for(lecture <- lectures) {
+					<div class="row">
+						<li><a href="@routes.LectureController.showLecture(lecture.getId())">@lecture.getName()</a></li>
+					</div>
+				}
+				</ul>
+			</div>
+		</div>
+	</div>
+}

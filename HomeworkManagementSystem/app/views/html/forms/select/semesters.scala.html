@@ -1,0 +1,11 @@
+@(id:String, semesters:List[models.Semester],selected:String)
+@import play.api.libs._
+<select id="@id" name="@id">
+  @for(semester <- semesters) {
+  <option @if(semester.getSemester().equals(selected)) {selected} value="@semester.getSemester()" name="@semester.getSemester()">@semester.getSemester()</option>
+  }
+</select>
+
+<script>
+$("#@id").select2();
+</script>

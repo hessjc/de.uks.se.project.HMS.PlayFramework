@@ -1,0 +1,30 @@
+@(user: models.User)
+@import helper._
+@import helper.twitterBootstrap._
+@import scala.collection.mutable.Map
+
+<legend>@Messages("user.student")&nbsp;&nbsp;&nbsp;</legend>
+		<div>
+			<div class="row">
+				@defining(forms.AccountForms.StudentForm().bind(Map("matrikelNumber" -> Option(user.getMatrikelNumber()).getOrElse(""), "id" -> user.getIdentifier))) { form =>
+						@helper.form(routes.AccountController.editMatriculationNumberSave(user.getId), 'id -> "form_containerMatNumber", 'container -> "containerMatNumber", 'class ->  "js-pjax",
+							'successMessage -> Messages("user.edit.matriculationnumber")) {
+							<div class="col-lg-3 col-sm-3 col-xs-3">@Messages("user.matriculation"):</div>
+							<div class="col-lg-4 col-sm-4 col-xs-4">
+								<div class="form-group @if(flash.contains("matrikelnumber")) {has-error}">
+										<input type="hidden" name="id" value="@form("id").value">
+										<input type="text" class="form-control" name="matrikelNumber" placeholder="@user.getMatrikelNumber()" value="@form("matrikelNumber").value" minlength="5" maxlength="10" digits="true">
+									</div>
+									@if(flash.contains("matrikelnumber")) { <font size=2px color=red>@flash.get("matrikelnumber")</font> }
+							</div>
+							<div class="col-lg-1 col-sm-1 col-xs-1">
+								@button.save()
+							</div>
+						}
+						<script>
+							$("#form_containerMatNumber").validate();
+						</script>
+					}
+			</div>
+		</div>
+		

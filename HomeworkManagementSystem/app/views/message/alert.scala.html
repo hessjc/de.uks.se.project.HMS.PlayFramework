@@ -1,0 +1,17 @@
+@import scala._
+@brands = @{ List("success", "info", "warning", "danger", "error") }
+
+@for(brand <- brands) {
+<div class="alert alert-@brand alert-dismissable spacer-top-10"id="global@{brand.substring(0, 1).toUpperCase();brand.substring(1).toLowerCase()}" @if(!flash.contains(brand)) {style="display: none"}>
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <span id="global@{brand.substring(0, 1).toUpperCase();brand.substring(1).toLowerCase()}Content">@if(flash.contains(brand)){@flash.get(brand)}</span>
+</div>
+}
+
+<!-- Ensure to not remove the alerts out of the DOM when they are closed -->
+<script type="text/javascript">
+  $(".alert").bind("close.bs.alert", function(event) {
+    event.preventDefault();
+    $(this).fadeOut();
+  })
+</script>

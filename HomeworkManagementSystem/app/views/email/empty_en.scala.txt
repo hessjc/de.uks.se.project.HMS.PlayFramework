@@ -1,0 +1,8 @@
+@(text:String)
+
+Howdy,
+
+@text
+
+Cheers,
+The HMS-Team

@@ -1,0 +1,18 @@
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import utils.StringHelper
+
+@main() {
+	@navigation.homeMenu()
+	<div class="col-sm-8 col-lg-9">
+	@dynamic("Proofreader") {
+		@if(flash.contains("assessmentclosed")) {
+		<div class="alert alert-success">@flash.get("assessmentclosed")</div>
+		}
+		<div class="panel-group" id="accordion">
+            @account.duty.notdone()
+            @account.duty.done()
+		</div>
+	}
+	</div>
+}

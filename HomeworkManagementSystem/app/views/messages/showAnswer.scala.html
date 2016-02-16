@@ -1,0 +1,79 @@
+@(message: models.Message, messageToAnswer: models.Message ,lecture: models.Lecture, assignment: models.Assignment, duty: models.Duty)
+@import helper._
+@import helper.twitterBootstrap._
+
+@user = @{User.findBySession(session())}
+
+<ul>
+@for(answer <- message.getAnswers()) {	
+	<li>
+		@if(answer == messageToAnswer || messageToAnswer == null) {
+			<span style="width:500px">
+		} else {
+			<spanOpacity style="width:500px">
+		}
+	    		@if(answer.getSender().getId() == user.getId()) {
+					<spanMy class="badge badge-my-center" style="width:93%">
+						<spanMy class="badge badge-my-left" style="width:50%">
+	    					@answer.getHead()
+	    				</spanMy>
+						<spanMy class="badge badge-my-center" style="width:21%">
+	    					Ich
+	    				</spanMy>
+						<spanMy class="badge badge-my-right" style="width:27%">
+	    					@util.dateformat(answer.getDate(), Messages("date.format"))
+	    				</spanMy>
+					</spanMy>
+				} else {
+					@if(answer.getSender().isLectureadminOf().contains(answer.getConversationLecture()) || answer.getSender().isProofreaderOf().contains(answer.getConversationLecture())) {
+						<spanAdmin class="badge badge-admin-center" style="width:93%">
+							<spanAdmin class="badge badge-admin-left" style="width:52%">
+	    						@Html(answer.getHead())
+	    					</spanAdmin>
+	    					<spanAdmin class="badge badge-admin-center" style="width:21%">
+	    						@if(answer.getSender().isLectureadminOf().contains(answer.getConversationLecture())) {
+									Lectureadmin
+								} else {
+									Proofreader
+								}
+							</spanAdmin>
+							<spanAdmin class="badge badge-admin-right" style="width:27%">
+								@util.dateformat(answer.getDate(), Messages("date.format"))
+							</spanAdmin>
+						</spanAdmin>
+					} else {
+						<spanStudent class="badge badge-student-center" style="width:93%">
+							<spanStudent class="badge badge-student-left" style="width:52%">
+	    						@Html(answer.getHead())
+	    					</spanStudent>
+	    					<spanStudent class="badge badge-student-center" style="width:21%">
+								Student
+							</spanStudent>
+							<spanStudent class="badge badge-student-right" style="width:27%">
+								@util.dateformat(answer.getDate(), Messages("date.format"))
+							</spanStudent>
+						</spanStudent>
+					}
+				}
+		    	@if(user.canAnswer(answer) && messageToAnswer == null) {
+			    	@{ null match {
+						case null if(assignment != null) => {button.addMessage(routes.MessageController.createAssignmentAnswer(assignment.getLecture().getId(), assignment.getId(), answer.getId()), false, "Neue Antwort")}
+						case null if(lecture != null) => {button.addMessage(routes.MessageController.createLectureAnswer(lecture.getId(), answer.getId()), false, "Neue Antwort")}
+						case null if(duty != null) => {button.addMessage(routes.MessageController.createDutyAnswer(duty.getAssignment().getLecture().getId(), duty.getAssignment().getId(), duty.getId(), answer.getId()), false, "Neue Antwort")}
+					}}
+				} else {
+					@if(messageToAnswer == null) {
+						@button.addMessage(null, true, "Neue Antwort")
+					}
+				}
+				<br>
+				@Html(answer.getBody())
+		@if(answer == messageToAnswer || messageToAnswer == null) {
+			</span>
+		} else {
+			</spanOpacity>
+		}
+        @messages.showAnswer(answer, messageToAnswer, lecture, assignment, duty)
+   </li>
+}
+</ul>

@@ -1,0 +1,183 @@
+@(createLectureForm: Form[forms.LectureForms.CreateLectureForm])
+@import be.objectify.deadbolt.java.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@import security.HDSDynamicResourceHandler.ADMINISTRATOR
+@import helper._
+@import helper.twitterBootstrap._
+@import controllers.routes.javascript._
+@import play.api.libs._
+@main() { 
+  @navigation.homeMenu()
+  @dynamic(ADMINISTRATOR) {
+  @helper.form(routes.LectureController.saveLectureCreate, 'id -> "createLectureForm") {
+  <div class="col-9 col-sm-9 col-lg-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">@Messages("lecture.create")</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row row-padded">
+          <div class="col-lg-9 col-sm-9 col-xs-9">
+            @html.forms.label("lecture.name")
+            @html.forms.input("name", "text", createLectureForm("name").value, "lecture.name", 0)
+          </div>
+        </div>
+        <div class="row row-padded">
+          <div class="col-lg-6 col-sm-6 col-xs-6">
+            @html.forms.label("semester")
+            @html.forms.select.semesters("semester", Semester.findAll(), "")
+          </div>
+        </div>
+        <div class="row row-padded">
+          <div class="col-lg-6 col-sm-6 col-xs-6">
+            @html.forms.label("deadline.registration")
+            <div class="bfh-datepicker" data-format="y-m-d" data-date="" data-name="closingdate" data-min="today"></div>
+          </div>
+        </div>
+        <div class="row row-padded">
+          <div class="col-lg-6 col-sm-6 col-xs-6">
+            @html.forms.label("roles.lectureadmin")
+            @html.forms.select.users("lectureadmin", User.findAll())
+          </div>
+        </div>
+        <div class="row row-padded">
+          <div class="col-lg-12 col-sm-12 col-xs-12">
+            @html.forms.label("description")
+            @html.forms.textarea("description", 3, 50, createLectureForm("description").value)
+          </div>
+        </div>
+      </div>
+      <div class="panel-heading">
+        <h3 class="panel-title">@Messages("duty")</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row row-padded">
+         <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-group @if(flash.contains("optionalDutys")) {has-error}">
+              <label for="optionalDutysSpinner">@Messages("lecture.optional.dutys.count")</label>
+              <input id="optionalDutysSpinner" value="0" name="optionalDutys" title="@Messages("lecture.optional.dutys.count.fulltext")">
+            </div>
+          </div>
+        </div>
+        <div class="row row-padded">
+          <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-group @if(flash.contains("minimumPercentageForExamination")) {has-error}">
+              <label for="lowerProcentualBounderyOfDutysSpinner">@Messages("lecture.optional.dutys.percentage")</label>
+              <input id="lowerProcentualBounderyOfDutysSpinner" value="0" name="lowerProcentualBounderyOfDutys" title="@Messages("lecture.optional.dutys.percentage.fulltext")">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-heading">
+        <h3 class="panel-title">@Messages("lecture.admission.examination")</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row row-padded">
+          <div class="col-lg-12 col-sm-12 col-xs-12">
+          <div class="form-group @if(flash.contains("closingdate")) {has-error}">
+            <label for="minimumPercentageForExaminationSpinner">@Messages("lecture.admission.examination.percentage.min")</label>
+            <input id="minimumPercentageForExaminationSpinner" value="0"
+              name="minimumPercentageForExamination" title="@Messages("lecture.admission.examination.percentage.min.fulltext")">
+          </div>
+        </div>
+      </div>
+      <div class="row row-padded">
+        <div class="col-lg-2 col-sm-2 col-xs-2">
+          <label for="bounds">@Messages("lecture.admission.examination.grade")</label>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-xs-1 col-xs-offset-9">
+          <i class="fa fa-plus-square fa-lg" value="+" id="plusBtn"></i> <i
+            class="fa fa-minus-square fa-lg" value="-" id="minusBtn"></i>
+        </div>
+      </div>
+      <div class="row row-padded">
+        <input id="bonuses" name="bonuses" value="" type="hidden">
+        <div id="result" value=""></div>
+      </div>
+      <div class="row row-padded pull-right">@button.create()</div>
+    </div>
+  </div>
+</div>
+} } }
+
+<script>
+  $(function() {
+    var optionalDutysSpinner = $("#optionalDutysSpinner").spinner({
+      min : 0
+    });
+    var lowerProcentualBounderyOfDutys = $(
+        "#lowerProcentualBounderyOfDutysSpinner").spinner({
+      step : 5,
+      min : 0,
+      max : 100,
+      numberFormat : "%"
+    });
+    var minimumPercentageForExaminationSpinner = $(
+        "#minimumPercentageForExaminationSpinner").spinner({
+      step : 5,
+      min : 0,
+      max : 100,
+      numberFormat : "%"
+    });
+  });
+  
+  $("#optionalDutysSpinner").numeric();
+  $("#lowerProcentualBounderyOfDutysSpinner").numeric();
+  $("#minimumPercentageForExaminationSpinner").numeric();
+</script>
+
+<script>
+  $(function() {
+    var tooltips = $("[title]").tooltip({
+      position : {
+        my : "left+30 center",
+        at : "right"
+      }
+    });
+  });
+</script>
+
+
+<script type="text/javascript" charset="utf-8">
+  var index = 0;
+
+  var plus = function() {
+    jsRoutes.controllers.Application.plus(index).ajax({
+      success : function(data) {
+        $("#result").after(data);
+        index += 1;
+      },
+      error : function() {
+        alert("Error!")
+      }
+    })
+  };
+
+  var minus = function() {
+    jsRoutes.controllers.Application.minus(index).ajax({
+      success : function(data) {
+        $("#examination"+index).remove();
+        if (index != 0) {
+          index -= 1;
+        }
+      },
+      error : function() {
+        alert("Error!")
+      }
+    })
+  };
+
+  $("#createLectureForm").submit(function(e) {
+    var optionTexts = [];
+    for (var i = 0; i < index; i++) {
+      optionTexts.push($("#percentageSpinner" + i).spinner("value"));
+      optionTexts.push($("#stepSpinner" + i).spinner("value"));
+    }
+    var quotedCSV = optionTexts.join(' ');
+    $("#bonuses").val(quotedCSV);
+  });
+
+  $('#plusBtn').click(plus);
+  $('#minusBtn').click(minus);
+</script>
+

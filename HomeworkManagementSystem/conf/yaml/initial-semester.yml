@@ -1,0 +1,28 @@
+# Semester
+
+semesters:
+
+    - !!models.Semester
+        id:         1
+        semester:   WS 2011/2012
+
+    - !!models.Semester
+        id:         2
+        semester:   SS 2012
+
+    - !!models.Semester
+        id:         3
+        semester:   WS 2012/2013
+
+    - !!models.Semester
+        id:         4
+        semester:   SS 2013
+
+    - !!models.Semester
+        id:         5
+        semester:   WS 2013/2014
+
+    - !!models.Semester
+        id:         6
+        semester:   SS 2014
+        

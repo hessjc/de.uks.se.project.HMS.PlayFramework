@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseNotdone">@Messages("duty.evaluation.notdone") <i class="fa fa-caret-down"></i></a>
+        </h4>
+    </div>
+    <div id="collapseNotdone" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <th>@Messages("semester")</th><th>@Messages("lecture")</th><th>@Messages("assignment")</th><th>@Messages("user.lastname"), @Messages("user.firstname")</th><th>@Messages("user.matriculation")</th><th></th>
+                    @for(assessment <- AssessmentController.myEvaluatedAssessments()) {
+                    @if(!assessment.duty.corrected) {
+                    <tr>
+                        <td>@assessment.duty.getAssignment().getLecture().getSemester().getSemester()</td>
+                        <td>@assessment.duty.getAssignment().getLecture().getName()</td>
+                        <td>@assessment.duty.getAssignment().getName()</td>
+                        <td>@assessment.duty.user.getLastName(), @assessment.duty.user.getFirstName()</td>
+                        <td>@assessment.duty.user.getMatrikelNumber()</td>
+                        <td><a href="@routes.AssessmentController.evaluateDuty(assessment.id)"><button class="btn btn-success">@Messages("correct")</button></a></td>
+                    </tr>
+                    }
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

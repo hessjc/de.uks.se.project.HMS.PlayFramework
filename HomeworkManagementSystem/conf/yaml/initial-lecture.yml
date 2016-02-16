@@ -1,0 +1,444 @@
+# Lecture
+
+lectures:
+
+    - !!models.Lecture
+        id:          1
+        name:        "Software Engineering 1"
+        description: "This course teaches software development in teams. We learn how to organize a software development team and distribute work among team members."
+        semester:
+               !!models.Semester
+                  id: 1
+        users:
+             - !!models.User
+                  id: 5
+             - !!models.User
+                  id: 6
+             - !!models.User
+                  id: 7
+             - !!models.User
+                  id: 8
+             - !!models.User
+                  id: 10
+             - !!models.User
+                  id: 18
+             - !!models.User
+                  id: 20
+             - !!models.User
+                  id: 22
+        lectureadmins:
+             - !!models.User
+                  id: 1
+             - !!models.User
+                  id: 2
+             - !!models.User
+                  id: 17
+        proofreaders:
+             - !!models.User
+                  id: 2
+             - !!models.User
+                  id: 3
+             - !!models.User
+                  id: 11
+             - !!models.User
+                  id: 15
+             - !!models.User
+                  id: 16
+
+    - !!models.Lecture
+        id:          2
+        name:        "Compiler Construction"
+        description: "Topics: scanner and parser programming, context free grammars, parser tables, scanner and parser generators, synthetic and inherited attributes, symbol tables, byte code generation, cross referencing, pattern matching, runtime analyses, refactorings"
+        semester:
+               !!models.Semester
+                  id: 1
+        users:
+             - !!models.User
+                  id: 5
+             - !!models.User
+                  id: 8
+             - !!models.User
+                  id: 10
+             - !!models.User
+                  id: 19
+             - !!models.User
+                  id: 20
+             - !!models.User
+                  id: 22
+        lectureadmins:
+             - !!models.User
+                  id: 2
+             - !!models.User
+                  id: 4
+             - !!models.User
+                  id: 12
+        proofreaders:
+             - !!models.User
+                  id: 1
+             - !!models.User
+                  id: 3
+             - !!models.User
+                  id: 14
+             - !!models.User
+                  id: 15
+             - !!models.User
+                  id: 16
+
+    - !!models.Lecture
+        id:          3
+        name:        "Graph and Model Driven Engineering"
+        description: "The concept of a graph is a simple but powerful one. It may be used to describe complex object models in a mathematical way."
+        semester:
+               !!models.Semester
+                  id: 1
+        users:
+             - !!models.User
+                  id: 6
+             - !!models.User
+                  id: 7
+             - !!models.User
+                  id: 9
+             - !!models.User
+                  id: 10
+             - !!models.User
+                  id: 21
+             - !!models.User
+                  id: 22
+        lectureadmins:
+             - !!models.User
+                  id: 2
+             - !!models.User
+                  id: 3
+             - !!models.User
+                  id: 4
+        proofreaders:
+             - !!models.User
+                  id: 2
+             - !!models.User
+                  id: 4
+             - !!models.User
+                  id: 11
+             - !!models.User
+                  id: 12
+             - !!models.User
+                  id: 16
+
+    - !!models.Lecture
+        id:          4
+        name:        "Programming Methodologies"
+        description: "Short description. This course teaches object oriented modeling and object oriented programming. We learn how to develop object oriented programs systematically from requirements via analysis and design to implementation and test. We learn the Unified Modeling Language (UML) and how to use it for the different development steps."
+        semester:
+               !!models.Semester
+                  id: 2
+        users:
+             - !!models.User
+                  id: 18
+             - !!models.User
+                  id: 19
+             - !!models.User
+                  id: 20
+             - !!models.User
+                  id: 21
+             - !!models.User
+                  id: 22
+
+        lectureadmins:
+             - !!models.User
+                  id: 3
+             - !!models.User
+                  id: 4
+
+        proofreaders:
+             - !!models.User
+                  id: 2
+             - !!models.User
+                  id: 3
+             - !!models.User
+                  id: 11
+             - !!models.User
+                  id: 12
+             - !!models.User
+                  id: 17
+
+    - !!models.Lecture
+        id:          5
+        name:        "Software Engineering 2"
+        description: "Modern interactive software tools conform to a common architecture:"
+        semester:
+               !!models.Semester
+                  id: 2
+        users:
+             - !!models.User
+                  id: 5
+             - !!models.User
+                  id: 6
+             - !!models.User
+                  id: 11
+             - !!models.User
+                  id: 20
+             - !!models.User
+                  id: 21
+             - !!models.User
+                  id: 22
+        lectureadmins:
+             - !!models.User
+                  id: 1
+             - !!models.User
+                  id: 2
+        proofreaders:
+             - !!models.User
+                  id: 3
+             - !!models.User
+                  id: 4
+             - !!models.User
+                  id: 13
+             - !!models.User
+                  id: 14
+             - !!models.User
+                  id: 15
+
+    - !!models.Lecture
+        id:          6
+        name:        "Software Engineering 1"
+        description: "This course teaches software development in teams. We learn how to organize a software development team and distribute work among team members."
+        semester:
+               !!models.Semester
+                  id: 5
+        users:
+             - !!models.User
+                  id: 5
+             - !!models.User
+                  id: 7
+             - !!models.User
+                  id: 8
+             - !!models.User
+                  id: 10
+             - !!models.User
+                  id: 18
+             - !!models.User
+                  id: 19
+        lectureadmins:
+             - !!models.User
+                  id: 11
+             - !!models.User
+                  id: 12
+        proofreaders:
+             - !!models.User
+                  id: 11
+             - !!models.User
+                  id: 14
+             - !!models.User
+                  id: 15
+
+    - !!models.Lecture
+        id:          7
+        name:        "Projekt: Game devlopment"
+        description: "The game development project will be a cooperation between students from computer science and from KunstuniKassel. Each group will consist of students from both classes. There will be a get-together BBQ at the Kunstuni."
+        semester:
+               !!models.Semester
+                  id: 2
+        users:
+             - !!models.User
+                  id: 6
+             - !!models.User
+                  id: 8
+             - !!models.User
+                  id: 9
+             - !!models.User
+                  id: 18
+             - !!models.User
+                  id: 21
+             - !!models.User
+                  id: 22
+        lectureadmins:
+             - !!models.User
+                  id: 1
+             - !!models.User
+                  id: 3
+        proofreaders:
+             - !!models.User
+                  id: 1
+             - !!models.User
+                  id: 3
+             - !!models.User
+                  id: 14
+
+    - !!models.Lecture
+        id:          8
+        name:        "Projekt: Game devlopment"
+        description: "The game development project will be a cooperation between students from computer science and from KunstuniKassel. Each group will consist of students from both classes. There will be a get-together BBQ at the Kunstuni."
+        semester:
+               !!models.Semester
+                  id: 3
+        users:
+             - !!models.User
+                  id: 7
+             - !!models.User
+                  id: 9
+             - !!models.User
+                  id: 10
+             - !!models.User
+                  id: 18
+             - !!models.User
+                  id: 19
+             - !!models.User
+                  id: 21
+        lectureadmins:
+             - !!models.User
+                  id: 2
+             - !!models.User
+                  id: 4
+             - !!models.User
+                  id: 17
+        proofreaders:
+             - !!models.User
+                  id: 11
+             - !!models.User
+                  id: 13
+             - !!models.User
+                  id: 14
+             - !!models.User
+                  id: 16
+
+    - !!models.Lecture
+        id:          9
+        name:        "Software Engineering 2"
+        description: "Modern interactive software tools conform to a common architecture:"
+        semester:
+               !!models.Semester
+                  id: 4
+        users:
+             - !!models.User
+                  id: 5
+             - !!models.User
+                  id: 6
+        lectureadmins:
+             - !!models.User
+                  id: 2
+             - !!models.User
+                  id: 8
+        proofreaders:
+             - !!models.User
+                  id: 11
+             - !!models.User
+                  id: 1
+             - !!models.User
+                  id: 2
+             - !!models.User
+                  id: 4
+
+    - !!models.Lecture
+        id:          10
+        name:        "Project Game development"
+        description: "The game development project will be a cooperation between students from computer science and from KunstuniKassel. Each group will consist of students from both classes. There will be a get-together BBQ at the Kunstuni."
+        semester:
+               !!models.Semester
+                  id: 4
+        users:
+             - !!models.User
+                  id: 5
+             - !!models.User
+                  id: 6
+             - !!models.User
+                  id: 7
+             - !!models.User
+                  id: 19
+             - !!models.User
+                  id: 20
+        lectureadmins:
+             - !!models.User
+                  id: 4
+             - !!models.User
+                  id: 12
+             - !!models.User
+                  id: 17
+        proofreaders:
+             - !!models.User
+                  id: 1
+             - !!models.User
+                  id: 4
+             - !!models.User
+                  id: 16
+             - !!models.User
+                  id: 17
+        
+    - !!models.Lecture
+        id:          11
+        name:        "Homework Management System"
+        description: "Bei diesem Projekt soll ein webbasiertes Hausaufgabenabgabesystem entwickelt werden. Das Projekt kann einen beliebigen Komplexitätsgrad haben, je nachdem ob das Projekt als Bachelor-/Masterprojekt angerechnet werden soll und wieviele Teilnehmer sich finden."
+        semester:
+               !!models.Semester
+                  id: 5
+        users:
+             - !!models.User
+                  id: 7
+             - !!models.User
+                  id: 8
+             - !!models.User
+                  id: 9
+        lectureadmins:
+             - !!models.User
+                  id: 4
+        proofreaders:
+             - !!models.User
+                  id: 3
+             - !!models.User
+                  id: 4
+
+    - !!models.Lecture
+        id:          12
+        name:        "Software Engineering 2"
+        description: "Modern interactive software tools conform to a common architecture:"
+        semester:
+               !!models.Semester
+                  id: 6
+        users:
+             - !!models.User
+                  id: 7
+             - !!models.User
+                  id: 8
+             - !!models.User
+                  id: 10
+             - !!models.User
+                  id: 19
+             - !!models.User
+                  id: 22
+        lectureadmins:
+             - !!models.User
+                  id: 2
+             - !!models.User
+                  id: 3
+        proofreaders:
+             - !!models.User
+                  id: 1
+             - !!models.User
+                  id: 12
+             - !!models.User
+                  id: 14
+             - !!models.User
+                  id: 16
+             - !!models.User
+                  id: 17
+
+    - !!models.Lecture
+        id:          13
+        name:        "Homework Management System"
+        description: "Bei diesem Projekt soll ein webbasiertes Hausaufgabenabgabesystem entwickelt werden. Das Projekt kann einen beliebigen Komplexitätsgrad haben, je nachdem ob das Projekt als Bachelor-/Masterprojekt angerechnet werden soll und wieviele Teilnehmer sich finden."
+        semester:
+               !!models.Semester
+                  id: 6
+        users:
+             - !!models.User
+                  id: 7
+             - !!models.User
+                  id: 8
+             - !!models.User
+                  id: 9
+        lectureadmins:
+             - !!models.User
+                  id: 3
+        proofreaders:
+             - !!models.User
+                  id: 1
+             - !!models.User
+                  id: 4

@@ -1,0 +1,11 @@
+@(verificationUrl: String, token: String, name: String, email: String)Hallo @name,
+
+
+Du hast dich kürzlich bei unserem @Messages("playauthenticate.core.application.name") registriert.
+
+Folge diesem Link um dein Konto jetzt zu aktivieren:
+
+@verificationUrl
+
+Grüße,
+Das @Messages("playauthenticate.core.application.shortname")-Team

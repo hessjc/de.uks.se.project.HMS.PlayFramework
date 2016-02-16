@@ -1,0 +1,23 @@
+@(loginForm: Form[provider.SimpleUserPassAuthProvider.SimpleLogin], user: User)
+
+@main() {
+	@navigation.homeMenu()
+	
+	<div class="col-12 col-sm-12 col-lg-9">
+		<legend>Benutzer verwalten</legend>
+		<select name="user" class="form-control">
+			@for(lUser <- User.findAll()) {
+				<option value="@routes.UserController.showUser(lUser.getId)" @if(user.getEmail().equals(lUser.getEmail())) { selected="selected"}>@lUser.getEmail()</option>
+			}
+		</select>
+		
+		<br>
+		<br>
+		
+		<script type="text/javascript">
+			$("select[name='user']").change(function() {
+				location.href = $(this).val();
+			});
+		</script>
+	</div>
+}

@@ -1,0 +1,16 @@
+@(user: models.User)
+@import helper._
+@import helper.twitterBootstrap._
+@import scala.collection.mutable.Map
+
+<legend>@Messages("user.name")&nbsp;&nbsp;&nbsp;<a href="@routes.AccountController.editName(user.getId)" style="font-size: 9pt" class="js-pjax" container="containerName">@Messages("edit")</a></legend>
+		<div>
+			<div class="row">
+				<div class="col-lg-3 col-sm-3 col-xs-3">@Messages("user.firstname"):</div>
+				<div class="col-lg-3 col-sm-3 col-xs-3">@user.getFirstName()</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3 col-sm-3 col-xs-3">@Messages("user.lastname"):</div>
+				<div class="col-lg-3 col-sm-3 col-xs-3">@user.getLastName()</div>
+			</div>
+		</div>

@@ -1,0 +1,12 @@
+@(user: User, lecture: Lecture)
+
+Hallo @user.getName(),
+<br /><br />
+<p>
+eine deiner Abgaben für die Vorlesung @lecture.getName() wurde gerade bewertet.<br />
+Schau sie dir doch <a href="@routes.AccountController.showMyAssessments().absoluteURL(request())">hier</a> direkt an.<br />
+</p>
+<p>
+Grüße,<br />
+<i>Das HMS-Team</i>
+</p>

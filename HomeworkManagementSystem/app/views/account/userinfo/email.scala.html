@@ -1,0 +1,12 @@
+@(user: models.User)
+@import helper._
+@import helper.twitterBootstrap._
+@import scala.collection.mutable.Map
+
+<legend>@Messages("user.email")</legend>
+<div>
+	<div class="row">
+		<div class="col-lg-3 col-sm-3 col-xs-3">@Messages("user.email"):</div>
+		<div class="col-lg-3 col-sm-3 col-xs-3">@user.getEmail()</div>
+	</div>
+</div>
